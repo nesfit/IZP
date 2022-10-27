@@ -1,11 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Funkce vymění hodnoty dvou celočíselných proměnných.
+ */
+void swapInts(int *variableA, int *variableB) {
+    // TODO: 1. implementujte metodu dle zadání
+}
+
 int main(int argc, char *argv[]) {
-  printf("argc=%d\n", argc);
-  for (int argi = 1; argi < argc; argi++) {
-    printf("argv[%d]=%s\n", argi, argv[argi]);
-  }
+  int number1, number2;
+
+  // načtení čísel ze stdin
+  scanf("%d", &number1);
+  scanf("%d", &number2);
+
+  swapInts(&number1, &number2);
+  printf("%d %d\n", number1, number2);
 
   return 0;
 }

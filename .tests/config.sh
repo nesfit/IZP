@@ -1,0 +1,13 @@
+
+PROJECT_SUBMIT_SOURCES=("main.c")
+
+PROJECT_GROUP_ID="$REPL_OWNER"
+PROJECT_TASK_ID="$REPL_SLUG"
+PROJECT_AUTHOR="$LOGIN"
+
+[ -z "$PROJECT_SUBMIT_MODE" ] && [ -n "$PROJECT_TASK_ID" ] && PROJECT_SUBMIT_MODE="tests"
+[ -z "$PROJECT_GROUP_ID" ] && PROJECT_GROUP_ID="github.com-nesad-IZP"
+[ -z "$PROJECT_TASK_ID" ] && PROJECT_TASK_ID="local-dev"
+[ -z "$PROJECT_AUTHOR" ] && PROJECT_AUTHOR="$USER"
+
+RESULT_API_URL_BASE="https://teaching.api.bazar.nesad.fit.vutbr.cz"

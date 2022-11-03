@@ -1,6 +1,13 @@
-# {MODULE}-{TASK}: {TITLE}
+# 06-02: Předávání parametrů odkazem
+V tomto příkladě si vyzkoušíte práci s funkcemi využívající ukazatele v parametrech.
 
-__TODO: Krátký popis, úvod k úkolu__
+
+## Přehled souborů příkladu 
+
+| Soubor                                    | Popis obsahu                                                |
+| ----------------------------------------- | ----------------------------------------------------------- |
+| [`main.c`](/main.c)                       | Vaše implementace úkolů
+| [`student-config.sh`](/student-config.sh) | Konfigurace testovacích scriptů vašeho repozitáře
 
 
 ## `Makefile` recepty
@@ -16,21 +23,12 @@ Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $R
 | `clean`       | Odstranění překladem-generovaných souborů
 
 
-## Termíny a názvosloví
-
-__TODO: Teorie k aktuálnímu příkladu__
-
-
-## Soubory příkladu
-
-| Soubor                                  | Popis obsahu                                                |
-| --------------------------------------- | ----------------------------------------------------------- |
-| [`main.c`](/main.c)                       | Vaše implementace úkolů
-| [`types.h`](/types.h)                     | Datové struktury a hlavičky funkcí, které máte k dispozici
-| [`test.h`](/test.h) a [`test.c`](/test.c)   | Logika pro automatizované testy
-| [`student-config.sh`](/student-config.sh) | Konfigurace testovacích scriptů vašeho repozitáře
-
-
 ## Úkoly
 
-__TODO: Zadání + kroky řešení úkolu__
+1. implementujte funkci `int divide(int, int, double *)`
+    - funkce provede výpočet `dividend / divisor` a jeho výsledek vrátí prostřednictvím parametru `quotient`
+    - metoda přijímá 3 parametry:
+        - dělence (`dividend`),
+        - dělitele (`divisor`),
+        - ukazatel na podíl/kvocient (`quotient`),
+    - metoda vrací hodnotu `1` při úspěšném dělení, `0` jinak

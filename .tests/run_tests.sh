@@ -77,7 +77,7 @@ function check_output() {
             [ -n "$ECHO_DETAIL" ] && printf "\n\tstd$OUT_TYPE:\n"
             [ -n "$ECHO_DETAIL" ] && cat "$OUT_FILEPATH"
 
-            printf "\n\tstd$OUT_TYPE ${GRAY}differs: $DESCRIPTION${NORMAL}"
+            printf "\n\tstd$OUT_TYPE ${GRAY}differs: $DESCRIPTION ${NORMAL}"
             if [ -f "$DETAILS_FILEPATH" ]; then
                 cat "$REF_MATCH_FILEPATH"
             fi
@@ -106,7 +106,7 @@ function check_output() {
         print_debug "  $CMD"
 
         MATCHED_COUNT="$($CMD)"
-        process_diff_details $MATCHED_COUNT eq 0 "it was expected ${NORMAL}to find an occurence ${GRAY}of:" "$REF_MATCH_FILEPATH"
+        process_diff_details $MATCHED_COUNT eq 0 "it was expected ${NORMAL}to find an occurrence ${GRAY}of:" "$REF_MATCH_FILEPATH"
         return $?
     fi
 
@@ -116,7 +116,7 @@ function check_output() {
         print_debug "  $CMD"
 
         MATCHED_COUNT="$($CMD)"
-        process_diff_details $MATCHED_COUNT ne 0 "it was expected ${RED}not ${NORMAL}to find an occurence ${GRAY}of:" "$REF_MATCH_INV_FILEPATH"
+        process_diff_details $MATCHED_COUNT ne 0 "it was expected ${RED}not ${NORMAL}to find an occurrence ${GRAY}of:" "$REF_MATCH_INV_FILEPATH"
         return $?
     fi
 
@@ -190,7 +190,7 @@ function run_test_with_args() {
         printf "\t${GRAY}run '${NORMAL}$(basename $RUN_FILEPATH)$__SEP$ARGS${GRAY}' "
         # test stdin
         if [ -f "$INPUT_FILEPATH" ]; then
-            printf "with ${NORMAL}stdin${GRAY}:${NORMAL}:\n"
+            printf "with ${NORMAL}stdin${GRAY}:${NORMAL}\n"
             cat $INPUT_FILEPATH
         else
             printf "with no input${NORMAL}"

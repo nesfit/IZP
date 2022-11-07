@@ -6,6 +6,8 @@
 #define ARR_SIZE 10
 
 
+#ifndef TEST_BUILD
+
 int main(int argc, char *argv[]) {
   // TODO: 0. Inicializujte staticky alokované pole
   int array[ARR_SIZE];
@@ -23,6 +25,8 @@ int main(int argc, char *argv[]) {
   run_automated_tests();
   return 0;
 }
+
+#endif
 
 /**
  * Vytiskne obsah pole na standardní výstup programu.

@@ -22,10 +22,27 @@ void __array_print(int arr[], int size) {
     }
 }
 
+#ifdef TEST_BUILD
+
+int main(int argc, char *argv[]) {
+  run_automated_tests();
+  return 0;
+}
+
+#endif
+
+int *__clone(int *array, int size) {
+  int memorySize = size * sizeof(int);
+  int *newArray = malloc(memorySize);
+  memcpy(newArray, array, memorySize);
+
+  return newArray;
+}
+
 void run_automated_tests() {
   printf("\n\n=== AUTOMATED TESTS ===\n");
 
-  int __size, *__array = __load(&__size);
+  int __size, *__array, *__tmpArray = __load(&__size);
 
   printf("loaded: ");
   array_print(__array, __size);
@@ -33,8 +50,10 @@ void run_automated_tests() {
   int __multiplier;
   scanf("%d", &__multiplier);
   printf("after multiply: ");
-  array_multiply(__array, __size, __multiplier);
-  __array_print(__array, __size);
+  __tmpArray = __clone(__array, __size);
+  array_multiply(__tmpArray, __size, __multiplier);
+  __array_print(__tmpArray, __size);
+  __dispose(__tmpArray);
 
   int __insertPairCount;
   scanf("%d", &__insertPairCount);

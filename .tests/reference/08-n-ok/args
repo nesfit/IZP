@@ -1,0 +1,5 @@
+-n 12
+-x -n 12
+-s Hello! -n 12 -y
+-s Hello! -y -n 12
+-s Hello! -n 12

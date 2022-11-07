@@ -13,8 +13,7 @@ int main(int argc, char *argv[]) {
   // TODO: 1b. Vytiskněte pole voláním funkce array_print
   
   // TODO: 2b. Pronásobte hodnoty pole libovolným číslem
-  // TODO: 2c. V případě chyby informujte uživatele
-  // TODO: 2d. Vytiskněte aktualizované pole
+  // TODO: 2c. Vytiskněte aktualizované pole
   
   // TODO: 3b. Vložte libovolnou hodnotu na indexy 3 a 7
   // TODO: 3c. V případě chyby informujte uživatele
@@ -27,10 +26,11 @@ int main(int argc, char *argv[]) {
 
 /**
  * Vytiskne obsah pole na standardní výstup programu.
+ *   Tisk musí proběhnout na jeden řádek, konkrétní
+ *   oddělovač jednotlivých prvků není vynucován.
  * 
- * @param array       pole, do kterého bude nový prvek vložen
- * @param size        velikost pole
- * @param multiplier  násobitel
+ * @param array  pole, do kterého bude nový prvek vložen
+ * @param size   velikost pole
  * 
  * Hlavičky žádných funkcí NEMĚŇTE!
  */

@@ -9,9 +9,13 @@
 #define TYPES_H
 
 typedef struct {
+    // indikuje, že přepínač -x byl/nebyl použit
     bool xFlag;
+    // indikuje, že přepínač -y byl/nebyl použit
     bool yFlag;
+    // uchovává znakový řetězec specifikovaný parametrem -s
     char *sValue;
+    // uchovává kladnou celočíselnou hodnotu specifikovanou parametrem -n
     unsigned nValue;
 } Config;
 

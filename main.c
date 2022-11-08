@@ -10,6 +10,7 @@ const char *usage = "syntax: %s [-x|-y] [-n COUNT] -s STR\n"
 
 
 int main(int argc, char *argv[]) {
+  // konfigurace programu
   Config config = { 
     .xFlag = false,
     .yFlag = false,
@@ -20,6 +21,8 @@ int main(int argc, char *argv[]) {
   // TODO: 2. odpovídajícím způsobem zavolejte funkci parse_args
   // TODO: 3. v případě chyby zpracování vypište obsah
   //   globální proměnné usage na chybový výstup
+  //     (pro formátování poskytněte cestu k programu z CLI argumentů)
+  //   a ukončente program s chybovým kódem 1
 
   // spouštění automatizovaných testů neměňte
   run_automated_tests(argv, argc);
@@ -28,11 +31,15 @@ int main(int argc, char *argv[]) {
 
 /**
  * Zpracuje argumenty příkazové řádky programu.
- * Výsledky ukládá do globální proměnné config.
+ *   Výsledky ukládá do struktury Config z parametrů metody.
+ * 
+ * Duplicity žádných přepínačů nejsou dovoleny.
  * 
  * @param arguments      pole argumentů z CLI
  * @param argumentCount  velikost pole argumentů
  * @param config         ukazatel na výstupní konfiguraci
+ * 
+ * @returns hodnotu 1 při úspěšném zpracování, 0 jinak
  * 
  * Hlavičky žádných funkcí NEMĚŇTE!
  */

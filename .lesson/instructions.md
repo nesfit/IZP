@@ -48,7 +48,8 @@ Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $R
 
 1. implementujte funkci `parse_args(char **, int, Config *)`
     - funkce zpracovává CLI argumenty předané programu při spuštění
-    - popis přijímaných argumentů programu:
+    - duplicitný přepínače jsou chápány jako chybné spuštění programu
+    - popis přijímaných argumentů programu (některé mají své hodnoty, některé slouží jen jako boolovské přepínače):
 
 ```
 syntax: ./main [-x|-y] [-n COUNT] -s STR

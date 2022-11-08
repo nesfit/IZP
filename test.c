@@ -6,15 +6,17 @@
  */
 
 #include "test.h"
+#include "types.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 
 
 void run_automated_tests(char **args, int argc) {
   printf("\n\n=== AUTOMATED TESTS ===\n");
 
-  Config __config = { 
+  Config __config = {
     .xFlag = false,
     .yFlag = false,
     .sValue = NULL,

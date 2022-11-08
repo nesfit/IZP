@@ -1,7 +1,5 @@
-# {MODULE}-{TASK}: {TITLE}
-
-__TODO: Krátký popis, úvod k úkolu__
-
+# 07-03: Funkce pro práci se vektory
+V tomto cvičení si vyzkoušíte práci s dynamickou alokací paměti.
 
 ## `Makefile` recepty
 
@@ -16,11 +14,6 @@ Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $R
 | `clean`       | Odstranění překladem-generovaných souborů
 
 
-## Termíny a názvosloví
-
-__TODO: Teorie k aktuálnímu příkladu__
-
-
 ## Soubory příkladu
 
 | Soubor                                  | Popis obsahu                                                |
@@ -33,4 +26,10 @@ __TODO: Teorie k aktuálnímu příkladu__
 
 ## Úkoly
 
-__TODO: Zadání + kroky řešení úkolu__
+1. implementujte funkci `vector_print(Vector *)`
+2. implementujte funkci `vector_ctor(Vector *, unsigned int)`
+3. implementujte funkci `vector_init(Vector *)`
+4. implementujte funkci `vector_dtor(Vector *)`
+5. implementujte funkci `vector_scalar_multiply(Vector *)`
+6. implementujte funkci `vector_add(Vector *)`
+7. implementujte funkci `vector_sub(Vector *)`

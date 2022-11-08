@@ -7,7 +7,7 @@ SOLUTION_DIRPATH="$(dirname $SCRIPT_DIRPATH)"
 
 RESULTS_FILEPATH="$SCRIPT_DIRPATH/results.csv"
 MAKEFILE="$SOLUTION_DIRPATH/Makefile"
-MAKE_RECIPE_NAME="main"
+MAKE_RECIPE_NAME="main-test"
 RUN_FILENAME="$MAKE_RECIPE_NAME"
 RUN_TIMEOUT="1s"
 
@@ -79,7 +79,7 @@ function check_output() {
 
             printf "\n\tstd$OUT_TYPE ${GRAY}differs: $DESCRIPTION ${NORMAL}"
             if [ -f "$DETAILS_FILEPATH" ]; then
-                cat "$REF_MATCH_FILEPATH"
+                cat "$DETAILS_FILEPATH"
             fi
         }
 
@@ -163,12 +163,15 @@ function run_test_with_args() {
     RUN_RETURN_CODE_FILEPATH="$OUT_DIRPATH/rc"
 
     # input files
+    ENV_FILEPATH="$REF_DIRPATH/env.sh"
     ARGS_FILEPATH="$REF_DIRPATH/args"
     INPUT_FILEPATH="$REF_DIRPATH/in"
     RETURN_CODE_FILEPATH="$REF_DIRPATH/rc"
 
     EXPECTED_RETURN_CODE=0
     [ -f "$RETURN_CODE_FILEPATH" ] && EXPECTED_RETURN_CODE="$(cat "$RETURN_CODE_FILEPATH")"
+
+    [ -f "$ENV_FILEPATH" ] && . "$ENV_FILEPATH"
 
     function print_fail_head_once() {
         [ "$__ERR_HEAD_PRINTED" -ne "0" ] && return 0
@@ -197,8 +200,10 @@ function run_test_with_args() {
         fi
     }
 
-    # define the array
+    export TEST_NAME
+
     print_debug "running $RUN_FILEPATH $ARGS"
+    print_debug "  TEST_NAME=$TEST_NAME"
 
     if [ -f "$INPUT_FILEPATH" ]; then
         # run with input

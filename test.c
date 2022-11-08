@@ -38,7 +38,7 @@ Vector __load_vector() {
         scanf("%d", &v.items[i]);
     }
 
-    __vector_print("loaded: ", &v);
+    //__vector_print("loaded: ", &v);
     return v;
 }
 
@@ -50,7 +50,7 @@ void __clone_vector(Vector *dest, Vector *src) {
 }
 
 void __dispose_vector(Vector *v) {
-    if (v->items != NULL) {
+    if (v->size > 0 && v->items != NULL) {
         free(v->items);
     }
     v->items = NULL;
@@ -71,9 +71,10 @@ int test_vector_ctor() {
   scanf("%u", &size);
 
   int status = vector_ctor(&v1, size);
+  printf("vector_ctor returned: %d\n", status);
   __vector_print("result: ", &v1);
   __dispose_vector(&v1);
-  return status;
+  return 0;
 }
 
 int test_vector_init() {
@@ -110,10 +111,11 @@ int test_vector_add() {
   Vector v2 = __load_vector();
   
   int status = vector_add(&v1, &v2);
+  printf("vector_add returned: %d\n", status);
   __vector_print("result: ", &v1);
   __dispose_vector(&v1);
   __dispose_vector(&v2);
-  return status;
+  return 0;
 }
 
 int test_vector_sub() {
@@ -121,10 +123,12 @@ int test_vector_sub() {
   Vector v2 = __load_vector();
   
   int status = vector_sub(&v1, &v2);
+  printf("vector_sub returned: %d\n", status);
   __vector_print("result: ", &v1);
+
   __dispose_vector(&v1);
   __dispose_vector(&v2);
-  return status;
+  return 0;
 }
 
 const char *test_names[] = {

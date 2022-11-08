@@ -69,7 +69,8 @@ void vector_dtor(Vector *v)
 
 /**
  * Provede výpočet skalárního součinu vektoru s daným číslem.
- *   Výsledek operace je uložen ve vektoru v1.
+ *   Výpočet se provádí nad hodnotami poskytnutého vektoru v,
+ *   změny probíhají tzv. in-place, bez alokace nového vektoru.
  * 
  * @param v       ukazatel na existující vektor
  * @param scalar  skalární hodnota
@@ -81,7 +82,8 @@ void vector_scalar_multiply(Vector *v, int scalar)
 
 /**
  * Provede součet dvou vektorů v1 + v2.
- *   Výsledek operace je uložen ve vektoru v1.
+ *   Výpočet se provádí nad hodnotami poskytnutého vektoru v1,
+ *   změny probíhají tzv. in-place, bez alokace nového vektoru.
  * 
  * Vzájemně kontrolujte rozměry obou vektorů!
  *   Operaci nelze provádět nad vektory různých rozměrů.
@@ -99,7 +101,8 @@ int vector_add(Vector *v1, Vector *v2)
 
 /**
  * Provede odečtení dvou vektorů v1 + v2.
- *   Výsledek operace je uložen ve vektoru v1.
+ *   Výpočet se provádí nad hodnotami poskytnutého vektoru v1,
+ *   změny probíhají tzv. in-place, bez alokace nového vektoru.
  * 
  * Vzájemně kontrolujte rozměry obou vektorů!
  *   Operaci nelze provádět nad vektory různých rozměrů.

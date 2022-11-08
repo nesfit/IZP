@@ -8,6 +8,7 @@
 #include "test.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 void __array_print(int arr[], int size) {
@@ -42,7 +43,7 @@ int *__clone(int *array, int size) {
 void run_automated_tests() {
   printf("\n\n=== AUTOMATED TESTS ===\n");
 
-  int __size, *__array, *__tmpArray = __load(&__size);
+  int __size, *__array = __load(&__size), *__tmpArray;
 
   printf("loaded: ");
   array_print(__array, __size);

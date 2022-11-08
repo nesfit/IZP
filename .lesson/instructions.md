@@ -1,48 +1,23 @@
-# 07-02: Práce s ukazateli na pole
-V tomto příkladě si vyzkoušíte jak pracovat s "různými typy" ukazatelů na pole ve funkcích.
+# 07-02: Práce s ukazateli na struktury
+V tomto příkladě si vyzkoušíte jak pracovat s ukazateli na struktury ve funkcích.
 
 
-## Termíny a názvosloví
-
-### automatická alokace na zásobníku (stack)
+### dereferenční operátor `*`, `->`
+Operátor `->` jako operátor odpovídá dereferenci nad strukturou, respektive ukazatelem na strukturu.
 ```c
-int stackInts[5] = {1, 2, 3, 4, 5};
-```
-
-### alokace na hromadě (heap)
-```c
-int *heapInts = malloc(5 * sizeof(int));
+typedef struct {
+    int year;
+    int month;
+    int day;
+} Date;
 ```
 ```c
-// dynamicky alokovaná paměť musí být programátorem opět VŽDY uvolněna
-free(heapInts);
-```
+Date date = {.year=2022, .month=10, .day=30};
+Date *datePtr = &date;
 
-### inicializace pole
-```c
-// inicializace samých nul
-for (int i = 0; i < 5 * sizeof(*heapInts); i++)
-{
-    heapInts[i] = 0;
-}
-```
-
-```c
-// inicializace samých nul
-memset(heapInts, 0, 5 * sizeof(*heapInts));
-```
-
-
-### předávání pole podprogramům
-```c
-int rel_isFunction(Pair rel[5], ...);
-int rel_isEquivalence(Pair *rel, ...);
-```
-
-```c
-pair_t rel[5] = {...};
-rel_isFunction(rel, ...);
-rel_isEquivalence(rel, ...);
+printf("year: %d\n", date.year); // 2022
+printf("year: %d\n", datePtr->year); // 2022
+printf("year: %d\n", (*datePtr).year); // 2022
 ```
 
 
@@ -71,7 +46,7 @@ Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $R
 
 ## Úkoly
 
-1. implementujte funkci `parse_args(char **, int)`
+1. implementujte funkci `parse_args(char **, int, Config *)`
     - funkce zpracovává CLI argumenty předané programu při spuštění
     - popis přijímaných argumentů programu:
 

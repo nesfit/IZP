@@ -15,7 +15,7 @@
 void __vector_print(char *prefix, Vector *v) {
     printf("%sVector(%d) = ", prefix, v->size);
     if (v->items == NULL) {
-        printf("null\n");
+        printf("(null)\n");
         return;
     }
 
@@ -32,7 +32,7 @@ void __vector_print(char *prefix, Vector *v) {
 
 Vector __load_vector() {
     Vector v;
-    scanf("%u", &v.size);
+    scanf("%d", &v.size);
     v.items = v.size ? malloc(v.size * sizeof(*v.items)) : NULL;
     for (int i = 0; i < v.size; i++) {
         scanf("%d", &v.items[i]);
@@ -68,7 +68,7 @@ int test_vector_print() {
 int test_vector_ctor() {
   Vector v1;
   int size;
-  scanf("%u", &size);
+  scanf("%d", &size);
 
   int status = vector_ctor(&v1, size);
   printf("vector_ctor returned: %d\n", status);

@@ -1,5 +1,19 @@
-# 07-03: Funkce pro práci se vektory
-V tomto cvičení si vyzkoušíte práci s dynamickou alokací paměti.
+# 07-03: Dynamická alokace paměti
+V tomto cvičení si vyzkoušíte práci s dynamickou alokací paměti na příkladu implementace funkcí pro práci s vektory.
+
+Jednotlivé úkoly najdete přímo v kódu.
+
+## Vektory
+
+Úvod do vektorů a operací nad nimi můžete najít na [Math Insight][intro].
+Další obecné informace máte k dispozici také na [Wiki][wiki].
+Ukázky řešení operací s vektory pak můžete najít na [WolframAlpha][wolfram].
+
+[intro]: https://mathinsight.org/vector_introduction "Math Insight - Vector Introduction"
+[wolfram]: https://www.wolframalpha.com/examples/mathematics/linear-algebra/vectors/ "WolframAlpha Vectors"
+[wiki]: https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics) "Wikipedia Vectors"
+
+---
 
 ## `Makefile` recepty
 
@@ -7,8 +21,7 @@ Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $R
 
 | Název receptu | Popis obsahu                                                |
 | ------------- | ----------------------------------------------------------- |
-| `main`        | Kompilace vašeho programu
-| `main-debug`  | Kompilace vašeho programu za účelem ladění
+|               | Kompilace vašeho programu
 | `test`        | Spuštění testovacích scriptů pro aktuální zadání
 | `submit`      | Spuštění testovacích scriptů pro aktuální zadání s odevzdáním řešení
 | `clean`       | Odstranění překladem-generovaných souborů
@@ -22,14 +35,3 @@ Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $R
 | [`types.h`](/types.h)                     | Datové struktury a hlavičky funkcí, které máte k dispozici
 | [`test.h`](/test.h) a [`test.c`](/test.c)   | Logika pro automatizované testy
 | [`student-config.sh`](/student-config.sh) | Konfigurace testovacích scriptů vašeho repozitáře
-
-
-## Úkoly
-
-1. implementujte funkci `vector_print(Vector *)`
-2. implementujte funkci `vector_ctor(Vector *, unsigned int)`
-3. implementujte funkci `vector_init(Vector *)`
-4. implementujte funkci `vector_dtor(Vector *)`
-5. implementujte funkci `vector_scalar_multiply(Vector *)`
-6. implementujte funkci `vector_add(Vector *)`
-7. implementujte funkci `vector_sub(Vector *)`

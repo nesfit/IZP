@@ -30,7 +30,3 @@ void run_automated_tests(char **args, int argc) {
   printf("sValue: %s\n", __config.sValue);
   printf("nValue: %d\n", __config.nValue);
 }
-
-// 03 chyby v [] vs null testy
-//    chybi dtor test
-//    vector integer x unsigned testy format

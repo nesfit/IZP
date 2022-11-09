@@ -1,4 +1,4 @@
-syntax: ./main [-x|-y] [-n COUNT] -s STR
+syntax: program [-x|-y] [-n COUNT] -s STR
     -x and -y are optional and mutually exclusive
     -s STR - mandatory, STR is a string
     -n COUNT - optional, COUNT is non-negative integer (default: 10)

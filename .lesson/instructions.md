@@ -1,6 +1,24 @@
 # 07-02: Práce s ukazateli na struktury
 V tomto příkladě si vyzkoušíte jak pracovat s ukazateli na struktury ve funkcích.
+Konkrétně na ukázce zpracování konfigurace programu - argumentů z příkazové řádky.
 
+Jednotlivé úkoly najdete přímo v kódu.
+
+## Argumenty příkazové řádky
+Duplicitný přepínače jsou chápány jako **chybné spuštění** programu.
+Popis přijímaných argumentů programu (některé mají své hodnoty, některé slouží jen jako boolovské přepínače):
+
+```
+syntax: ./main [-x|-y] [-n COUNT] -s STR
+    -x and -y are optional and mutually exclusive
+    -s STR - mandatory, STR is a string
+    -n COUNT - optional, COUNT is non-negative integer (default: 10)
+```
+
+---
+
+## Teorie
+Užitečné ukázky kódu relevantní pro práci na tomto cvičení.
 
 ### dereferenční operátor `*`, `->`
 Operátor `->` jako operátor odpovídá dereferenci nad strukturou, respektive ukazatelem na strukturu.
@@ -20,40 +38,25 @@ printf("year: %d\n", datePtr->year); // 2022
 printf("year: %d\n", (*datePtr).year); // 2022
 ```
 
-
-## Soubory příkladu
-
-| Soubor                                  | Popis obsahu                                                |
-| --------------------------------------- | ----------------------------------------------------------- |
-| [`main.c`](/main.c)                       | Vaše implementace úkolů
-| [`types.h`](/types.h)                     | Datové struktury a hlavičky funkcí, které máte k dispozici
-| [`test.h`](/test.h) a [`test.c`](/test.c)   | Logika pro automatizované testy
-| [`student-config.sh`](/student-config.sh) | Konfigurace testovacích scriptů vašeho repozitáře
-
+---
 
 ## `Makefile` recepty
 
 Recepty spustitelné z příkazové řádky prostřednictvím příkazu `make $RECIPE`.
 
-| Název receptu | Popis obsahu                                                |
-| ------------- | ----------------------------------------------------------- |
-| `main`        | Kompilace vašeho programu
-| `main-debug`  | Kompilace vašeho programu za účelem ladění
+| Název receptu | Popis obsahu                                          |
+| ------------- | ----------------------------------------------------- |
+|               | Kompilace vašeho programu
 | `test`        | Spuštění testovacích scriptů pro aktuální zadání
 | `submit`      | Spuštění testovacích scriptů pro aktuální zadání s odevzdáním řešení
 | `clean`       | Odstranění překladem-generovaných souborů
 
 
-## Úkoly
+## Soubory příkladu
 
-1. implementujte funkci `parse_args(char **, int, Config *)`
-    - funkce zpracovává CLI argumenty předané programu při spuštění
-    - duplicitný přepínače jsou chápány jako chybné spuštění programu
-    - popis přijímaných argumentů programu (některé mají své hodnoty, některé slouží jen jako boolovské přepínače):
-
-```
-syntax: ./main [-x|-y] [-n COUNT] -s STR
-    -x and -y are optional and mutually exclusive
-    -s STR - mandatory, STR is a string
-    -n COUNT - optional, COUNT is non-negative integer (default: 10)
-```
+| Soubor                                    | Popis obsahu                                                |
+| ----------------------------------------- | ----------------------------------------------------------- |
+| [`main.c`](/main.c)                       | Vaše implementace úkolů
+| [`types.h`](/types.h)                     | Datové struktury a hlavičky funkcí, které máte k dispozici
+| [`test.h`](/test.h) a [`test.c`](/test.c) | Logika pro automatizované testy
+| [`student-config.sh`](/student-config.sh) | Konfigurace testovacích scriptů vašeho repozitáře

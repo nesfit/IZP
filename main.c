@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-const char *usage = "syntax: %s [-x|-y] [-n COUNT] -s STR\n"
+const char *usage = "syntax: program [-x|-y] [-n COUNT] -s STR\n"
   "    -x and -y are optional and mutually exclusive\n"
   "    -s STR - mandatory, STR is a string\n"
   "    -n COUNT - optional, COUNT is non-negative integer (default: 10)\n";
@@ -21,7 +21,6 @@ int main(int argc, char *argv[]) {
   // TODO: 2. odpovídajícím způsobem zavolejte funkci parse_args
   // TODO: 3. v případě chyby zpracování vypište obsah
   //   globální proměnné usage na chybový výstup
-  //     (pro formátování poskytněte cestu k programu z CLI argumentů)
   //   a ukončente program s chybovým kódem 1
 
   // spouštění automatizovaných testů neměňte

@@ -41,12 +41,11 @@ int *__clone(int *array, int size) {
 }
 
 void run_automated_tests() {
-  printf("\n\n=== AUTOMATED TESTS ===\n");
-
   int __size, *__array = __load(&__size), *__tmpArray;
 
   printf("loaded: ");
   array_print(__array, __size);
+  printf("\n");
 
   int __multiplier;
   scanf("%d", &__multiplier);
@@ -61,7 +60,7 @@ void run_automated_tests() {
   for (int i = 0; i < __insertPairCount; i++) {
     int __value, __position;
     scanf("%d %d", &__value, &__position);
-    printf("insert: %d\n", array_insert(__array, __size, __value, __position));
+    printf("insert returned: %d\n", array_insert(__array, __size, __value, __position));
   }
 
   printf("after insert: ");

@@ -7,7 +7,7 @@ SOLUTION_DIRPATH="$(dirname $SCRIPT_DIRPATH)"
 
 RESULTS_FILEPATH="$SCRIPT_DIRPATH/results.csv"
 MAKEFILE="$SOLUTION_DIRPATH/Makefile"
-MAKE_RECIPE_NAME="main"
+MAKE_RECIPE_NAME="main-test"
 RUN_FILENAME="$MAKE_RECIPE_NAME"
 RUN_TIMEOUT="1s"
 
@@ -74,10 +74,12 @@ function check_output() {
         print_debug "  RESULT_EXPECTED=$RESULT_EXPECTED"
 
         function print_diff_details() {
-            [ -n "$ECHO_DETAIL" ] && printf "\n\tstd$OUT_TYPE:\n"
-            [ -n "$ECHO_DETAIL" ] && cat "$OUT_FILEPATH"
+            [ -n "$ECHO_QUIET" ] && return
 
-            printf "\n\tstd$OUT_TYPE ${GRAY}differs: $DESCRIPTION ${NORMAL}"
+            printf "\n\tstd$OUT_TYPE:\n"
+            cat "$OUT_FILEPATH"
+
+            printf "\n\tstd$OUT_TYPE ${GRAY}differs: $DESCRIPTION ${NORMAL}\n"
             if [ -f "$DETAILS_FILEPATH" ]; then
                 cat "$REF_MATCH_FILEPATH"
             fi
@@ -175,7 +177,12 @@ function run_test_with_args() {
         __ERR_HEAD_PRINTED=1
 
         # test header
-        print_fail "Test $TEST_ID" "" "\n"
+        if [ -z "$ECHO_QUIET" ]; then
+            print_fail "Test $TEST_ID" "" "\n"
+        else
+            print_fail "Test $TEST_ID"
+            return
+        fi
 
         # additional test description
         if [ -f "$DESC_FILEPATH" ]; then
@@ -234,17 +241,17 @@ function run_test_with_args() {
     print_debug "TEST_OUT_ERR=$TEST_OUT_ERR"
     if [ "$TEST_RC_DIFF" -ne "0" ]; then
         print_fail_head_once
-        printf "\n\treturn code ${GRAY}differs: expected ${NORMAL}%s${GRAY} ${NORMAL}but got ${RED}%s${NORMAL}" "$EXPECTED_RETURN_CODE" "$TEST_RC"
+        [ -z "$ECHO_QUIET" ] && printf "\n\treturn code ${GRAY}differs: expected ${NORMAL}%s${GRAY} ${NORMAL}but got ${RED}%s${NORMAL}" "$EXPECTED_RETURN_CODE" "$TEST_RC"
     fi
 
     if [ "$TEST_OUT_DIFF" -ne "0" ]; then
         print_fail_head_once
-        printf "$TEST_OUT\n"
+        [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT\n"
     fi
 
     if [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
         print_fail_head_once
-        printf "$TEST_OUT_ERR\n"
+        [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT_ERR\n"
     fi
 
     if [ "$TEST_RC_DIFF" -eq "0" ] && [ "$TEST_OUT_DIFF" -eq "0" ] && [ "$TEST_OUT_ERR_DIFF" -eq "0" ]; then
@@ -331,10 +338,10 @@ pct=$(awk -v successful=$successful -v total=$total 'BEGIN { print  ( successful
 FINAL_TOUCH=""
 if [ $(printf "%.0f" $pct) -gt 99 ]; then
     COLOR="${GREEN}${BOLD}"
-    FINAL_TOUCH="🎉"
+    FINAL_TOUCH=" 🎉"
 elif [ $(printf "%.0f" $pct) -ge 66 ]; then
     COLOR="${YELLOW}${BOLD}"
 else
     COLOR="${RED}${BOLD}"
 fi
-printf "${GRAY}Test summary:${NORMAL} passed ${COLOR}%2d${NORMAL}${GRAY}/${NORMAL}%2d ${COLOR}%5.1f%%${NORMAL}$FINAL_TOUCH\n" $successful $total $pct
+printf "\r${GRAY}Test summary:${NORMAL} passed ${COLOR}%2d${NORMAL}${GRAY}/${NORMAL}%2d ${COLOR}%5.1f%%${NORMAL}$FINAL_TOUCH\n" $successful $total $pct

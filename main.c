@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
  *   Tisk musí proběhnout na jeden řádek, konkrétní
  *   oddělovač jednotlivých prvků není vynucován.
  * 
- * @param array  pole, do kterého bude nový prvek vložen
+ * @param array  pole, které bude zobrazeno
  * @param size   velikost pole
  * 
  * Hlavičky žádných funkcí NEMĚŇTE!

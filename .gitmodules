@@ -1,3 +1,4 @@
 [submodule "solution"]
 	path = solution
-	url = ./solution
+	url = git@github.com:nesfit/IZP-solutions.git
+	branch = 07-02-program-config

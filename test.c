@@ -27,6 +27,10 @@ void run_automated_tests(char **args, int argc) {
   printf("parse success: %s\n", __status == 0 ? "Yes" : "No");
   printf("xFlag: %s\n", __config.xFlag ? "True" : "False");
   printf("yFlag: %s\n", __config.yFlag ? "True" : "False");
-  printf("sValue: %s\n", __config.sValue ? __config.sValue : "#null#");
-  printf("nValue: %u\n", __config.nValue);
+  printf("sValue: %s\n", __config.sValue);
+  printf("nValue: %d\n", __config.nValue);
 }
+
+// 03 chyby v [] vs null testy
+//    chybi dtor test
+//    vector integer x unsigned testy format

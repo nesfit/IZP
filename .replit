@@ -1,7 +1,7 @@
 compile = ["make", "-s"]
 run = "./main"
 entrypoint = "main.c"
-hidden = ["main", "main-debug", "main-test", "**/*.o", "**/*.d", ".ccls-cache", ".tests", ".gitignore", "Makefile", "test.*"]
+hidden = ["main", "main-*", "**/*.o", "**/*.d", ".ccls-cache", ".tests", ".gitignore", "Makefile", "test.*"]
 # onBoot = []
 
 [gitHubImport]

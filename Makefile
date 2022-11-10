@@ -17,6 +17,9 @@ main-debug: $(SRCS) $(HEADERS)
 main-test: $(SRCS) $(HEADERS)
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 $(SRCS) -o "$@"
 
+main-solution: $(SRCS) $(HEADERS)
+	$(CC) $(CFLAGS) -DTEST_BUILD=1 test.c solution/*.c -o "$@"
+
 test:
 	@./.tests/run_tests.sh
 

@@ -61,7 +61,6 @@ function check_output() {
         DIFF_RC=$?
 
         print_debug "  diff \$?=$DIFF_RC"
-        [ -n "$ECHO_DETAIL" ] && printf "\n\tstd$OUT_TYPE ${GRAY}differs: it was expected ${NORMAL}to be the same${GRAY} as:${NORMAL}\n%s" "$(cat "$REF_EXACT_FILEPATH")"
         printf "\n\tstd$OUT_TYPE ${GRAY}differs: it was expected ${NORMAL}to be the same${GRAY} as reference:${NORMAL}\n%s" "$DIFF"
         return $DIFF_RC
     fi
@@ -249,7 +248,15 @@ function run_test_with_args() {
     print_debug "TEST_OUT_ERR=$TEST_OUT_ERR"
     if [ "$TEST_RC_DIFF" -ne "0" ]; then
         print_fail_head_once
-        [ -z "$ECHO_QUIET" ] && printf "\n\treturn code ${GRAY}differs: expected ${NORMAL}%s${GRAY} ${NORMAL}but got ${RED}%s${NORMAL}" "$EXPECTED_RETURN_CODE" "$TEST_RC"
+        if [ -z "$ECHO_QUIET" ]; then
+            printf "\n\treturn code ${GRAY}differs: expected ${NORMAL}%s${GRAY} ${NORMAL}but got ${RED}%s${NORMAL}" "$EXPECTED_RETURN_CODE" "$TEST_RC"
+
+            if [ "$TEST_RC" -eq "139" ]; then
+                printf "\n\t\t${GRAY}signal meaning:${RED} Segmentation Fault${NORMAL}\n"
+            elif [ "$TEST_RC" -eq "134" ]; then
+                printf "\n\t\t${GRAY}signal meaning:${RED} Aborted${NORMAL}\n"
+            fi
+        fi
     fi
 
     if [ "$TEST_OUT_DIFF" -ne "0" ]; then

@@ -20,7 +20,7 @@ int divide(int dividend, int divisor, double *quotient) {
 
 int main(int argc, char *argv[]) {
   int dividend, divisor;
-  double quotient;
+  double quotient = 0.0;
 
   // načtení dělence a dělitele ze stdin
   scanf("%d", &dividend);
@@ -30,6 +30,8 @@ int main(int argc, char *argv[]) {
 
   // TODO: Ošetřete případné chybné zpracování,
   //   v případě chyby, vypiště "divide: error"
+  //   na standardní chybový výstup a ukončete aplikaci
+  //   s chybovým kódem 1
 
   // výpis výsledku druhého
   printf("%.3f\n", quotient);

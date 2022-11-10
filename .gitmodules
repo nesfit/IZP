@@ -1,0 +1,6 @@
+[submodule "solution"]
+	path = solution
+	url = ./solution
+	branch = 07-03-structs-vectors
+[submodule "git@github.com:nesfit/IZP-solutions.git"]
+	url = solution

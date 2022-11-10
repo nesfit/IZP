@@ -23,11 +23,11 @@ void __vector_print(char *prefix, Vector *v) {
     for (int i = 0; i < v->size - 1; i++) {
         printf("%d, ", v->items[i]);
     }
+
     if (v->size > 0) {
-        printf("%d]\n", v->items[v->size - 1]);
-    } else {
-        printf("]\n");
+        printf("%d", v->items[v->size - 1]);
     }
+    printf("]\n");
 }
 
 Vector __load_vector() {

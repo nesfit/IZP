@@ -17,14 +17,14 @@ main-debug: $(SRCS) $(HEADERS)
 main-test: $(SRCS) $(HEADERS)
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 $(SRCS) -o "$@"
 
-main-solution: $(SRCS) $(HEADERS)
+main-solution: test.c solution/*.c $(HEADERS)
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 -DSOLUTION_BUILD=1 test.c solution/*.c -o "$@"
 
 test:
-	@./.tests/run_tests.sh
+	@./.tests/scripts/run_tests.sh
 
 submit:
-	@PROJECT_SUBMIT_MODE=sources ./.tests/run_tests.sh
+	@PROJECT_SUBMIT_MODE=sources ECHO_QUIET=1 ./.tests/scripts/run_tests.sh
 
 clean:
 	rm -f main main-*

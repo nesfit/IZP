@@ -9,24 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void run_automated_tests() {
-  printf("\n\n=== AUTOMATED TESTS ===\n");
-
-  int __relSize;
-  Set __set;
-  __load_set(&__set);
-  Pair *__rel = __load_pairs(&__relSize);
-
-  printf("isFunction: %d\n", rel_isFunction(__rel, __relSize, __set));
-
-  int __relMin, __relMax, __minMaxResult;
-  __minMaxResult = rel_minMax(__rel, __relSize, &__relMin, &__relMax);
-  printf("minMax: %d, min=%d, max=%d\n", __minMaxResult, __relMin, __relMax);
-
-  printf("isEquivalence: %d\n", rel_isEquivalence(__rel, __relSize));
-
-  __dispose(__rel);
-}
 
 void __load_set(Set *set) {
   scanf("%d", &set->cardinality);
@@ -46,3 +28,22 @@ Pair *__load_pairs(int *size) {
 }
 
 void __dispose(Pair *pairs) { free(pairs); }
+
+void run_automated_tests() {
+  printf("\n\n=== AUTOMATED TESTS ===\n");
+
+  int __relSize;
+  Set __set;
+  __load_set(&__set);
+  Pair *__rel = __load_pairs(&__relSize);
+
+  printf("isFunction: %d\n", rel_isFunction(__rel, __relSize, __set));
+
+  int __relMin, __relMax, __minMaxResult;
+  __minMaxResult = rel_minMax(__rel, __relSize, &__relMin, &__relMax);
+  printf("minMax: %d, min=%d, max=%d\n", __minMaxResult, __relMin, __relMax);
+
+  printf("isEquivalence: %d\n", rel_isEquivalence(__rel, __relSize));
+
+  __dispose(__rel);
+}

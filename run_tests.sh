@@ -213,6 +213,7 @@ function run_test_with_args() {
     # define the array
     print_debug "running $RUN_FILEPATH $ARGS"
     print_debug "  TEST_NAME=$TEST_NAME"
+    export TEST_NAME
 
     if [ -f "$INPUT_FILEPATH" ]; then
         # run with input

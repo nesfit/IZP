@@ -4,6 +4,7 @@ Tests are run by running the `run_tests.sh` script.
 There are special environment variables accepted:
   - `DEBUG`: skips login validation and result submission
   - `DEBUG_ECHO`: enables script debugging
+  - `ECHO_QUIET`: disables verbose test logging
 
 ## Updating
 

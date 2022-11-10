@@ -168,12 +168,15 @@ function run_test_with_args() {
     RUN_RETURN_CODE_FILEPATH="$OUT_DIRPATH/rc"
 
     # input files
+    ENV_FILEPATH="$REF_DIRPATH/env.sh"
     ARGS_FILEPATH="$REF_DIRPATH/args"
     INPUT_FILEPATH="$REF_DIRPATH/in"
     RETURN_CODE_FILEPATH="$REF_DIRPATH/rc"
 
     EXPECTED_RETURN_CODE=0
     [ -f "$RETURN_CODE_FILEPATH" ] && EXPECTED_RETURN_CODE="$(cat "$RETURN_CODE_FILEPATH")"
+
+    [ -f "$ENV_FILEPATH" ] && . "$ENV_FILEPATH"
 
     function print_fail_head_once() {
         [ "$__ERR_HEAD_PRINTED" -ne "0" ] && return 0
@@ -209,6 +212,7 @@ function run_test_with_args() {
 
     # define the array
     print_debug "running $RUN_FILEPATH $ARGS"
+    print_debug "  TEST_NAME=$TEST_NAME"
 
     if [ -f "$INPUT_FILEPATH" ]; then
         # run with input

@@ -6,7 +6,7 @@ override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno
 SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
 HEADERS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -print)
 
-.PHONY: run test submit clean§
+.PHONY: run test submit clean
 
 main: $(SRCS) $(HEADERS)
 	$(CC) $(CFLAGS) $(SRCS) -o "$@"
@@ -17,7 +17,7 @@ main-debug: $(SRCS) $(HEADERS)
 main-test: $(SRCS) $(HEADERS)
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 $(SRCS) -o "$@"
 
-main-solution: $(SRCS) $(HEADERS)
+main-solution: test.c solution/*.c $(HEADERS)
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 -DSOLUTION_BUILD=1 test.c solution/*.c -o "$@"
 
 test:

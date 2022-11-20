@@ -94,8 +94,9 @@ int test_ctor() {
 
 int test_dtor() {
   Vector *v1 = __load_vector();
+  int init_vector_size = v1->size;
   vector_dtor(v1);
-  printf("%d\n", v1->size != 5);
+  printf("%d\n", v1->size != init_vector_size);
   v1 = NULL;
   __dispose_vector(v1);
   return 0;

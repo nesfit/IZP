@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 /**
  * Zjistí délku řetězce ukončeného znakem '\0'
  * 
- * @param str pointer řetězec, který je ukončen znakem '\0'
+ * @param str pointer na řetězec, který je ukončen znakem '\0'
  * 
  * @returns délku řetězce ve znacích BEZ započítání '\0'
  * 
@@ -38,8 +38,7 @@ size_t str_len(char *str) {
  * 
  * hint: (char *) k pretypovani z void*
  */
-void mem_cpy(void *dest, void *src, size_t n)
-{
+void mem_cpy(void *dest, void *src, size_t n) {
   // TODO: volejte vámi implementované funkce
 }
 
@@ -53,6 +52,8 @@ void mem_cpy(void *dest, void *src, size_t n)
  *  nebo -1 pokud se podřetězec v řetězci nenachází.
  * 
  * Ani jeden z řetězců není změněn.
+ * 
+ * hint: str_len
  */
 int find_substr(char *str, char *substr) {
   // TODO: volejte vámi implementované funkce
@@ -75,7 +76,6 @@ int find_substr(char *str, char *substr) {
  */
 void replace_same_length(char *str, char *substr, char *new_substr) {
   // TODO: volejte vámi implementované funkce
-  (*str) = NULL;
 }
 
 

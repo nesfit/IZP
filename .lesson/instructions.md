@@ -32,7 +32,7 @@ Výsledek nahrazení v řetezci `abcdefghi` podřetězce `bc` za `XYZ` je `aXYZd
     /**
     * Zjistí délku řetězce ukončeného znakem '\0'
     * 
-    * @param str pointer řetězec, který je ukončen znakem '\0'
+    * @param str pointer na řetězec, který je ukončen znakem '\0'
     * 
     * @returns délku řetězce ve znacích BEZ započítání '\0'
     * 
@@ -64,42 +64,47 @@ Výsledek nahrazení v řetezci `abcdefghi` podřetězce `bc` za `XYZ` je `aXYZd
     *  nebo -1 pokud se podřetězec v řetězci nenachází.
     * 
     * Ani jeden z řetězců není změněn.
+    * 
+    * hint: str_len
     */
     int find_substr(char *str, char *substr);
     ```
 
     ```C
     /**
-     * Nahradí nahrazovaný podřetězec za nahrazující podřetězec v řetězci,
-     * kde oba podřetězce jsou o stejné délce.
-     * 
-     * @param str pointer na řetězec ve kterém se vyhledává
-     * @param substr pointer na vyhledávaný nahrazovaný podřetězec 
-     * @param new_substr pointer na nahrazující podřetězec
-     * 
-     * Podřetězce nejsou změněny.
-     * 
-     * hint: memcpy, find_substr
-     */
+    * Nahradí nahrazovaný podřetězec za nahrazující podřetězec v řetězci,
+    * kde oba podřetězce jsou o stejné délce.
+    * 
+    * @param str pointer na řetězec ve kterém se vyhledává
+    * @param substr pointer na vyhledávaný nahrazovaný podřetězec 
+    * @param new_substr pointer na nahrazující podřetězec
+    * 
+    * Podřetězce nejsou změněny. Pokud nejsou podřetězce stejně dlouhé,
+    * funkce substituci neprovede, stejně tak pokud není 
+    * podřetězec v řetězci nalezen.
+    * 
+    * hint: mem_cpy, find_substr, str_len
+    */
     void replace_same_length(char *str, char *substr, char *new_substr);
     ```
     
     ```C
     /**
     * Nahradí nahrazovaný podřetězec za nahrazující podřetězec v řetězci,
-    * kde každý podřetězec má jinou velikost. Původní řetězec je uvolněn.
+    * kde každý podřetězec může mít jinou velikost. Původní řetězec je uvolněn.
     * 
     * @param str pointer na řetězec ve kterém se vyhledává
     * @param substr pointer na vyhledávaný nahrazovaný podřetězec 
     * @param new_substr pointer na nahrazující podřetězec
     * 
     * @returns pointer na nový řetězec vytvořený v nově alokované paměti v
-    * případě úspěchu, NULL jinak. 
+    * případě úspěchu, pointer na původní řetězec v případě že podřetězec
+    *  se v řetězci nenachází, NULL jinak. 
     * 
     * Podřetězce nejsou změněny. V případě chyby není řetězec uvolněn a zůstává
     * nezměněn.
     * 
-    * hint: memcpy, find_substr, malloc, free, realloc
+    * hint: mem_cpy, find_substr, str_len, malloc, free
     */
     char *replace(char *str, char *substr, char *new_substr);
     ```    

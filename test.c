@@ -64,6 +64,7 @@ void __dispose_vector(Vector *v) {
 
 int test_resize() {
   Vector *v1 = __load_vector();
+  int old_size = v1->size;
   int new_size;
   scanf("%d", &new_size);
   v1->items = resize(v1->items, new_size);
@@ -72,7 +73,7 @@ int test_resize() {
   {
     v1->items[i] = i;
   }
-  if(new_size == 0)
+  if(new_size == 0 && old_size != 0)
   {
     v1->items[0] = 69;
   }
@@ -94,10 +95,8 @@ int test_ctor() {
 
 int test_dtor() {
   Vector *v1 = __load_vector();
-  int init_vector_size = v1->size;
-  vector_dtor(v1);
-  printf("%d\n", v1->size != init_vector_size);
-  v1 = NULL;
+  vector_dtor(&v1);
+  __vector_print("result: ", v1);
   __dispose_vector(v1);
   return 0;
 }

@@ -18,10 +18,11 @@ int main(int argc, char *argv[]) {
 /**
  * Provede změnu velikosti alokované paměti na heapu. Pokud je nová velikost nulová,
  * je paměť dealokována a funkce vrací NULL. Pokud je ukazatel na existující paměť NULL,
- * je alokován nový blok paměti.
+ * je alokován nový blok paměti. V případě že je pointer na paměť NULL a zároveň je 
+ * požadovaná velikost 0, funkce vrací NULL bez jakékoliv alokace.
  * 
  * @param arr ukazatel na existující alokovanou paměť
- * @param new_size nová velikost vektoru v prvcích
+ * @param new_size nová velikost paměti v prvcích INT
  * 
  * @returns pointer na nově alokovaný vector v případě úspěšné alokace, NULL jinak
  * 
@@ -35,7 +36,8 @@ int *resize(int *arr, unsigned int new_size)
 
 
 /**
- * Dynamicky alokuje nový vektor o nulové délce na heapu.
+ * Dynamicky alokuje nový vektor o nulové délce na heapu, pointer na složky (komponenty) vektoru
+ * nastavuje na NULL.
  * 
  * @returns pointer na nově alokovaný vector v případě úspěšné alokace, NULL jinak
  * 
@@ -50,13 +52,13 @@ Vector *vector_ctor()
 
 /**
  * Provede zrušení (uvolnění alokované paměti) daného vektoru a to jak jeho prvků,
- * tak vektoru samotného.
+ * tak vektoru samotného. Ukazatel na vektor pak nastavuje na NULL.
  * 
- * @param v  ukazatel na existující vektor
+ * @param v ukazatel na existující vektor
  * 
  * hint: free
  */
-void vector_dtor(Vector *v)
+void vector_dtor(Vector **v)
 {
   // TODO: implementujte funkci dle zadání
 }

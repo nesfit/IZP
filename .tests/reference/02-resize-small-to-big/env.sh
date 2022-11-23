@@ -1,1 +1,0 @@
-TEST_NAME=test_resize

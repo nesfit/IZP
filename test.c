@@ -13,76 +13,53 @@
 
 
 void __vector_print(char *prefix, Vector *v) {
-    if(v == NULL)
-    {
-      printf("NULL\n");
+  if(v == NULL)
+  {
+    printf("Vector = (null)\n");
+    return;
+  }
+  printf("%sVector(%d) = ", prefix, v->size);
+  if (v->items == NULL) {
+      printf("(null)\n");
       return;
-    }
-    printf("%sVector(%d) = ", prefix, v->size);
-    if (v->items == NULL) {
-        printf("(null)\n");
-        return;
-    }
-    printf("[");
-    for (int i = 0; i < v->size - 1; i++) {
-        printf("%d, ", v->items[i]);
-    }
-    if (v->size > 0) {
-        printf("%d", v->items[v->size - 1]);
-    }
-    printf("]\n");
+  }
+  printf("[");
+  for (int i = 0; i < v->size - 1; i++) {
+      printf("%d, ", v->items[i]);
+  }
+  if (v->size > 0) {
+      printf("%d", v->items[v->size - 1]);
+  }
+  printf("]\n");
 }
 
 Vector* __load_vector() {
-    Vector *v = malloc(sizeof(Vector));
-    scanf("%d", &(v->size));
-    v->items = v->size ? malloc(v->size * sizeof(int)) : NULL;
-    for (int i = 0; i < v->size; i++) {
-        scanf("%d", &v->items[i]);
-    }
-    //__vector_print("loaded: ", v);
-    return v;
+  Vector *v = malloc(sizeof(Vector));
+  scanf("load Vector(%d):", &(v->size));
+  v->items = v->size ? malloc(v->size * sizeof(int)) : NULL;
+  for (int i = 0; i < v->size; i++) {
+      scanf("%d", &v->items[i]);
+  }
+  //__vector_print("loaded: ", v);
+  return v;
 }
 
 void __clone_vector(Vector *dest, Vector *src) {
-    dest->size = src->size;
-    int memsize = src->size * sizeof(*src->items);
-    dest->items = malloc(memsize);
-    memcpy(dest->items, src->items, memsize);
+  dest->size = src->size;
+  int memsize = src->size * sizeof(*src->items);
+  dest->items = malloc(memsize);
+  memcpy(dest->items, src->items, memsize);
 }
 
 void __dispose_vector(Vector *v) {
-    if(v == NULL)
-      return;
-    if (v->size > 0 && v->items != NULL) {
-        free(v->items);
-    }
-    v->items = NULL;
-    v->size = 0;
-    free(v);
-}
-
-int test_resize() {
-  Vector *v1 = __load_vector();
-  int old_size = v1->size;
-  int new_size;
-  scanf("%d", &new_size);
-  v1->items = resize(v1->items, new_size);
-  v1->size = new_size;
-  for(int i = 0; i < new_size; i++)
-  {
-    v1->items[i] = i;
+  if(v == NULL)
+    return;
+  if (v->size > 0 && v->items != NULL) {
+      free(v->items);
   }
-  if(new_size == 0 && old_size != 0)
-  {
-    v1->items[0] = 69;
-  }
-  if(new_size < 100)
-  {
-    __vector_print("result: ", v1);
-  }
-  __dispose_vector(v1);
-  return 0;
+  v->items = NULL;
+  v->size = 0;
+  free(v);
 }
 
 int test_ctor() {
@@ -95,6 +72,7 @@ int test_ctor() {
 
 int test_dtor() {
   Vector *v1 = __load_vector();
+
   vector_dtor(&v1);
   __vector_print("result: ", v1);
   __dispose_vector(v1);
@@ -103,24 +81,28 @@ int test_dtor() {
 
 int test_vector_add() {
   Vector *v1 = __load_vector();
-  for (int i = 0; i < 10; i++)
+
+  int __count;
+  scanf(" add %d:", &__count);
+  for (int i = 0; i < __count; i++)
   {
-    vector_add(v1, 69);
+    int numberToAdd;
+    scanf("%d", &numberToAdd);
+    printf("vector_add: %d\n", vector_add(v1, numberToAdd));
   }
+
   __vector_print("result: ", v1);
   __dispose_vector(v1);
   return 0;
 }
 
 const char *test_names[] = {
-    "test_resize",
     "test_ctor",
     "test_dtor",
     "test_vector_add",
 };
 
 int (*tests[])() = {
-    &test_resize,
     &test_ctor,
     &test_dtor,
     &test_vector_add,
@@ -151,8 +133,6 @@ int run_test_by_name(const char *test_name) {
 #ifdef TEST_BUILD
 
 int main(int argc, char **args) {
-  printf("=== AUTOMATED TESTS ===\n");
-
   const char *test_name = getenv("TEST_NAME");
   return run_test_by_name(test_name);
 }

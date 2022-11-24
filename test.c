@@ -15,7 +15,7 @@
 void __vector_print(char *prefix, Vector *v) {
   if(v == NULL)
   {
-    printf("Vector = (null)\n");
+    printf("%sVector = (null)\n", prefix);
     return;
   }
   printf("%sVector(%d) = ", prefix, v->size);
@@ -40,7 +40,7 @@ Vector* __load_vector() {
   for (int i = 0; i < v->size; i++) {
       scanf("%d", &v->items[i]);
   }
-  //__vector_print("loaded: ", v);
+  __vector_print("loaded: ", v);
   return v;
 }
 
@@ -79,7 +79,19 @@ int test_dtor() {
   return 0;
 }
 
-int test_vector_add() {
+int test_resize() {
+  Vector *v1 = __load_vector();
+
+  int __new_size;
+  scanf(" resize to %d", &__new_size);
+  vector_resize(v1, __new_size);
+
+  __vector_print("result: ", v1);
+  __dispose_vector(v1);
+  return 0;
+}
+
+int test_expand() {
   Vector *v1 = __load_vector();
 
   int __count;
@@ -88,7 +100,7 @@ int test_vector_add() {
   {
     int numberToAdd;
     scanf("%d", &numberToAdd);
-    printf("vector_add: %d\n", vector_add(v1, numberToAdd));
+    printf("vector_expand: %d\n", vector_expand(v1, numberToAdd));
   }
 
   __vector_print("result: ", v1);
@@ -99,13 +111,15 @@ int test_vector_add() {
 const char *test_names[] = {
     "test_ctor",
     "test_dtor",
-    "test_vector_add",
+    "test_resize",
+    "test_expand",
 };
 
 int (*tests[])() = {
     &test_ctor,
     &test_dtor,
-    &test_vector_add,
+    &test_resize,
+    &test_expand,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

@@ -1,5 +1,5 @@
 # 08-01: Dynamická alokace paměti
-V tomto cvičení si vyzkoušíte pokročilejší práci s dynamickou pamětí. K funkcím z minulého cvičení přidáme ještě funkci pro realokaci paměti - `realloc` 
+V tomto cvičení si vyzkoušíte pokročilejší práci s dynamickou pamětí. K funkcím z minulého cvičení přidáme ještě funkci pro realokaci paměti - `realloc`.
 
 Pro připomenutí:
 
@@ -14,16 +14,6 @@ Nově použijeme i funkci:
 
  `void *realloc(void *ptr, size_t size)`
  - mění velikost alokované paměti, která byla dříve alokována pomocí funkce `malloc` nebo `calloc`. Vstupem je pointer `ptr` na dříve alokovanou pamět, kterou chceme zvětšit nebo zmenšit a dále pak nová velikost alokované paměti `size`.
-
-## Vektory
-
-Úvod do vektorů a operací nad nimi můžete najít na [Math Insight][intro].
-Další obecné informace máte k dispozici také na [Wiki][wiki].
-Ukázky řešení operací s vektory pak můžete najít na [WolframAlpha][wolfram].
-
-[intro]: https://mathinsight.org/vector_introduction "Math Insight - Vector Introduction"
-[wolfram]: https://www.wolframalpha.com/examples/mathematics/linear-algebra/vectors/ "WolframAlpha Vectors"
-[wiki]: https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics) "Wikipedia Vectors"
 
 ---
 
@@ -82,7 +72,7 @@ Ukázky řešení operací s vektory pak můžete najít na [WolframAlpha][wolfr
     * 
     * hint: vaše funkce resize
     */
-    int vector_add(Vector *vec, int value);
+    int vector_expand(Vector *vec, int value);
     ```
 3. Implementujte vypisovací funkci:
 

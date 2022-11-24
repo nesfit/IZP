@@ -7,8 +7,13 @@
 #ifndef TEST_BUILD
 
 int main(int argc, char *argv[]) {
+  // TODO: 1. V nekonečném cyklu čtete nenulové celočíselné hodnoty a jednotlivě je přidávejte do vektoru.
+  //   Nulová hodnota ukončuje čtecí cyklus. 
   
-  // TODO: volejte vámi implementované funkce
+  // TODO: 2. Vypište uživateli obsah vektoru a jeho celkovou velikost voláním `vector_print`.
+
+  // TODO: 3. Uvolněte alokovanou paměť.
+
   return 0;
 }
 
@@ -31,7 +36,7 @@ Vector *vector_ctor()
 
 /**
  * Provede zrušení (uvolnění alokované paměti) daného vektoru.
- * A to jak jeho prvků, tak vektoru samotného.
+ * A to včetně pole jeho komponent.
  * 
  * @param v  ukazatel na existující vektor
  * 
@@ -55,16 +60,35 @@ void vector_print(Vector *v)
 
 
 /**
- * Přidá do vektoru jednu novou složku (komponenetu) a vektor automaticky rozšíří.
+ * Změní rozměr vektoru na nove definovaný rozměr.
+ * Odpovídajícím způsobem aktualizuje pole komponent a rozměr vektoru.
  * 
- * @param v       ukazatel na existující vektor
- * @param value   hodnota, která má být přidána do vektoru
+ * @param v         ukazatel na existující vektor
+ * @param new_size  nový rozměr vektoru (počet složek/komponent)
  * 
- * @returns hodnotu 1 v případě úspěšného přidání složky do vektoru, 0 jinak
+ * @returns hodnotu 1 v případě úspěšné změny, 0 jinak
  * 
  * hint: realloc, sizeof
  */
-int vector_add(Vector *v, int value)
+int vector_resize(Vector *v, int new_size)
+{
+  // TODO: implementujte funkci dle zadání
+  return -1;
+}
+
+
+/**
+ * Rozšíří rozměr vektoru o jedna a přidá do něj jednu novou složku (komponenetu).
+ * Odpovídajícím způsobem aktualizuje pole komponent a rozměr vektoru.
+ * 
+ * @param v       ukazatel na existující vektor
+ * @param value   složka, která má být přidána do vektoru
+ * 
+ * @returns hodnotu 1 v případě úspěšného přidání složky do vektoru, 0 jinak
+ * 
+ * hint: vector_resize
+ */
+int vector_expand(Vector *v, int value)
 {
   // TODO: implementujte funkci dle zadání
   return -1;

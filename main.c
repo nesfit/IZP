@@ -37,8 +37,9 @@ Vector *vector_ctor()
 /**
  * Provede zrušení (uvolnění alokované paměti) daného vektoru.
  * A to včetně pole jeho komponent.
+ * Po uvolnění ukazatel na původní vektor vynulujte.
  * 
- * @param v  ukazatel na existující vektor
+ * @param v  ukazatel na ukazatel na existující vektor
  * 
  * hint: free
  */

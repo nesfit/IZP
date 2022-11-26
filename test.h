@@ -9,6 +9,4 @@
 
 #include "types.h"
 
-void run_automated_tests();
-
 #endif

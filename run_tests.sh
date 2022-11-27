@@ -175,6 +175,7 @@ function run_test_with_args() {
     EXPECTED_RETURN_CODE=0
     [ -f "$RETURN_CODE_FILEPATH" ] && EXPECTED_RETURN_CODE="$(cat "$RETURN_CODE_FILEPATH")"
 
+    # load config from environment
     [ -f "$ENV_FILEPATH" ] && . "$ENV_FILEPATH"
 
     function print_fail_head_once() {
@@ -212,16 +213,34 @@ function run_test_with_args() {
     # define the array
     print_debug "running $RUN_FILEPATH $ARGS"
     print_debug "  TEST_NAME=$TEST_NAME"
+
+    # export relevant test variables by default
     export TEST_NAME
+
+    VALGRIND_CALL=""
+    if [[ -n "$VALGRIND" && "$VALGRIND" -eq 1 ]]; then
+        [[ -z "$VALGRIND_FLAGS" ]] && VALGRIND_FLAGS="--leak-check=summary --show-reachable=yes"
+		VALGRIND_CALL="valgrind $VALGRIND_FLAGS"
+
+    fi
 
     if [ -f "$INPUT_FILEPATH" ]; then
         # run with input
-        timeout --preserve-status "$RUN_TIMEOUT" "$RUN_FILEPATH" $ARGS <"$INPUT_FILEPATH" >"$RUN_OUT_FILEPATH" 2>"$RUN_OUT_ERR_FILEPATH"
+        timeout --preserve-status "$RUN_TIMEOUT" $VALGRIND_CALL "$RUN_FILEPATH" $ARGS <"$INPUT_FILEPATH" >"$RUN_OUT_FILEPATH" 2>"$RUN_OUT_ERR_FILEPATH"
         TEST_RC="$?"
+
     else
         # run without input
-        timeout --preserve-status "$RUN_TIMEOUT" "$RUN_FILEPATH" $ARGS >"$RUN_OUT_FILEPATH" 2>"$RUN_OUT_ERR_FILEPATH"
+        timeout --preserve-status "$RUN_TIMEOUT" $VALGRIND_CALL "$RUN_FILEPATH" $ARGS >"$RUN_OUT_FILEPATH" 2>"$RUN_OUT_ERR_FILEPATH"
         TEST_RC="$?"
+
+    fi
+
+    if [[ -n "$VALGRIND" && "$VALGRIND" -eq 1 ]]; then
+		sed -nr 's/^([0-9=]* )?(.*)$/\2/p' "$RUN_OUT_ERR_FILEPATH" | grep --invert-match -E "^(Command|Copyright|Using Valgrind)" >"$RUN_OUT_ERR_FILEPATH"
+        VALGRIND=0
+        VALGRIND_FLAGS=""
+
     fi
 
     print_working "Test $TEST_ID: validating"

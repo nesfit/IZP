@@ -70,7 +70,6 @@ int test_person_dtor()
   Person person = __load_person();
   person_dtor(&person);
   __print_person("result: ", &person);
-  __dispose_person(&person);
   return 0;
 }
 
@@ -79,7 +78,6 @@ int test_array_dtor()
   PersonArray array = __load_array();
   array_dtor(&array);
   __print_array("result: ", &array);
-  __dispose_array(&array);
   return 0;
 }
 
@@ -121,23 +119,23 @@ int (*tests[])() = {
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))
 
 int run_test_by_name(const char *test_name) {
-    if (test_name != NULL) {
-        for (size_t testId = 0; testId < TEST_COUNT; testId++)
-        {
-            if (strcmp(test_names[testId], test_name) == 0) {
-                return tests[testId]();
-            }
-        }
-    }
-    
-    fprintf(stderr, "could not find test '%s'\n", test_name);
-    fprintf(stderr, "supported tets:\n");
+  if (test_name != NULL) {
     for (size_t testId = 0; testId < TEST_COUNT; testId++)
     {
-        fprintf(stderr, "    - %s\n", test_names[testId]);
+      if (strcmp(test_names[testId], test_name) == 0) {
+        return tests[testId]();
+      }
     }
+  }
+  
+  fprintf(stderr, "could not find test '%s'\n", test_name);
+  fprintf(stderr, "supported tets:\n");
+  for (size_t testId = 0; testId < TEST_COUNT; testId++)
+  {
+    fprintf(stderr, "    - %s\n", test_names[testId]);
+  }
 
-    return 99;
+  return 99;
 }
 
 #ifdef TEST_BUILD

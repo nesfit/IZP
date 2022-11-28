@@ -160,9 +160,9 @@ void *array_append(PersonArray *array, Person *p)
 {
   if (array_expand(array)) {
     return person_copy(p, &array->items[array->length - 1]);
-  } else {
-    return NULL;
   }
+
+  return NULL;
 }
 
 /**

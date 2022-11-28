@@ -71,7 +71,6 @@ void person_swap(Person *a, Person *b)
   *b = tmp;
 }
 
-// Porovna dve osoby. Vraci <0, >0, 0, pokud a<b, a>b, a=b.
 /**
  * Porovná dvě instance osoby.
  * 
@@ -202,6 +201,7 @@ int array_find_min(PersonArray *array, int startIndex)
 
 /**
  * Seřadí prvky v poli podle rok narození (případně podle jména).
+ * Implementujte algoritmem selection-sort.
  * 
  * @param array  Ukazatel na existující instanci pole osob
  * 

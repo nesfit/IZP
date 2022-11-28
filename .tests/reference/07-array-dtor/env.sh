@@ -1,2 +1,2 @@
-TEST_NAME=test_person_dtor
+TEST_NAME=test_array_dtor
 VALGRIND=1

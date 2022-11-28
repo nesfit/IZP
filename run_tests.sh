@@ -238,7 +238,8 @@ function run_test_with_args() {
     fi
 
     if [[ -n "$VALGRIND" && "$VALGRIND" -eq 1 ]]; then
-		cat "$RUN_OUT_ERR_FILEPATH" | sed -nr 's/^([0-9=]* )?(.*)$/\2/p' | grep --invert-match -E "^(Command|Copyright|Using Valgrind)" >"$RUN_OUT_ERR_FILEPATH"
+        content="$(cat "$RUN_OUT_ERR_FILEPATH")"
+        echo "$content" | sed -nr 's/^([0-9=]* )?(.*)$/\2/p' | grep --invert-match -E "^(Command|Copyright|Using Valgrind)" >"$RUN_OUT_ERR_FILEPATH"
         VALGRIND=0
         VALGRIND_FLAGS=""
 

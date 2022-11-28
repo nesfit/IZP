@@ -104,6 +104,7 @@ function check_output() {
         return 0
     }
 
+    STATUS=0
     if [ -f "$REF_MATCH_FILEPATH" ]; then
         # soft match with grep
         CMD="grep --fixed-strings --count --text --file "$REF_MATCH_FILEPATH" "$OUT_FILEPATH""
@@ -237,7 +238,7 @@ function run_test_with_args() {
     fi
 
     if [[ -n "$VALGRIND" && "$VALGRIND" -eq 1 ]]; then
-		sed -nr 's/^([0-9=]* )?(.*)$/\2/p' "$RUN_OUT_ERR_FILEPATH" | grep --invert-match -E "^(Command|Copyright|Using Valgrind)" >"$RUN_OUT_ERR_FILEPATH"
+		cat "$RUN_OUT_ERR_FILEPATH" | sed -nr 's/^([0-9=]* )?(.*)$/\2/p' | grep --invert-match -E "^(Command|Copyright|Using Valgrind)" >"$RUN_OUT_ERR_FILEPATH"
         VALGRIND=0
         VALGRIND_FLAGS=""
 

@@ -197,7 +197,7 @@ void array_remove(PersonArray *array, unsigned int index)
  * 
  * použijte: person_cmp
  */
-int array_find_min(PersonArray *array, int startIndex)
+int array_find_min(PersonArray *array, unsigned int startIndex)
 {
   // TODO: implementujte funkci dle popisu
   return -2;

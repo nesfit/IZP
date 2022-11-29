@@ -39,21 +39,21 @@ void person_print(Person *p);
 
 #pragma region Person array methods
 
-void array_ctor(PersonArray *arrayrray);
+void array_ctor(PersonArray *array);
 
-void array_dtor(PersonArray *arrayrray);
+void array_dtor(PersonArray *array);
 
-void *array_expand(PersonArray *arrayrray);
+void *array_expand(PersonArray *array);
 
-void *array_append(PersonArray *arrayrray, Person *p);
+void *array_append(PersonArray *array, Person *p);
 
-void array_remove(PersonArray *arrayrray, unsigned int index);
+void array_remove(PersonArray *array, unsigned int index);
 
-int array_find_min(PersonArray *arrayrray, int startIndex);
+int array_find_min(PersonArray *array, unsigned int startIndex);
 
-void array_sort(PersonArray *arrayrray);
+void array_sort(PersonArray *array);
 
-void array_print(PersonArray *arrayrray);
+void array_print(PersonArray *array);
 
 #pragma endregion
 

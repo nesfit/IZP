@@ -14,7 +14,7 @@ Person __load_person() {
   int year;
   char nameLoaded[100];
   char *nameAllocated;
-  scanf("%d, %99s", &year, (char *)&nameLoaded);
+  scanf("%d, %99[^\n]", &year, (char *)&nameLoaded);
   nameAllocated = malloc(strlen(nameLoaded) + 1);
   strcpy(nameAllocated, nameLoaded);
 
@@ -65,6 +65,23 @@ void __dispose_array(PersonArray *array) {
   array->length = 0;
 }
 
+int test_person_copy()
+{
+  Person person1 = __load_person();
+  Person person2;
+  person_copy(&person1, &person2);
+
+  char newName[100];
+  scanf(" copy and rename to %99[^\n]", newName);
+  strcpy(person2.name, newName);
+  __print_person("source: ", &person1);
+  __print_person("result: ", &person2);
+
+  __dispose_person(&person1);
+  __dispose_person(&person2);
+  return 0;
+}
+
 int test_person_dtor()
 {
   Person person = __load_person();
@@ -103,6 +120,7 @@ int test_sort()
 }
 
 const char *test_names[] = {
+  "test_person_copy",
   "test_person_dtor",
   "test_array_dtor",
   "test_find_min",
@@ -110,6 +128,7 @@ const char *test_names[] = {
 };
 
 int (*tests[])() = {
+  &test_person_copy,
   &test_person_dtor,
   &test_array_dtor,
   &test_find_min,

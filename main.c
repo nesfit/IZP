@@ -50,12 +50,13 @@ void person_move(Person *src, Person *dst)
  * @param dst  Ukazatel na existující cílovou instanci
  * 
  * @returns Ukazatel na alokovanou paměť, NULL při neúspěšné alokaci
+ * 
+ * použijte: person_ctor
  */
 void *person_copy(Person *src, Person *dst)
 {
   *dst = *src;
   return dst;
-  // chyba! Neni provadena kopie jmena
 }
 
 /**
@@ -179,6 +180,9 @@ void array_remove(PersonArray *array, unsigned int index)
 
   if (array->length) {
     array->items = realloc(array->items, (array->length - 1) * sizeof(Person));
+    if (array->items) {
+      array->length--;
+    }
   }
 }
 

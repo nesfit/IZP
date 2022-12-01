@@ -19,8 +19,7 @@ typedef struct {
   Person *items;
 } PersonArray;
 
-#pragma region Person methods
-
+// Person Methods
 void person_ctor(Person *p, unsigned birthYear, const char *name);
 
 void person_dtor(Person *p);
@@ -35,10 +34,7 @@ int person_cmp(Person *a, Person *b);
 
 void person_print(Person *p);
 
-#pragma endregion
-
-#pragma region Person array methods
-
+// PersonArray Methods
 void array_ctor(PersonArray *array);
 
 void array_dtor(PersonArray *array);
@@ -54,7 +50,5 @@ int array_find_min(PersonArray *array, unsigned int startIndex);
 void array_sort(PersonArray *array);
 
 void array_print(PersonArray *array);
-
-#pragma endregion
 
 #endif

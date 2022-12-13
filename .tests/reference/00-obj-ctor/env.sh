@@ -1,1 +1,1 @@
-TEST_NAME=test_item_ctor
+TEST_NAME=test_object_ctor

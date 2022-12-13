@@ -128,7 +128,9 @@ void __dispose_list(List *list)
 
 int test_object_ctor() {
   Object o = __load_object();
-  __print_object(o);
+  Object userO = object_ctor(o.id, o.name);
+  __print_object(userO);
+  free(userO.name);
   free(o.name);
   return 0;
 }

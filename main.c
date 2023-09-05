@@ -1,8 +1,13 @@
-#include "test.h"
 #include "types.h"
 #include <stdio.h>
-#include <stdlib.h>
 
+
+void print_args(char **argv, int argc) {
+  printf("argc=%d\n", argc);
+  for (int argi = 1; argi < argc; argi++) {
+    printf("argv[%d]=%s\n", argi, argv[argi]);
+  }
+}
 
 #ifndef TEST_BUILD
 
@@ -13,11 +18,3 @@ int main(int argc, char *argv[]) {
 }
 
 #endif
-
-
-void print_args(char **argv, int argc) {
-  printf("argc=%d\n", argc);
-  for (int argi = 1; argi < argc; argi++) {
-    printf("argv[%d]=%s\n", argi, argv[argi]);
-  }
-}

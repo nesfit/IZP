@@ -3,8 +3,8 @@ all: main
 CC = gcc
 override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno-unused-result -pedantic -lm
 
-SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
-HEADERS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -print)
+SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -depth 1 -print)
+HEADERS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -depth 1 -print)
 
 .PHONY: run test submit clean§
 

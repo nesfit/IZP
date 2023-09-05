@@ -17,8 +17,8 @@ The tests are defined by numerous files as described below.
 
 ## Test definition
 
-These files define how the program is run.
-Environment variable `TEST_NAME` selects the test to run within the application (`env.sh` should be used for this purpose).
+These files define how the program is run in each test case.
+Files must be placed into the test case directory.
 
 | File name | Description                                                  | Defaults when missing                       |
 |-----------|--------------------------------------------------------------|---------------------------------------------|
@@ -28,6 +28,17 @@ Environment variable `TEST_NAME` selects the test to run within the application 
 | `desc`    | Provides description of the given test                       | Empty test description                      |
 
 All the files are optional.
+
+**Environment variables**
+
+These can be set either in `env.sh` in the reference directory (as global defaults) or in each test case specific `env.sh`.
+
+| Variable name        | Description                                                                                                                     |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `TEST_NAME`          | Defines which test case of the program should be run                                                                            |
+| `RUN_NEXT_BEHAVIOUR` | The program asks whether to continue after the first failed test. This is behaviour is disabled when the variable is set to "". |
+| `VALGRIND`           | Setting this variable to "1" will enable valgrin for the given test case                                                        |
+| `VALGRIND_FLAGS`     | Allows overriding default valgrind CLI options                                                                                  |
 
 ## Result definition
 

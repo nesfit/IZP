@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[ -n "$DEBUG_BASH" ] && set -x
+
 SCRIPT_DIRPATH="$(realpath $(dirname $0))"
 TESTS_DIRPATH="$SCRIPT_DIRPATH/../reference"
 OUTS_DIRPATH="$SCRIPT_DIRPATH/../student"
@@ -14,14 +16,15 @@ RUN_FILENAME="$MAKE_RECIPE_NAME"
 
 . "$SCRIPT_DIRPATH/common.sh"
 
+# validate config when not in debug mode
 if [ -z "$DEBUG" ]; then
     . "$SOLUTION_DIRPATH/student-config.sh"
 
     if [ -z "$PROJECT_AUTHOR" ]; then
         if [[ -z "$LOGIN" ]]; then
-            >&2 echo -e "${RED}No faculty login has been set!${NORMAL}\n${GRAY}Configure it in${NORMAL} student-config.sh"
+            >&2 echo -e "${RED}No faculty login has been set!${NORMAL}\n${GRAY}Configure it in${NORMAL} /student-config.sh"
             exit 1
-        elif [[ "$LOGIN" =~ ^(x[a-z]{5}[a-z0-9]{2})$ ]]; then
+        elif [[ "$LOGIN" =~ ^(x[a-z]{5}[a-z0-9]{2})$ && "$LOGIN" != "xlogin00" ]]; then
             # FIT LOGIN
             :
         elif [[ "$LOGIN" =~ ^([0-9]{6})$ ]]; then
@@ -29,12 +32,13 @@ if [ -z "$DEBUG" ]; then
             :
         else
             >&2 echo -e "${RED}Invalid student identifier ${NORMAL}${LOGIN}${RED}!"
-            >&2 echo -e "${GRAY}Expected either ${NORMAL}xlogin00${GRAY} or ${NORMAL}VUTID${GRAY}.${NORMAL}"
+            >&2 echo -e "${GRAY}Expected format is either ${NORMAL}xlogin00${GRAY} or ${NORMAL}VUTID${GRAY}.${NORMAL}"
             exit 2
         fi
     fi
 fi
 
+# load definitions from configuration
 if [ -f "$SCRIPT_DIRPATH/../config.sh" ]; then
     . "$SCRIPT_DIRPATH/../config.sh"
 fi
@@ -245,6 +249,7 @@ function run_test_with_args() {
 
     fi
 
+    # print outputs
     print_working "Test $TEST_ID: validating"
     print_debug "terminated with $TEST_RC"
     print_debug "out:"
@@ -252,21 +257,26 @@ function run_test_with_args() {
     print_debug "err:"
     [ -n "$DEBUG_ECHO" ] && cat "$RUN_OUT_ERR_FILEPATH"
 
+    # test return code
     TEST_RC_DIFF="0"
     [ -z "$EXPECTED_RETURN_CODE" ] && EXPECTED_RETURN_CODE="0"
     if [ "$TEST_RC" -ne "$EXPECTED_RETURN_CODE" ]; then
         TEST_RC_DIFF="1"
     fi
 
+    # test stdout
     TEST_OUT="$(check_stdout "$OUT_DIRPATH" "$REF_DIRPATH")"
     TEST_OUT_DIFF=$?
     
+    # test stderr
     TEST_OUT_ERR="$(check_stderr "$OUT_DIRPATH" "$REF_DIRPATH")"
     TEST_OUT_ERR_DIFF=$?
 
     print_debug "TEST_RC_DIFF=$TEST_RC_DIFF, TEST_OUT_DIFF=$TEST_OUT_DIFF, TEST_OUT_ERR_DIFF=$TEST_OUT_ERR_DIFF"
     print_debug "TEST_OUT=$TEST_OUT"
     print_debug "TEST_OUT_ERR=$TEST_OUT_ERR"
+
+    # inform about return code test results
     if [ "$TEST_RC_DIFF" -ne "0" ]; then
         print_fail_head_once
         if [ -z "$ECHO_QUIET" ]; then
@@ -280,16 +290,19 @@ function run_test_with_args() {
         fi
     fi
 
+    # inform about stdout test results
     if [ "$TEST_OUT_DIFF" -ne "0" ]; then
         print_fail_head_once
         [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT\n"
     fi
 
+    # inform about stderr test results
     if [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
         print_fail_head_once
         [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT_ERR\n"
     fi
 
+    # finalize test
     if [ "$TEST_RC_DIFF" -eq "0" ] && [ "$TEST_OUT_DIFF" -eq "0" ] && [ "$TEST_OUT_ERR_DIFF" -eq "0" ]; then
         return 0
     else
@@ -315,6 +328,7 @@ fi;
 ((successful=0))
 ((failed=0))
 
+# run all test cases
 for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ ! -d "$TEST_DIRPATH" ]; then
         print_stderr_warn "No tests were found in $TESTS_DIRPATH!"

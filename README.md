@@ -7,26 +7,29 @@ There are special environment variables accepted:
   - `DEBUG_BASH`: enables advanced script debugging when defined
   - `ECHO_QUIET`: hides test case details (errpr details, diffs) when defined
 
+
 # Test cases
 
 Test cases are under the `tests` directory.
 Each test case is in its own directory.
 The directory name must begin with a number and may be followed by sluggified name (e.g. `test-some_name`).
-The tests are defined by numerous files as described below:
+The tests are defined by numerous files as described below.
 
-### Test definition
+## Test definition
 
 These files define how the program is run.
+Environment variable `TEST_NAME` selects the test to run within the application (`env.sh` should be used for this purpose).
 
 | File name | Description                                                  | Defaults when missing                       |
 |-----------|--------------------------------------------------------------|---------------------------------------------|
-| `args`    | Each row defines one program invocation with given arguments | Program is invoked once, no arguments       |      
+| `env.sh`  | Script for environment variable definition before each test  | No additional environment is set for tests  |
+| `args`    | Each row defines one program invocation with given arguments | Program is invoked once, no arguments       |
 | `in`      | Defines the content of `stdin` always passed to the program  | No content passed on `stdin` of the program | 
 | `desc`    | Provides description of the given test                       | Empty test description                      |
 
 All the files are optional.
 
-### Result definition
+## Result definition
 
 These files define conditions of the successful test.
 

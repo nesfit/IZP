@@ -12,6 +12,7 @@ MAKEFILE="$SOLUTION_DIRPATH/Makefile"
 
 [ -z "$MAKE_RECIPE_NAME" ] && MAKE_RECIPE_NAME="main-test"
 [ -z "$RUN_TIMEOUT" ] && RUN_TIMEOUT="1s"
+[ -z "$RUN_NEXT_BEHAVIOUR" ] && RUN_NEXT_BEHAVIOUR="ask"
 RUN_FILENAME="$MAKE_RECIPE_NAME"
 
 . "$SCRIPT_DIRPATH/common.sh"
@@ -180,6 +181,9 @@ function run_test_with_args() {
     EXPECTED_RETURN_CODE=0
     [ -f "$RETURN_CODE_FILEPATH" ] && EXPECTED_RETURN_CODE="$(cat "$RETURN_CODE_FILEPATH")"
 
+    # load default config
+    [ -f "$TESTS_DIRPATH/env.sh" ] && . "$TESTS_DIRPATH/env.sh"
+
     # load config from environment
     [ -f "$ENV_FILEPATH" ] && . "$ENV_FILEPATH"
 
@@ -286,18 +290,20 @@ function run_test_with_args() {
                 printf "\n\t\t${GRAY}signal meaning:${RED} Segmentation Fault${NORMAL}\n"
             elif [ "$TEST_RC" -eq "134" ]; then
                 printf "\n\t\t${GRAY}signal meaning:${RED} Aborted${NORMAL}\n"
+            elif [ "$TEST_RC" -eq "99" ]; then
+                printf "\n\t\t${GRAY}possible misconfiguration:${RED} test ${NORMAL}${TEST_NAME}${RED} not found${NORMAL}\n"
             fi
         fi
     fi
 
     # inform about stdout test results
-    if [ "$TEST_OUT_DIFF" -ne "0" ]; then
+    if [ "$TEST_RC" -ne "99" ] && [ "$TEST_OUT_DIFF" -ne "0" ]; then
         print_fail_head_once
         [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT\n"
     fi
 
     # inform about stderr test results
-    if [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
+    if [ "$TEST_RC" -ne "99" ] && [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
         print_fail_head_once
         [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT_ERR\n"
     fi
@@ -366,12 +372,39 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
         ((successful++))
     else
         ((failed++))
+
+        if [ "$RUN_NEXT_BEHAVIOUR" == "ask" ]; then
+            while :
+            do
+                echo ""
+                read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}a=all${GRAY},${NORMAL}n=next${GRAY},${NORMAL}q=quit${GRAY}]: ${NORMAL}" ANS
+                case "$ANS" in
+                    a)
+                    RUN_NEXT_BEHAVIOUR=""
+                    break;
+                    ;;
+
+                    n)
+                    RUN_NEXT_BEHAVIOUR="ask"
+                    break;
+                    ;;
+
+                    q)
+                    break 2;
+                    ;;
+
+                    *)
+                    continue;
+                    ;;
+                esac
+            done
+        fi
     fi
 
     DESC=""
     [ -f "$DESC_FILEPATH" ] && DESC="$(cat "$DESC_FILEPATH")"
     printf "%s,%s,%d,%d,%d\n" "$TEST_ID" "$DESC" "$TEST_RC_DIFF" "$TEST_OUT_DIFF" "$TEST_OUT_ERR_DIFF" >>"$RESULTS_FILEPATH"
-    echo
+    echo ""
 
 done
 
@@ -394,4 +427,6 @@ elif [ $(printf "%.0f" $pct) -ge 66 ]; then
 else
     COLOR="${RED}${BOLD}"
 fi
+
+echo ""
 printf "\r${GRAY}Test summary:${NORMAL} passed ${COLOR}%2d${NORMAL}${GRAY}/${NORMAL}%2d ${COLOR}%5.1f%%${NORMAL}$FINAL_TOUCH\n" $successful $total $pct

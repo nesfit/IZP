@@ -2,18 +2,26 @@
 #include <stdio.h>
 
 
-void print_args(char **argv, int argc) {
-  printf("argc=%d\n", argc);
-  for (int argi = 1; argi < argc; argi++) {
-    printf("argv[%d]=%s\n", argi, argv[argi]);
-  }
+/**
+ * Funkce vymění hodnoty dvou celočíselných proměnných.
+ */
+void swapInts(int *variableA, int *variableB) {
+    // TODO: 1. implementujte metodu dle zadání
 }
+
 
 #ifndef TEST_BUILD
 
 int main(int argc, char *argv[]) {
-  print_args(argv, argc);
-  run_automated_tests();
+  int number1, number2;
+
+  // načtení čísel ze stdin
+  scanf("%d", &number1);
+  scanf("%d", &number2);
+
+  swapInts(&number1, &number2);
+  printf("%d %d\n", number1, number2);
+
   return 0;
 }
 

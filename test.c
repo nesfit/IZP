@@ -11,25 +11,26 @@
 #include <stdlib.h>
 #include <string.h>
 
+int test_run(int argc, char **argv) {
+  if (argc != 3) {
+    fprintf(stderr, "unexpected number of arguments %d, expected 2\n", argc - 1);
+    return 1;
+  }
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+  int number1 = atoi(argv[1]);
+  int number2 = atoi(argv[2]);
+  swapInts(&number1, &number2);
+
+  printf("%d %d\n", number1, number2);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
-}
-
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_run",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_run,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

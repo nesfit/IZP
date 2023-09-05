@@ -7,8 +7,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-// DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
+// DEKLAROVANÉ HLAVIČKY FUNKCÍ A STRUKTUR NIJAK NEMĚŇTE
 
-void print_args(char **argv, int argc);
+void swapInts(int *variableA, int *variableB);
 
 #endif

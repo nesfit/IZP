@@ -12,24 +12,80 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+#pragma region Helper functions for set operations
+
+void __load_set(Set *set) {
+  scanf("%d", &set->cardinality);
+  for (int i = 0; i < set->cardinality; i++) {
+    scanf("%d", &set->items[i]);
+  }
+}
+
+Pair *__load_pairs(int *size) {
+  scanf("%d", size);
+  Pair *pairs = malloc((*size) * sizeof(Pair));
+  for (int i = 0; i < *size; i++) {
+    scanf("%d %d", &pairs[i].first, &pairs[i].second);
+  }
+
+  return pairs;
+}
+
+void __dispose(Pair *pairs) { free(pairs); }
+
+#pragma endregion
+
+int test_is_function(int argc, char **argv) {
+  int __relSize;
+  Set __set;
+  __load_set(&__set);
+  Pair *__rel = __load_pairs(&__relSize);
+
+  printf("rel_isFunction=%d\n", rel_isFunction(__rel, __relSize, __set));
+
+  __dispose(__rel);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_min_max(int argc, char **argv) {
+  int __relSize;
+  Set __set;
+  __load_set(&__set);
+  Pair *__rel = __load_pairs(&__relSize);
+
+  int __relMin, __relMax, __minMaxResult;
+  __minMaxResult = rel_minMax(__rel, __relSize, &__relMin, &__relMax);
+
+  printf("rel_minMax=%d\n", __minMaxResult);
+  printf("min=%d\n", __relMin);
+  printf("max=%d\n", __relMax);
+
+  __dispose(__rel);
+  return 0;
+}
+
+int test_is_equivalence(int argc, char **argv) {
+  int __relSize;
+  Set __set;
+  __load_set(&__set);
+  Pair *__rel = __load_pairs(&__relSize);
+
+  printf("rel_isEquivalence=%d\n", rel_isEquivalence(__rel, __relSize, __set));
+
+  __dispose(__rel);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_is_function",
+  "test_min_max",
+  "test_is_equivalence",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_is_function,
+  &test_min_max,
+  &test_is_equivalence,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

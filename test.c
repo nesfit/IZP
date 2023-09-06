@@ -12,24 +12,32 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+int test_parse_args(int argc, char **argv) {
+  Config __config = {
+    .xFlag = false,
+    .yFlag = false,
+    .sValue = NULL,
+    .nValue = 10,
+  };
+
+  int __status = parse_args(argv, argc, &__config);
+  if (__status != 1) {
+    return 1;
+  }
+
+  printf("xFlag  = %s\n", __config.xFlag ? "true" : "false");
+  printf("yFlag  = %s\n", __config.yFlag ? "true" : "false");
+  printf("sValue = %s\n", __config.sValue);
+  printf("nValue = %d\n", __config.nValue);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
-}
-
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_parse_args",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_parse_args,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

@@ -255,7 +255,7 @@ function run_test_with_args() {
 
     if [ -f "$INPUT_FILEPATH" ]; then
         # run with input
-        timeout --preserve-status "$RUN_TIMEOUT" $VALGRIND_CALL "$RUN_FILEPATH" $ARGS <"$INPUT_FILEPATH" >"$RUN_OUT_FILEPATH" 2>"$RUN_OUT_ERR_FILEPATH"
+        grep --invert-match --extended-regexp --text "^#" "$INPUT_FILEPATH" | timeout --preserve-status "$RUN_TIMEOUT" $VALGRIND_CALL "$RUN_FILEPATH" $ARGS >"$RUN_OUT_FILEPATH" 2>"$RUN_OUT_ERR_FILEPATH"
         TEST_RC="$?"
 
     else

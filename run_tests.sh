@@ -156,12 +156,30 @@ function check_output() {
     return 0
 }
 
+function print_output() {
+    OUT_TYPE="$1"       # output type: out, err
+    OUT_DIRPATH="$2"    # real outptu directory for a test
+    OUT_FILEPATH="$OUT_DIRPATH/$OUT_TYPE"
+    OUT_CONTENT="$(cat "$OUT_FILEPATH")"
+    if [ -z "$ECHO_QUIET" ] && [ -n "$OUT_CONTENT" ]; then
+        printf "\n\tstd$OUT_TYPE ${GRAY}of the program: ${NORMAL}\n$OUT_CONTENT\n"
+    fi
+}
+
 function check_stdout() {
     check_output "out" "$1" "$2"
 }
 
+function print_stdout() {
+    print_output "out" "$1"
+}
+
 function check_stderr() {
     check_output "err" "$1" "$2"
+}
+
+function print_stderr() {
+    print_output "err" "$1"
 }
 
 function run_test_with_args() {
@@ -298,24 +316,34 @@ function run_test_with_args() {
         fi
     fi
 
-    # inform about stdout test results
-    if [ "$TEST_RC" -ne "99" ] && [ "$TEST_OUT_DIFF" -ne "0" ]; then
-        print_fail_head_once
-        [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT\n"
-    fi
+    TEST_RESULT=1
+    [ "$TEST_RC_DIFF" -eq "0" ] && [ "$TEST_OUT_DIFF" -eq "0" ] && [ "$TEST_OUT_ERR_DIFF" -eq "0" ] && TEST_RESULT=0
 
-    # inform about stderr test results
-    if [ "$TEST_RC" -ne "99" ] && [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
-        print_fail_head_once
-        [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT_ERR\n"
+    if [ "$TEST_RC" -ne "99" ]; then
+        if [ "$TEST_RESULT" -eq 1 ]; then
+            # test has failed
+            print_fail_head_once
+            print_stdout "$OUT_DIRPATH"
+        fi
+
+        # inform about stdout test results
+        if [ "$TEST_OUT_DIFF" -ne "0" ]; then
+            [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT\n"
+        fi
+
+        if [ "$TEST_RESULT" -eq 1 ]; then
+            # test has failed
+            print_stderr "$OUT_DIRPATH"
+        fi
+
+        # inform about stderr test results
+        if [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
+            [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT_ERR\n"
+        fi
     fi
 
     # finalize test
-    if [ "$TEST_RC_DIFF" -eq "0" ] && [ "$TEST_OUT_DIFF" -eq "0" ] && [ "$TEST_OUT_ERR_DIFF" -eq "0" ]; then
-        return 0
-    else
-        return 1
-    fi
+    return "$TEST_RESULT"
 }
 
 rm -Rf "$OUTS_DIRPATH"

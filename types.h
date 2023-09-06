@@ -9,6 +9,6 @@
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-void print_args(char **argv, int argc);
+int divide(int dividend, int divisor, double *quotient);
 
 #endif

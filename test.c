@@ -12,24 +12,118 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+#pragma region Helper methods for testing
+
+void __vector_print(char *prefix, Vector *v) {
+  if(v == NULL)
+  {
+    printf("%sVector = (null)\n", prefix);
+    return;
+  }
+  printf("%sVector(%d) = ", prefix, v->size);
+  if (v->items == NULL) {
+      printf("(null)\n");
+      return;
+  }
+  printf("[");
+  for (int i = 0; i < v->size - 1; i++) {
+      printf("%d, ", v->items[i]);
+  }
+  if (v->size > 0) {
+      printf("%d", v->items[v->size - 1]);
+  }
+  printf("]\n");
+}
+
+Vector* __load_vector(void) {
+  Vector *v = malloc(sizeof(Vector));
+  scanf("load Vector(%d):", &(v->size));
+  v->items = v->size ? malloc(v->size * sizeof(int)) : NULL;
+  for (int i = 0; i < v->size; i++) {
+      scanf("%d", &v->items[i]);
+  }
+  __vector_print("loaded: ", v);
+  return v;
+}
+
+void __clone_vector(Vector *dest, Vector *src) {
+  dest->size = src->size;
+  int memsize = src->size * sizeof(*src->items);
+  dest->items = malloc(memsize);
+  memcpy(dest->items, src->items, memsize);
+}
+
+void __dispose_vector(Vector *v) {
+  if(v == NULL)
+    return;
+  if (v->size > 0 && v->items != NULL) {
+      free(v->items);
+  }
+  v->items = NULL;
+  v->size = 0;
+  free(v);
+}
+
+#pragma endregion
+
+int test_ctor(int argc, char **argv) {
+  Vector *v1 = vector_ctor();
+
+  __vector_print("result: ", v1);
+  __dispose_vector(v1);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_dtor(int argc, char **argv) {
+  Vector *v1 = __load_vector();
+
+  vector_dtor(&v1);
+  __vector_print("result: ", v1);
+  __dispose_vector(v1);
+  return 0;
+}
+
+int test_resize(int argc, char **argv) {
+  Vector *v1 = __load_vector();
+
+  int __new_size;
+  scanf(" resize to %d", &__new_size);
+  vector_resize(v1, __new_size);
+
+  __vector_print("result: ", v1);
+  __dispose_vector(v1);
+  return 0;
+}
+
+int test_expand(int argc, char **argv) {
+  Vector *v1 = __load_vector();
+
+  int __count;
+  scanf(" add %d:", &__count);
+  for (int i = 0; i < __count; i++)
+  {
+    int numberToAdd;
+    scanf("%d", &numberToAdd);
+    printf("vector_expand: %d\n", vector_expand(v1, numberToAdd));
+  }
+
+  __vector_print("result: ", v1);
+  __dispose_vector(v1);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+    "test_ctor",
+    "test_dtor",
+    "test_resize",
+    "test_expand",
 };
 
-int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+int (*tests[])(int, char **) = {
+    &test_ctor,
+    &test_dtor,
+    &test_resize,
+    &test_expand,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

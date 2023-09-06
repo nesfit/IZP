@@ -59,6 +59,7 @@ These define how the output condition is to be interpreted.
 
 | Mode        | Description                                                  |
 |-------------|--------------------------------------------------------------|
+| _undefined_ | Defaults to `exact` matching mode                            |
 | `exact`     | The content **must** match the reference exactly.            |
 | `match`     | The content **must** contain the reference somewhere.        |
 | `no-match`  | The content **must not** contain the reference anywhere.     |

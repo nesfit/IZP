@@ -55,13 +55,15 @@ function check_output() {
 
     OUT_FILEPATH="$OUT_DIRPATH/$OUT_TYPE"
     REF_EXACT_FILEPATH="$REF_DIRPATH/$OUT_TYPE.exact"
+    REF_EXACT_FILEPATH__ALT="$REF_DIRPATH/$OUT_TYPE"
     REF_MATCH_FILEPATH="$REF_DIRPATH/$OUT_TYPE.match"
     REF_MATCH_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE.no-match"
     REF_REGEX_FILEPATH="$REF_DIRPATH/$OUT_TYPE.regex"
     REF_REGEX_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE.regex-inv"
 
-    if [ -f "$REF_EXACT_FILEPATH" ]; then
+    if [ -f "$REF_EXACT_FILEPATH" ] || [ -f "$REF_EXACT_FILEPATH__ALT" ]; then
         # exact match with diff
+        [ ! -f "$REF_EXACT_FILEPATH" ] && REF_EXACT_FILEPATH="$REF_EXACT_FILEPATH__ALT"
         DIFF="$(diff --new-file --unified=6 --label="Reference output    (lines missing from your output)" "$REF_EXACT_FILEPATH" --label="Your program output (extra lines not in reference)" "$OUT_FILEPATH")"
         DIFF_RC=$?
 
@@ -346,24 +348,31 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ "$__LAST_RESULT" -eq 0 ] && [ "$RUN_NEXT_BEHAVIOUR" == "ask" ]; then
         while :
         do
-            echo ""
-            read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}a=all${GRAY},${NORMAL}n=next${GRAY},${NORMAL}q=quit${GRAY}]: ${NORMAL}" ANS
+            read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}n=next${GRAY},${NORMAL}a=all${GRAY},${NORMAL}q=quit${GRAY}] (default ${NORMAL}next${GRAY}): ${NORMAL}" ANS
             case "$ANS" in
                 a)
                 RUN_NEXT_BEHAVIOUR=""
+                echo ""
                 break;
                 ;;
 
                 n)
                 RUN_NEXT_BEHAVIOUR="ask"
+                echo ""
                 break;
                 ;;
 
                 q)
                 break 2;
+                echo ""
                 ;;
 
                 *)
+                if [ -z "$ANS" ]; then
+                    RUN_NEXT_BEHAVIOUR="ask"
+                    break;
+                fi
+                echo ""
                 continue;
                 ;;
             esac

@@ -12,24 +12,43 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+int test_is_valid_date(int argc, char **argv) {
+  struct date_t __date;
+  if (argc == 2) {
+    sscanf(argv[1], "%d-%d-%d", &__date.year, &__date.month, &__date.day);
+  } else {
+    scanf("%d-%d-%d", &__date.year, &__date.month, &__date.day);
+  }
+  fprintf(stderr, "loaded: %d-%d-%d", __date.year, __date.month, __date.day);
+  int __status = is_valid_date(__date);
+  printf("is_valid_date returned %d\n", __status);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_earlier_date(int argc, char **argv) {
+  struct date_t __date1, __date2;
+  if (argc == 3) {
+    sscanf(argv[1], "%d-%d-%d", &__date1.year, &__date1.month, &__date1.day);
+    sscanf(argv[2], "%d-%d-%d", &__date2.year, &__date2.month, &__date2.day);
+  } else {
+    scanf("%d-%d-%d", &__date1.year, &__date1.month, &__date1.day);
+    scanf("%d-%d-%d", &__date2.year, &__date2.month, &__date2.day);
+  }
+  fprintf(stderr, "loaded first: %d-%d-%d", __date1.year, __date1.month, __date1.day);
+  fprintf(stderr, "loaded second: %d-%d-%d", __date2.year, __date2.month, __date2.day);
+  int __status = earlier_date(__date1, __date2);
+  printf("earlier_date returned %d\n", __status);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_is_valid_date",
+  "test_earlier_date",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_is_valid_date,
+  &test_earlier_date,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

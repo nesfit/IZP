@@ -334,11 +334,40 @@ fi;
 ((successful=0))
 ((failed=0))
 
+__LAST_RESULT=1
+
 # run all test cases
 for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ ! -d "$TEST_DIRPATH" ]; then
         print_stderr_warn "No tests were found in $TESTS_DIRPATH!"
         exit 1
+    fi
+
+    if [ "$__LAST_RESULT" -eq 0 ] && [ "$RUN_NEXT_BEHAVIOUR" == "ask" ]; then
+        while :
+        do
+            echo ""
+            read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}a=all${GRAY},${NORMAL}n=next${GRAY},${NORMAL}q=quit${GRAY}]: ${NORMAL}" ANS
+            case "$ANS" in
+                a)
+                RUN_NEXT_BEHAVIOUR=""
+                break;
+                ;;
+
+                n)
+                RUN_NEXT_BEHAVIOUR="ask"
+                break;
+                ;;
+
+                q)
+                break 2;
+                ;;
+
+                *)
+                continue;
+                ;;
+            esac
+        done
     fi
 
     TEST_ID="$(basename $TEST_DIRPATH)"
@@ -376,35 +405,10 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ "$__ERR_HEAD_PRINTED" -eq 0 ]; then
         print_ok "Test $TEST_ID"
         ((successful++))
+        __LAST_RESULT=1
     else
         ((failed++))
-
-        if [ "$RUN_NEXT_BEHAVIOUR" == "ask" ]; then
-            while :
-            do
-                echo ""
-                read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}a=all${GRAY},${NORMAL}n=next${GRAY},${NORMAL}q=quit${GRAY}]: ${NORMAL}" ANS
-                case "$ANS" in
-                    a)
-                    RUN_NEXT_BEHAVIOUR=""
-                    break;
-                    ;;
-
-                    n)
-                    RUN_NEXT_BEHAVIOUR="ask"
-                    break;
-                    ;;
-
-                    q)
-                    break 2;
-                    ;;
-
-                    *)
-                    continue;
-                    ;;
-                esac
-            done
-        fi
+        __LAST_RESULT=0
     fi
 
     DESC=""

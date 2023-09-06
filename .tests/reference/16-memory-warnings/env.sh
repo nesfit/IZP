@@ -1,0 +1,2 @@
+TEST_NAME=test_memory_leaks
+VALGRIND=1

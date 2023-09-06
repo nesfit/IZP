@@ -3,7 +3,7 @@
 [ -n "$DEBUG_BASH" ] && set -x
 
 SCRIPT_DIRPATH="$(realpath $(dirname $0))"
-TESTS_DIRPATH="$SCRIPT_DIRPATH/../reference"
+TESTS_DIRPATH="$(realpath $SCRIPT_DIRPATH/../reference)"
 OUTS_DIRPATH="$SCRIPT_DIRPATH/../student"
 SOLUTION_DIRPATH="$(realpath $(dirname $SCRIPT_DIRPATH)/..)"
 
@@ -354,16 +354,22 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     DESC_FILEPATH="$REF_DIRPATH/desc"
 
     print_working "Test $TEST_ID: running"
+    __ERR_HEAD_PRINTED=0
     if [ -f "$ARGS_FILEPATH" ]; then
         # args are defined
-        while read ARGSET; do
-            __ERR_HEAD_PRINTED=0
+        invocations=0
+        while IFS= read ARGSET || [ "$ARGSET" ]; do
             run_test_with_args "$OUT_DIRPATH" "$REF_DIRPATH" "$ARGSET"
+            ((invocations++))
             [ $? -ne 0 ] && break
         done <"$ARGS_FILEPATH"
+
+        if [ "$invocations" -eq 0 ]; then
+            print_stderr_warn "  test run error: CLI args are defined, but the program was never started (${ARGS_FILEPATH} is empty?)"
+            __ERR_HEAD_PRINTED=1
+        fi
     else
         # args are not defined
-        __ERR_HEAD_PRINTED=0
         run_test_with_args "$OUT_DIRPATH" "$REF_DIRPATH"
     fi
 

@@ -1,0 +1,12 @@
+(0)->NULL
+Inserting elements!
+(6)->[4, Daniel]->[5, Vladimir]->[3, Frantisek]->[6, Marcel]->[7, Honza]->[1, Michal]->NULL
+Element with the lowest ID: [1, Michal]
+Get element with name Daniel: [4, Daniel]
+Get element with name Michal: [1, Michal]
+Remove first element!
+Current state:
+(5)->[5, Vladimir]->[3, Frantisek]->[6, Marcel]->[7, Honza]->[1, Michal]->NULL
+Now call destructor!
+Final state:
+(0)->NULL

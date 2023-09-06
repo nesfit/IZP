@@ -1,0 +1,3 @@
+(4)->[4, Daniel]->[5, Vladimir]->[3, Frantisek]->[6, Marcel]->NULL
+Calling destructor!
+(0)->NULL

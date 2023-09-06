@@ -1,0 +1,5 @@
+-y
+-n 0 -y
+-s Hello! -n 0 -y
+-s Hello! -y -n 0
+-y -s Hello! -n 0

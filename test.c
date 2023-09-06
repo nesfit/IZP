@@ -12,24 +12,108 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+#pragma region Helper methods for testing
+
+char* __load_string(void) {
+  size_t size;
+  scanf("%lu", &size);
+  if (size == 0)
+  {
+    char *new_string = malloc(1 * sizeof(char));
+    new_string[0] = '\0';
+    return new_string;
+  }
+  char *new_string = malloc(size * sizeof(char)+1);
+  new_string[size-1] = '\0';
+  scanf("%s", new_string);
+  return new_string;
+}
+
+void __dispose_string(char *str) {
+    if(str == NULL)
+      return;
+    free(str);
+}
+
+#pragma endregion
+
+int test_str_len(int argc, char **argv)
+{
+  char *testString = __load_string();
+  printf("%lu\n",str_len(testString));
+  __dispose_string(testString);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_mem_cpy(int argc, char **argv)
+{
+  char *a = __load_string();
+  char *b = __load_string();
+
+  mem_cpy(b,a,strlen(a));
+
+  printf("%s\n",a);
+  printf("%s\n",b);
+
+  __dispose_string(a);
+  __dispose_string(b);
+  return 0;
+}
+
+int test_find_substr(int argc, char **argv)
+{
+  char *a = __load_string();
+  char *b = __load_string();
+  printf("%d\n",find_substr(a,b));
+  __dispose_string(a);
+  __dispose_string(b);
+  return 0;
+}
+
+int test_replace_same_length(int argc, char **argv)
+{
+  char *a = __load_string();
+  char *b = __load_string();
+  char *c = __load_string();
+  replace_same_length(a,b,c);
+  printf("%s\n",a);
+  printf("%s\n",b);
+  printf("%s\n",c);
+  __dispose_string(a);
+  __dispose_string(b);
+  __dispose_string(c);
+  return 0;
+}
+
+int test_replace(int argc, char **argv)
+{
+  char *a = __load_string();
+  char *b = __load_string();
+  char *c = __load_string();
+  a = replace(a,b,c);
+  printf("%s\n",a);
+  printf("%s\n",b);
+  printf("%s\n",c);
+  __dispose_string(a);
+  __dispose_string(b);
+  __dispose_string(c);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_str_len",
+  "test_mem_cpy",
+  "test_find_substr",
+  "test_replace_same_length",
+  "test_replace",
 };
 
-int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+int (*tests[])(int, char **) = {
+  &test_str_len,
+  &test_mem_cpy,
+  &test_find_substr,
+  &test_replace_same_length,
+  &test_replace,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

@@ -9,6 +9,10 @@
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-void print_args(char **argv, int argc);
+void array_print(int array[], int size);
+
+void array_multiply(int *array, int size, int multiplier);
+
+int array_insert(int array[], int size, int value, int position);
 
 #endif

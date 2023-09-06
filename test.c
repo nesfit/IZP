@@ -12,24 +12,93 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+void __array_fprint(FILE *file, int arr[], int size) {
+    fprintf(file, "[");
+    for (int i = 0; i < size - 1; i++) {
+        fprintf(file, "%d, ", arr[i]);
+    }
+    if (size > 0) {
+        fprintf(file, "%d]\n", arr[size - 1]);
+    } else {
+        fprintf(file, "]\n");
+    }
+}
+
+int *__load(int *size) {
+  scanf("%d", size);
+  int *array = malloc((*size) * sizeof(int));
+  for (int i = 0; i < *size; i++) {
+    scanf("%d", &array[i]);
+  }
+
+  return array;
+}
+
+void __dispose(int *array) { free(array); }
+
+void __array_print_loaded(int array[], int size) {
+  fprintf(stderr, "loaded: ");
+  __array_fprint(stderr, array, size);
+  fprintf(stderr, "\n");
+}
+
+int test_array_print(int argc, char **argv) {
+  int __size, *__array = __load(&__size);
+  __array_print_loaded(__array, __size);
+
+  array_print(__array, __size);
+  __dispose(__array);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_array_multiply(int argc, char **argv) {
+  int __size, *__array = __load(&__size);
+  __array_print_loaded(__array, __size);
+
+  int __multiplier;
+  scanf("%d", &__multiplier);
+
+  array_multiply(__array, __size, __multiplier);
+
+  __array_fprint(stdout, __array, __size);
+  __dispose(__array);
+  return 0;
+}
+
+int test_array_insert(int argc, char **argv) {
+  int __size, *__array = __load(&__size);
+  __array_print_loaded(__array, __size);
+
+  int __insertPairCount;
+  scanf("%d", &__insertPairCount);
+
+  for (int i = 0; i < __insertPairCount; i++) {
+    int __value, __position;
+    scanf("%d %d", &__value, &__position);
+    fprintf(stderr, "inserting %d at position %d\n", __value, __position);
+    int __insertResult = array_insert(__array, __size, __value, __position);
+    if (__insertResult != 1) {
+      fprintf(stderr, "inserting failed\n");
+      __dispose(__array);
+      return __insertResult == 0 ? 1 : __insertResult;
+    }
+  }
+
+  __array_fprint(stdout, __array, __size);
+  __dispose(__array);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_array_print",
+  "test_array_multiply",
+  "test_array_insert",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_array_print,
+  &test_array_multiply,
+  &test_array_insert,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

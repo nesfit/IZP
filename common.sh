@@ -8,8 +8,9 @@ BOLD=$(tput bold)
 ITALIC=$(tput sitm)
 NORMAL=$(tput sgr0)
 
+# print base "[Prefix]" "Message" "pre-prefix" "suffix"
 function print_base() {
-    printf "$3\r%-18s %-42s$4" "$1" "$2"
+    printf "$3\r%-18s %-52s$4" "$1" "$2"
 }
 
 function print_ok() {

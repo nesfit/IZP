@@ -12,24 +12,38 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+#pragma region Support methods for testing
+
+ull __load_index(void) {
+  ull n;
+  scanf("generate Fibonacci number %llu", &n);
+  return n;
+}
+
+#pragma endregion
+
+int test_fib(int argc, char **argv) {
+  ull result = fib(__load_index());
+  printf("calls: %llu\n", fib_calls);
+  printf("result: %llu\n", result);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_fib_fast(int argc, char **argv) {
+  ull result = fib_fast(__load_index());
+  printf("calls: %llu\n", fib_fast_calls);
+  printf("result: %llu\n", result);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_fib",
+  "test_fib_fast",
 };
 
-int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+int (*tests[])(int, char **) = {
+  &test_fib,
+  &test_fib_fast,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

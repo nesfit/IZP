@@ -9,6 +9,13 @@
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-void print_args(char **argv, int argc);
+typedef unsigned long long int ull;
+
+extern ull fib_calls;
+extern ull fib_fast_calls;
+
+ull fib(ull n);
+
+ull fib_fast(ull n);
 
 #endif

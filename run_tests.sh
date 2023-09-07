@@ -20,7 +20,7 @@ RUN_FILENAME="$MAKE_RECIPE_NAME"
 if [ -n "$GENERATE_REFERENCE" ]; then
     while :
     do
-        read -n1 -p "${RED}Continuing will rewrite existing reference outputs? ${GRAY}[${NORMAL}n=no${GRAY},${NORMAL}a=all${GRAY},${NORMAL}e=existing${GRAY}] (${NORMAL}no${GRAY}): ${NORMAL}" ANS
+        read -n1 -p "${RED}Continuing will overwrite existing reference outputs? ${GRAY}[${NORMAL}n=no${GRAY},${NORMAL}a=all${GRAY},${NORMAL}e=existing${GRAY}] (${NORMAL}no${GRAY}): ${NORMAL}" ANS
         case "$ANS" in
             a)
             GENERATE_REFERENCE="all"
@@ -38,6 +38,41 @@ if [ -n "$GENERATE_REFERENCE" ]; then
 
             n)
             GENERATE_REFERENCE=
+            echo ""
+            break;
+            ;;
+
+            *)
+            if [ -z "$ANS" ]; then
+                GENERATE_REFERENCE=
+                break;
+            fi
+            echo ""
+            continue;
+            ;;
+        esac
+    done
+fi
+
+if [ -n "$GENERATE_REFERENCE" ]; then
+    while :
+    do
+        read -n1 -p "${RED}Which outputs should be persisted? ${GRAY}[${NORMAL}a=both${GRAY},${NORMAL}o=stdout${GRAY},${NORMAL}e=stderr${GRAY}] (${NORMAL}no${GRAY}): ${NORMAL}" ANS
+        case "$ANS" in
+            a)
+            GENERATE_REFERENCE_OUTPUT="all"
+            echo ""
+            break;
+            ;;
+
+            e)
+            GENERATE_REFERENCE_OUTPUT="err"
+            echo ""
+            break;
+            ;;
+
+            o)
+            GENERATE_REFERENCE_OUTPUT="out"
             echo ""
             break;
             ;;
@@ -98,11 +133,19 @@ function check_output() {
     REF_REGEX_FILEPATH="$REF_DIRPATH/$OUT_TYPE.regex"
     REF_REGEX_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE.regex-inv"
 
+    [ ! -f "$REF_EXACT_FILEPATH" ] && [ -f "$REF_EXACT_FILEPATH__ALT" ] && REF_EXACT_FILEPATH="$REF_EXACT_FILEPATH__ALT"
+    if [[ "$GENERATE_REFERENCE" == "all" ]] && [[ -f "$OUT_FILEPATH" ]]; then
+        if [[ "$GENERATE_REFERENCE_OUTPUT" == "all" ]] || [[ "$GENERATE_REFERENCE_OUTPUT" == "$OUT_TYPE" ]]; then
+            cat "$OUT_FILEPATH" >"$REF_EXACT_FILEPATH"
+        fi
+    fi
+
     if [ -f "$REF_EXACT_FILEPATH" ] || [ -f "$REF_EXACT_FILEPATH__ALT" ]; then
         # exact match with diff
-        [ ! -f "$REF_EXACT_FILEPATH" ] && REF_EXACT_FILEPATH="$REF_EXACT_FILEPATH__ALT"
         if [[ "$GENERATE_REFERENCE" == "existing" ]] && [[ -f "$OUT_FILEPATH" ]]; then
-            cat "$OUT_FILEPATH" >"$REF_EXACT_FILEPATH"
+            if [[ "$GENERATE_REFERENCE_OUTPUT" == "all" ]] || [[ "$GENERATE_REFERENCE_OUTPUT" == "$OUT_TYPE" ]]; then
+                cat "$OUT_FILEPATH" >"$REF_EXACT_FILEPATH"
+            fi
         fi
 
         DIFF="$(diff --new-file --unified=6 --label="Reference output    (lines missing from your output)" "$REF_EXACT_FILEPATH" --label="Your program output (extra lines not in reference)" "$OUT_FILEPATH")"
@@ -111,9 +154,6 @@ function check_output() {
         print_debug "  diff \$?=$DIFF_RC"
         printf "\n\tstd$OUT_TYPE ${GRAY}differs: it was expected ${NORMAL}to be the same${GRAY} as reference:${NORMAL}\n%s" "$DIFF"
         return $DIFF_RC
-    fi
-    if [[ "$GENERATE_REFERENCE" == "all" ]] && [[ -f "$OUT_FILEPATH" ]]; then
-        cat "$OUT_FILEPATH" >"$REF_EXACT_FILEPATH"
     fi
 
     function process_diff_details() {
@@ -375,7 +415,8 @@ function run_test_with_args() {
     TEST_RESULT=1
     [ "$TEST_RC_DIFF" -eq "0" ] && [ "$TEST_OUT_DIFF" -eq "0" ] && [ "$TEST_OUT_ERR_DIFF" -eq "0" ] && TEST_RESULT=0
 
-    if [ "$TEST_RC" -lt "97" ] && [ "$TEST_RC" -gt "99" ]; then
+    print_debug "TEST_RC=$TEST_RC"
+    if [ "$TEST_RC" -lt 97 ] || [ "$TEST_RC" -gt 99 ]; then
         if [ "$TEST_RESULT" -eq 1 ]; then
             # test has failed
             print_fail_head_once
@@ -399,7 +440,8 @@ function run_test_with_args() {
     fi
 
     # finalize test
-    return "$TEST_RESULT"
+    print_debug "TEST_RESULT=$TEST_RESULT"
+    return $TEST_RESULT
 }
 
 rm -Rf "$OUTS_DIRPATH"

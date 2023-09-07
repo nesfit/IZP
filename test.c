@@ -5,6 +5,7 @@
  *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
  */
 
+#include "test.h"
 #include "types.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,8 +51,40 @@ int run_test_by_name(const char *test_name, int argc, char **argv) {
         fprintf(stderr, "    - %s\n", test_names[testId]);
     }
 
-    return 99;
+    return TEST_ERR_NOT_FOUND;
 }
+
+#pragma region Base support methods for testing purposes
+
+void __print_array(FILE *target, int *array, int length) {
+  fprintf(target, "Array(%d) [", length);
+  for (int i = 0; i < length - 1; i++)
+  {
+    fprintf(target, "%2d, ", array[i]);
+  }
+  if (length > 0) {
+    fprintf(target, "%2d", array[length - 1]);
+  }
+  fprintf(target, "]");
+}
+
+int __load_array(int **array) {
+  int __length;
+  scanf(" load %d items: ", &__length);
+  *array = (int *) malloc(__length * sizeof(int));
+  if (*array == NULL) exit(TEST_ERR_SYSTEM_FAILURE);
+  for (int i = 0; i < __length; i++) {
+    if (scanf("%d", (*array) + i) != 1) {
+      free(*array);
+      fprintf(stderr, "failed reading value for index %d\n", i);
+      exit(TEST_ERR_WRONG_INVOCATION);
+    }
+  }
+  fprintf(stderr, "loaded: "); __print_array(stderr, *array, __length); fprintf(stderr, "\n");
+  return __length;
+}
+
+#pragma endregion
 
 #ifdef TEST_BUILD
 

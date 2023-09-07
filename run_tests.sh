@@ -317,6 +317,14 @@ function run_test_with_args() {
 
     fi
 
+    if [ "$TEST_RC" -ne 0 ]; then
+        if [[ "$GENERATE_REFERENCE" == "existing" ]] && [[ -f "$RETURN_CODE_FILEPATH" ]]; then
+            echo "$TEST_RC" >"$RETURN_CODE_FILEPATH"
+        elif [[ "$GENERATE_REFERENCE" == "all" ]]; then
+            echo "$TEST_RC" >"$RETURN_CODE_FILEPATH"
+        fi
+    fi
+
     # print outputs
     print_working "Test $TEST_ID: validating"
     print_debug "terminated with $TEST_RC"

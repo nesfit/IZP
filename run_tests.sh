@@ -427,12 +427,14 @@ function run_test_with_args() {
         if [ "$TEST_OUT_DIFF" -ne "0" ]; then
             [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT\n"
         fi
+    fi
 
-        if [ "$TEST_RESULT" -eq 1 ]; then
-            # test has failed
-            print_stderr "$OUT_DIRPATH"
-        fi
+    if [ "$TEST_RESULT" -eq 1 ]; then
+        # test has failed
+        print_stderr "$OUT_DIRPATH"
+    fi
 
+    if [ "$TEST_RC" -lt 97 ] || [ "$TEST_RC" -gt 99 ]; then
         # inform about stderr test results
         if [ "$TEST_OUT_ERR_DIFF" -ne "0" ]; then
             [ -z "$ECHO_QUIET" ] && printf "$TEST_OUT_ERR\n"

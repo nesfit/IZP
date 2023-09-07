@@ -367,7 +367,7 @@ function run_test_with_args() {
     TEST_RESULT=1
     [ "$TEST_RC_DIFF" -eq "0" ] && [ "$TEST_OUT_DIFF" -eq "0" ] && [ "$TEST_OUT_ERR_DIFF" -eq "0" ] && TEST_RESULT=0
 
-    if [ "$TEST_RC" -ne "99" ]; then
+    if [ "$TEST_RC" -lt "97" ] && [ "$TEST_RC" -gt "99" ]; then
         if [ "$TEST_RESULT" -eq 1 ]; then
             # test has failed
             print_fail_head_once

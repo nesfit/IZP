@@ -12,24 +12,50 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+#pragma region Support methods for testing purposes
+
+void __load_matrix(int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  for (int row = 0; row < MAT_ROWS; row++) {
+    for (int col = 0; col < MAT_COLUMNS; col++) {
+      scanf("%d", &matrix[row][col]);
+    }
+  }
+}
+
+#pragma endregion
+
+int test_print_2d(int argc, char **argv) {
+  int matrix[MAT_ROWS][MAT_COLUMNS]; __load_matrix(matrix);
+  print_2d(matrix);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_contains_value(int argc, char **argv) {
+  int matrix[MAT_ROWS][MAT_COLUMNS], __value; __load_matrix(matrix);
+  scanf(" contains value %d", &__value);
+  int __status = contains_value(matrix, __value);
+  printf("contains_value returned %d\n", __status);
+  return 0;
+}
+
+int test_find_value(int argc, char **argv) {
+  int matrix[MAT_ROWS][MAT_COLUMNS], __value; __load_matrix(matrix);
+  scanf(" find value %d", &__value);
+  MatCoords __coords = find_value(matrix, __value);
+  printf("find_value returned [%d, %d]\n", __coords.row, __coords.column);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_print_2d",
+  "test_contains_value",
+  "test_find_value",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_print_2d,
+  &test_contains_value,
+  &test_find_value,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

@@ -12,24 +12,80 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+int test_is_in_set(int argc, char **argv) {
+  int *__array, __length = __load_array(&__array), __value;
+  if (scanf(" is %d in set", &__value) != 1) {
+    fprintf(stderr, "load failed, expected an additional value\n");
+    return TEST_ERR_WRONG_INVOCATION;
+  }
+  bool __result = is_in_set(__array, __length, __value);
+  printf("is_in_set("); __print_array(stdout, __array, __length);
+  printf(", %2d, %2d) = %s\n", __length, __value, __result ? "true" : "false");
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_is_set(int argc, char **argv) {
+  int *__array, __length = __load_array(&__array);
+  bool __result = is_set(__array, __length);
+  printf("is_set("); __print_array(stdout, __array, __length);
+  printf(", %2d) = %s\n", __length, __result ? "true" : "false");
+  return 0;
+}
+
+int test_is_sorted_set(int argc, char **argv) {
+  int *__array, __length = __load_array(&__array);
+  bool __result = is_sorted_set(__array, __length);
+  printf("is_sorted_set("); __print_array(stdout, __array, __length);
+  printf(", %2d) = %s\n", __length, __result ? "true" : "false");
+  return 0;
+}
+
+int test_print_intersection(int argc, char **argv) {
+  int *__array1, __length1 = __load_array(&__array1);
+  int *__array2, __length2 = __load_array(&__array2);
+  printf("print_intersection(\n\t");
+  __print_array(stdout, __array1, __length1); printf(", %2d,\n\t", __length1);
+  __print_array(stdout, __array2, __length2); printf(", %2d)\n", __length2);
+  print_intersection(__array1, __array2, __length1, __length2);
+  return 0;
+}
+
+int test_print_union(int argc, char **argv) {
+  int *__array1, __length1 = __load_array(&__array1);
+  int *__array2, __length2 = __load_array(&__array2);
+  printf("print_union(\n\t");
+  __print_array(stdout, __array1, __length1); printf(", %2d,\n\t", __length1);
+  __print_array(stdout, __array2, __length2); printf(", %2d)\n", __length2);
+  print_union(__array1, __array2, __length1, __length2);
+  return 0;
+}
+
+int test_print_product(int argc, char **argv) {
+  int *__array1, __length1 = __load_array(&__array1);
+  int *__array2, __length2 = __load_array(&__array2);
+  printf("print_product(\n\t");
+  __print_array(stdout, __array1, __length1); printf(", %2d,\n\t", __length1);
+  __print_array(stdout, __array2, __length2); printf(", %2d)\n", __length2);
+  print_product(__array1, __array2, __length1, __length2);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_is_in_set",
+  "test_is_set",
+  "test_is_sorted_set",
+  "test_print_intersection",
+  "test_print_union",
+  "test_print_product",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_is_in_set,
+  &test_is_set,
+  &test_is_sorted_set,
+  &test_print_intersection,
+  &test_print_union,
+  &test_print_product,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

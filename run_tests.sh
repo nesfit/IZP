@@ -356,6 +356,10 @@ function run_test_with_args() {
                 printf "\n\t\t${GRAY}signal meaning:${RED} Aborted${NORMAL}\n"
             elif [ "$TEST_RC" -eq "99" ]; then
                 printf "\n\t\t${GRAY}possible misconfiguration:${RED} test ${NORMAL}${TEST_NAME}${RED} not found${NORMAL}\n"
+            elif [ "$TEST_RC" -eq "98" ]; then
+                printf "\n\t\t${GRAY}possible misconfiguration:${RED} test ${NORMAL}${TEST_NAME}${RED} invoked incorrectly${NORMAL}\n"
+            elif [ "$TEST_RC" -eq "97" ]; then
+                printf "\n\t\t${GRAY}possible misconfiguration:${RED} test ${NORMAL}${TEST_NAME}${RED} failed during setup${NORMAL}\n"
             fi
         fi
     fi

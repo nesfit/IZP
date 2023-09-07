@@ -12,24 +12,118 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+#pragma region Support methods for testing purposes
+
+void __read_dump(const char *filepath) {
+  FILE *f = fopen(filepath, "r");
+  if (f == NULL) {
+    fprintf(stderr, "%s", "file does not exist!\n");
+    exit(97);
+  }
+  fprintf(stderr, "file contents:\n");
+  char s[50];
+  while (fgets(s, 50, f) != NULL) {
+    fprintf(stderr, "%s", s);
+  }
+  fclose(f);
+}
+
+void __print(int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  for (int rowIndex = 0; rowIndex < MAT_ROWS; rowIndex++) {
+    for (int columnIndex = 0; columnIndex < MAT_COLUMNS; columnIndex++) {
+      printf("%d ", matrix[rowIndex][columnIndex]);
+    }
+    printf("\n");
+  }
+}
+
+void __load(FILE *source, int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  for (int rowIndex = 0; rowIndex < MAT_ROWS; rowIndex++) {
+    for (int columnIndex = 0; columnIndex < MAT_COLUMNS; columnIndex++) {
+      fscanf(source, "%d", &matrix[rowIndex][columnIndex]);
+    }
+  }
+}
+
+void __load_from(const char *filepath, int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  FILE *f = fopen(filepath, "r");
+  if (f == NULL) exit(97);
+  __load(f, matrix);
+  fclose(f);
+}
+
+void __save(FILE *source, int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  for (int rowIndex = 0; rowIndex < MAT_ROWS; rowIndex++) {
+    for (int columnIndex = 0; columnIndex < MAT_COLUMNS; columnIndex++) {
+      fprintf(source, "%d ", matrix[rowIndex][columnIndex]);
+    }
+    fprintf(source, "\n");
+  }
+}
+
+void __save_to(const char *filepath, int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  FILE *f = fopen(filepath, "w");
+  if (f == NULL) exit(97);
+  __save(f, matrix);
+  fclose(f);
+}
+
+#pragma endregion
+
+static const char *__filename = ".tests/student/__mat.txt";
+
+int test_save_to_file(int argc, char **argv) {
+  int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
+  save_to_file(__filename, __mat);
+  __load_from(__filename, __mat_loaded);
+  __print(__mat_loaded);
+  __read_dump(__filename);
+  remove(__filename);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_save_to(int argc, char **argv) {
+  int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
+  FILE *f = fopen(__filename, "w");
+  if (f == NULL) exit(97);
+  save_to(f, __mat);
+  fclose(f);
+  __load_from(__filename, __mat_loaded);
+  __read_dump(__filename);
+  remove(__filename);
+  __print(__mat_loaded);
+  return 0;
+}
+
+int test_load_from_file(int argc, char **argv) {
+  int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
+  __save_to(__filename, __mat);
+  load_from_file(__filename, __mat_loaded);
+  __print(__mat_loaded);
+  __read_dump(__filename);
+  remove(__filename);
+  return 0;
+}
+
+int test_load_from(int argc, char **argv) {
+  int __mat[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
+  load_from(stdin, __mat);
+  __print(__mat);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_save_to_file",
+  "test_save_to",
+  "test_load_from_file",
+  "test_load_from",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_save_to_file,
+  &test_save_to,
+  &test_load_from_file,
+  &test_load_from,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

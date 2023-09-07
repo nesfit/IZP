@@ -57,7 +57,7 @@ int run_test_by_name(const char *test_name, int argc, char **argv) {
 #pragma region Base support methods for testing purposes
 
 void __print_array(FILE *target, int *array, int length) {
-  fprintf(target, "[", length);
+  fprintf(target, "[");
   for (int i = 0; i < length - 1; i++)
   {
     fprintf(target, "%2d, ", array[i]);

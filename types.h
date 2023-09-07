@@ -4,11 +4,15 @@
  *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
  */
 
+#include <stdbool.h>
+
 #ifndef TYPES_H
 #define TYPES_H
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-void print_args(char **argv, int argc);
+bool is_alpha(char c);
+
+bool is_name(char arr[]);
 
 #endif

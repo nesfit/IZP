@@ -12,24 +12,28 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+int test_is_alpha(int argc, char **argv) {
+  char __c; scanf("load char: %c", &__c);
+  int __status = is_alpha(__c);
+  printf("is_alpha('%c') == %d\n", __c, __status);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_is_name(int argc, char **argv) {
+  char __name[100]; scanf("load name: %99s", (char*) &__name);
+  int __status = is_name(__name);
+  printf("is_name(\"%s\") == %d\n", __name, __status);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_is_alpha",
+  "test_is_name",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_is_alpha,
+  &test_is_name,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

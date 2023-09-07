@@ -8,14 +8,51 @@ OUTS_DIRPATH="$SCRIPT_DIRPATH/../student"
 SOLUTION_DIRPATH="$(realpath $(dirname $SCRIPT_DIRPATH)/..)"
 
 RESULTS_FILEPATH="$SCRIPT_DIRPATH/../results.csv"
-MAKEFILE="$SOLUTION_DIRPATH/Makefile"
 
+[ -z "$MAKEFILE" ] && MAKEFILE="$SOLUTION_DIRPATH/Makefile"
 [ -z "$MAKE_RECIPE_NAME" ] && MAKE_RECIPE_NAME="main-test"
 [ -z "$RUN_TIMEOUT" ] && RUN_TIMEOUT="1s"
 [ -z "$RUN_NEXT_BEHAVIOUR" ] && [ -z "$ECHO_QUIET" ] && RUN_NEXT_BEHAVIOUR="ask"
 RUN_FILENAME="$MAKE_RECIPE_NAME"
 
 . "$SCRIPT_DIRPATH/common.sh"
+
+if [ -n "$GENERATE_REFERENCE" ]; then
+    while :
+    do
+        read -n1 -p "${RED}Continuing will rewrite existing reference outputs? ${GRAY}[${NORMAL}n=no${GRAY},${NORMAL}a=all${GRAY},${NORMAL}e=existing${GRAY}] (${NORMAL}no${GRAY}): ${NORMAL}" ANS
+        case "$ANS" in
+            a)
+            GENERATE_REFERENCE="all"
+            RUN_NEXT_BEHAVIOUR=
+            echo ""
+            break;
+            ;;
+
+            e)
+            GENERATE_REFERENCE="existing"
+            RUN_NEXT_BEHAVIOUR=
+            echo ""
+            break;
+            ;;
+
+            n)
+            GENERATE_REFERENCE=
+            echo ""
+            break;
+            ;;
+
+            *)
+            if [ -z "$ANS" ]; then
+                GENERATE_REFERENCE=
+                break;
+            fi
+            echo ""
+            continue;
+            ;;
+        esac
+    done
+fi
 
 # validate config when not in debug mode
 if [ -z "$DEBUG" ]; then
@@ -64,12 +101,19 @@ function check_output() {
     if [ -f "$REF_EXACT_FILEPATH" ] || [ -f "$REF_EXACT_FILEPATH__ALT" ]; then
         # exact match with diff
         [ ! -f "$REF_EXACT_FILEPATH" ] && REF_EXACT_FILEPATH="$REF_EXACT_FILEPATH__ALT"
+        if [[ "$GENERATE_REFERENCE" == "existing" ]] && [[ -f "$OUT_FILEPATH" ]]; then
+            cat "$OUT_FILEPATH" >"$REF_EXACT_FILEPATH"
+        fi
+
         DIFF="$(diff --new-file --unified=6 --label="Reference output    (lines missing from your output)" "$REF_EXACT_FILEPATH" --label="Your program output (extra lines not in reference)" "$OUT_FILEPATH")"
         DIFF_RC=$?
 
         print_debug "  diff \$?=$DIFF_RC"
         printf "\n\tstd$OUT_TYPE ${GRAY}differs: it was expected ${NORMAL}to be the same${GRAY} as reference:${NORMAL}\n%s" "$DIFF"
         return $DIFF_RC
+    fi
+    if [[ "$GENERATE_REFERENCE" == "all" ]] && [[ -f "$OUT_FILEPATH" ]]; then
+        cat "$OUT_FILEPATH" >"$REF_EXACT_FILEPATH"
     fi
 
     function process_diff_details() {
@@ -376,7 +420,7 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ "$__LAST_RESULT" -eq 0 ] && [ "$RUN_NEXT_BEHAVIOUR" == "ask" ]; then
         while :
         do
-            read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}n=next${GRAY},${NORMAL}a=all${GRAY},${NORMAL}q=quit${GRAY}] (default ${NORMAL}next${GRAY}): ${NORMAL}" ANS
+            read -n1 -p "${GRAY}The previous failed, continue? [${NORMAL}n=next${GRAY},${NORMAL}a=all${GRAY},${NORMAL}q=quit${GRAY}] (${NORMAL}next${GRAY}): ${NORMAL}" ANS
             case "$ANS" in
                 a)
                 RUN_NEXT_BEHAVIOUR=""

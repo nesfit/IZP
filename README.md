@@ -35,7 +35,11 @@ These can be set either in `env.sh` in the reference directory (as global defaul
 
 | Variable name        | Description                                                                                                                     |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `MAKEFILE`           | Allows supplying custom Makefile                                                                                                |
+| `MAKE_RECIPE_NAME`   | Defines which Makefile recipe should be used to build the tested binary                                                         |
+| `GENERATE_REFERENCE` | Defining this varibale will enable the script to generate test-case outputs                                                     |
 | `TEST_NAME`          | Defines which test case of the program should be run                                                                            |
+| `RUN_TIMEOUT`        | Defines the timeout of each individual test-case                                                                                |
 | `RUN_NEXT_BEHAVIOUR` | The program asks whether to continue after the first failed test. This is behaviour is disabled when the variable is set to "". |
 | `VALGRIND`           | Setting this variable to "1" will enable valgrin for the given test case                                                        |
 | `VALGRIND_FLAGS`     | Allows overriding default valgrind CLI options                                                                                  |

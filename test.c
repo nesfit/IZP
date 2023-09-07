@@ -12,24 +12,47 @@
 #include <string.h>
 
 
-int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
+int test_get_max(int argc, char **argv) {
+  int *__array, __length = __load_array(&__array);
+  int __result = get_max(__array, __length);
+  printf("get_max("); __print_array(stdout, __array, __length); printf(", %2d) = %2d\n", __length, __result);
+  free(__array);
   return 0;
 }
 
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
+int test_get_sum(int argc, char **argv) {
+  int *__array, __length = __load_array(&__array);
+  int __result = get_sum(__array, __length);
+  printf("get_sum("); __print_array(stdout, __array, __length); printf(", %2d) = %2d\n", __length, __result);
+  free(__array);
+  return 0;
+}
+
+int test_values_are_smaller_than(int argc, char **argv) {
+  int *__array1, __length1 = __load_array(&__array1);
+  int *__array2, __length2 = __load_array(&__array2);
+  if (__length1 != __length2) {
+    fprintf(stderr, "lengths of both arrays are expected to be the same");
+    exit(TEST_ERR_WRONG_INVOCATION);
+  }
+  int __result = values_are_smaller_than(__array1, __array2, __length1);
+  printf("values_are_smaller_than(\n\t"); __print_array(stdout, __array1, __length1);
+  printf(", %2d,\n\t", __length1); __print_array(stdout, __array2, __length2);
+  printf(", %2d) = %s\n", __length2, __result ? "true" : "false");
+  free(__array1);
+  return 0;
 }
 
 const char *test_names[] = {
-  "test_example_success",
-  "test_example_failure",
+  "test_get_max",
+  "test_get_sum",
+  "test_values_are_smaller_than",
 };
 
 int (*tests[])(int, char**) = {
-  &test_example_success,
-  &test_example_failure,
+  &test_get_max,
+  &test_get_sum,
+  &test_values_are_smaller_than,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

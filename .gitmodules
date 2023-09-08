@@ -5,4 +5,4 @@
 [submodule "solution"]
 	path = solution
 	url = git@github.com:nesfit/IZP-solutions.git
-	branch = master
+	branch = 03-02

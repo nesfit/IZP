@@ -8,7 +8,7 @@
 #define TYPES_H
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
-
-void print_args(char **argv, int argc);
-
+void print_first_argument(int argc, char *argv[]);
+void print_parse_arguments(int argc, char *argv[]);
+void print_all_arguments(int argc, char *argv[]);
 #endif

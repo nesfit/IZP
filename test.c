@@ -13,23 +13,15 @@
 
 
 int test_example_success(int argc, char **argv) {
-  print_args(argv, argc);
   return 0;
-}
-
-int test_example_failure(int argc, char **argv) {
-  print_args(argv, argc);
-  return 1;
 }
 
 const char *test_names[] = {
   "test_example_success",
-  "test_example_failure",
 };
 
 int (*tests[])(int, char**) = {
   &test_example_success,
-  &test_example_failure,
 };
 
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))

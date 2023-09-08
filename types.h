@@ -8,7 +8,9 @@
 #define TYPES_H
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
-
-void print_args(char **argv, int argc);
+  void read_print_array_reverse();
+  void read_print_array_max();
+  void read_print_array_avg();
+  void read_print_array_merge();
 
 #endif

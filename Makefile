@@ -3,21 +3,18 @@ all: main
 CC = gcc
 override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno-unused-result -pedantic -lm
 
-SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -depth 1 -print)
-HEADERS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -depth 1 -print)
-
 .PHONY: run test submit clean
 
-main: $(SRCS) $(HEADERS)
-	$(CC) $(CFLAGS) $(SRCS) -o "$@"
+main:
+	$(CC) $(CFLAGS) ./*.c -o "$@"
 
-main-debug: $(SRCS) $(HEADERS)
-	$(CC) $(CFLAGS) -O0 $(SRCS) -o "$@"
+main-debug:
+	$(CC) $(CFLAGS) -O0 ./*.c -o "$@"
 
-main-test: $(SRCS) $(HEADERS)
-	$(CC) $(CFLAGS) -DTEST_BUILD=1 $(SRCS) -o "$@"
+main-test:
+	$(CC) $(CFLAGS) -DTEST_BUILD=1 ./*.c -o "$@"
 
-main-solution: $(SRCS) $(HEADERS)
+main-solution:
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 -DSOLUTION_BUILD=1 test.c solution/*.c -o "$@"
 
 test:

@@ -1,7 +1,7 @@
 all: main
 
 CC = gcc
-override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno-unused-result -pedantic -lm
+override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno-unused-result -Wno-unknown-pragmas -pedantic -lm
 
 .PHONY: run test submit clean
 

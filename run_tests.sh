@@ -97,7 +97,7 @@ if [ -z "$DEBUG" ]; then
         if [[ -z "$LOGIN" ]]; then
             >&2 echo -e "${RED}No faculty login has been set!${NORMAL}\n${GRAY}Configure it in${NORMAL} /student-config.sh"
             exit 1
-        elif [[ "$LOGIN" =~ ^(x[a-z]{5}[a-z0-9]{2})$ && "$LOGIN" != "xlogin00" ]]; then
+        elif [[ "$LOGIN" =~ ^(x[a-z]{5,6}[a-z0-9]{2})$ && "$LOGIN" != "xlogin00" ]]; then
             # FIT LOGIN
             :
         elif [[ "$LOGIN" =~ ^([0-9]{6})$ ]]; then

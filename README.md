@@ -18,3 +18,17 @@ BRANCH="branch_name"
 git branch -c main "$BRANCH"
 git submodule set-branch --branch "$BRANCH" solution
 ```
+
+## Propagating changes from master
+```
+git fetch
+for BRANCH in $(git branch -r | grep -E -o "\d{2}-\d{2}-.*");
+do
+    echo "\nRebase $BRANCH"
+    read
+    git checkout $BRANCH || break
+    git reset --hard origin/"$BRANCH" || break
+    git rebase master || break
+    git push --force || break
+done
+```

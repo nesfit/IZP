@@ -26,8 +26,8 @@ for BRANCH in $(git branch -r | grep -E -o "\d{2}-\d{2}-.*");
 do
     echo "\nRebase $BRANCH"
     read
+    git branch -D $BRANCH
     git checkout $BRANCH || break
-    git pull || break
     git reset --hard origin/"$BRANCH" || break
     git rebase master || break
     git push --force || break
@@ -41,8 +41,8 @@ for BRANCH in $(git branch -r | grep -E -o "\d{2}-\d{2}-.*");
 do
     echo "\nSync test scripts on $BRANCH"
     read
+    git branch -D $BRANCH
     git checkout $BRANCH || break
-    git pull || break
     git submodule update --remote .tests/scripts || break
     git add .tests/scripts || break
     git commit -m "feat: sync latest test scripts" || break

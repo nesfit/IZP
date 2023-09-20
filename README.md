@@ -27,6 +27,7 @@ do
     echo "\nRebase $BRANCH"
     read
     git checkout $BRANCH || break
+    git pull || break
     git reset --hard origin/"$BRANCH" || break
     git rebase master || break
     git push --force || break
@@ -41,6 +42,7 @@ do
     echo "\nSync test scripts on $BRANCH"
     read
     git checkout $BRANCH || break
+    git pull || break
     git submodule update --remote .tests/scripts || break
     git add .tests/scripts || break
     git commit -m "feat: sync latest test scripts" || break

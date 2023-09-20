@@ -1,4 +1,4 @@
-compile = ["make"]
+compile = ["make", "--always-make"]
 run = "./main"
 entrypoint = "main.c"
 hidden = ["main", "main-*", "**/*.o", "**/*.d", ".ccls-cache", ".tests", "solution", ".gitignore", ".gitmodules", "Makefile", "README.md", "test.*"]

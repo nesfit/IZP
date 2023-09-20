@@ -12,6 +12,6 @@
   void read_print_is_character();
   void read_print_is_even();
   void read_print_factorial();
-  void read_print_gdc();
+  void read_print_gcd();
 
 #endif

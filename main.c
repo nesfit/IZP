@@ -33,7 +33,7 @@ void read_print_factorial() {
   return;
 }
 
-void read_print_gdc(){
+void read_print_gcd(){
   //TODO 1. Read two numbers from stdin.
 
   //TODO 2. Calculate and print greatest common divisor (gcd) of the two read numbers and print it to stdout.
@@ -57,8 +57,8 @@ int main()
   printf("\n--read_print_factorial--\n");
   read_print_factorial();
 
-  printf("\n--read_print_gdc--\n");
-  read_print_gdc();
+  printf("\n--read_print_gcd--\n");
+  read_print_gcd();
 
   return 0;
 }

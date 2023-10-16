@@ -6,7 +6,7 @@ override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno
 .PHONY: run test submit clean
 
 main:
-	$(CC) $(CFLAGS) ./*.c -o "$@"
+	$(CC) $(CFLAGS) -O0 ./*.c -o "$@"
 
 main-debug:
 	$(CC) $(CFLAGS) -O0 ./*.c -o "$@"

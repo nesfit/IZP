@@ -5,16 +5,16 @@ override CFLAGS += -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno
 
 .PHONY: run test submit clean
 
-main:
+main: main.c
 	$(CC) $(CFLAGS) -O0 ./*.c -o "$@"
 
-main-debug:
+main-debug: main.c
 	$(CC) $(CFLAGS) -O0 ./*.c -o "$@"
 
-main-test:
+main-test: main.c
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 ./*.c -o "$@"
 
-main-solution:
+main-solution: main.c
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 -DSOLUTION_BUILD=1 test.c solution/*.c -o "$@"
 
 test:

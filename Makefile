@@ -9,7 +9,7 @@ main: main.c
 	$(CC) $(CFLAGS) -O1 ./*.c -o "$@"
 
 main-debug: main.c
-	$(CC) $(CFLAGS) -O1 ./*.c -o "$@"
+	$(CC) $(CFLAGS) -O1 -g ./*.c -o "$@"
 
 main-test: main.c
 	$(CC) $(CFLAGS) -DTEST_BUILD=1 ./*.c -o "$@"

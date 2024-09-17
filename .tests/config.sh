@@ -15,10 +15,10 @@ if [[ -z "$PROJECT_TASK_ID" && -n "$IZP_BRANCH" ]]; then
     fi
 fi
 
-if [[ -z "$LOGIN" && "$JUPYTERHUB_USER" ==  *"@vutbr.cz" ]] \
-|| [[ -z "$LOGIN" && "$JUPYTERHUB_USER" ==  *"@vut.cz" ]]; then
+if [[ -z "$PROJECT_AUTHOR" && "$JUPYTERHUB_USER" ==  *"@vutbr.cz" ]] \
+|| [[ -z "$PROJECT_AUTHOR" && "$JUPYTERHUB_USER" ==  *"@vut.cz" ]]; then
     # try getting login from JupyterHub environment
-    LOGIN="${JUPYTERHUB_USER%%@*}"
+    PROJECT_AUTHOR="${JUPYTERHUB_USER%%@*}"
 fi
 
 # variable defaults

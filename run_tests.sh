@@ -89,13 +89,20 @@ if [ -n "$GENERATE_REFERENCE" ]; then
     done
 fi
 
+# load definitions from configuration
+if [ -f "$SCRIPT_DIRPATH/../config.sh" ]; then
+    . "$SCRIPT_DIRPATH/../config.sh"
+fi
+
 # validate config when not in debug mode
 if [ -z "$DEBUG" ]; then
-    . "$SOLUTION_DIRPATH/student-config.sh"
+    if [ -f "$SOLUTION_DIRPATH/student-config.sh" ]; then
+        . "$SOLUTION_DIRPATH/student-config.sh"
+    fi
 
     if [ -z "$PROJECT_AUTHOR" ]; then
         if [[ -z "$LOGIN" ]]; then
-            >&2 echo -e "${RED}No faculty login has been set!${NORMAL}\n${GRAY}Configure it in${NORMAL} /student-config.sh"
+            >&2 echo -e "${RED}No faculty login has been set!${NORMAL}\n${GRAY}Configure it in${NORMAL} $SOLUTION_DIRPATH/student-config.sh"
             exit 1
         elif [[ "$LOGIN" =~ ^(x[a-z]{5,6}[a-z0-9]{2})$ && "$LOGIN" != "xlogin00" ]]; then
             # FIT LOGIN
@@ -108,12 +115,9 @@ if [ -z "$DEBUG" ]; then
             >&2 echo -e "${GRAY}Expected format is either ${NORMAL}xlogin00${GRAY} or ${NORMAL}VUTID${GRAY}.${NORMAL}"
             exit 2
         fi
-    fi
-fi
 
-# load definitions from configuration
-if [ -f "$SCRIPT_DIRPATH/../config.sh" ]; then
-    . "$SCRIPT_DIRPATH/../config.sh"
+        PROJECT_AUTHOR="$LOGIN"
+    fi
 fi
 
 RUN_FILEPATH="$SOLUTION_DIRPATH/$RUN_FILENAME"

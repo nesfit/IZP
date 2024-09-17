@@ -1,6 +1,6 @@
 [submodule ".tests/scripts"]
 	path = .tests/scripts
-	url = git@github.com:nesfit/IZP.git
+	url = https://github.com/nesfit/IZP.git
 	branch = _test-scripts
 [submodule "solution"]
 	path = solution

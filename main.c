@@ -98,7 +98,7 @@ int main() {
 	// We do not actually have to use the return value
 	// We have seen this before with functions such as printf and scanf
 	// - they also have a return value!
-	if (smaller_than(arr1, arr2, 5)) {
+	if (values_are_smaller_than(arr1, arr2, 5)) {
 		printf("The first array is smaller than the second.\n");
 
 	} else {

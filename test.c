@@ -14,15 +14,17 @@
 
 int test_is_alpha(int argc, char **argv) {
   char __c; scanf("load char: %c", &__c);
-  int __status = is_alpha(__c);
-  printf("is_alpha('%c') == %d\n", __c, __status);
+  bool __status = is_alpha(__c);
+  char *__status_str = __status ? "true" : "false";
+  printf("is_alpha('%c') == %s\n", __c, __status_str);
   return 0;
 }
 
 int test_is_name(int argc, char **argv) {
   char __name[100]; scanf("load name: %99s", (char*) &__name);
-  int __status = is_name(__name);
-  printf("is_name(\"%s\") == %d\n", __name, __status);
+  bool __status = is_name(__name);
+  char *__status_str = __status ? "true" : "false";
+  printf("is_name(\"%s\") == %s\n", __name, __status_str);
   return 0;
 }
 

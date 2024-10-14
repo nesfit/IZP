@@ -14,16 +14,22 @@
 
 #pragma region Support methods for testing purposes
 
+#define ERR_FILE_MISSING 97
+
 void __read_dump(const char *filepath) {
   FILE *f = fopen(filepath, "r");
   if (f == NULL) {
     fprintf(stderr, "%s", "file does not exist!\n");
-    exit(97);
+    exit(ERR_FILE_MISSING);
   }
   fprintf(stderr, "file contents:\n");
-  char s[50];
+  char s[50]; int length = 0;
   while (fgets(s, 50, f) != NULL) {
     fprintf(stderr, "%s", s);
+    if (++length >= 5) {
+      fprintf(stderr, "** FILE CONTENT TRUNCATED **\n");
+      break;
+    }
   }
   fclose(f);
 }
@@ -47,7 +53,7 @@ void __load(FILE *source, int matrix[MAT_ROWS][MAT_COLUMNS]) {
 
 void __load_from(const char *filepath, int matrix[MAT_ROWS][MAT_COLUMNS]) {
   FILE *f = fopen(filepath, "r");
-  if (f == NULL) exit(97);
+  if (f == NULL) exit(ERR_FILE_MISSING);
   __load(f, matrix);
   fclose(f);
 }
@@ -63,7 +69,7 @@ void __save(FILE *source, int matrix[MAT_ROWS][MAT_COLUMNS]) {
 
 void __save_to(const char *filepath, int matrix[MAT_ROWS][MAT_COLUMNS]) {
   FILE *f = fopen(filepath, "w");
-  if (f == NULL) exit(97);
+  if (f == NULL) exit(ERR_FILE_MISSING);
   __save(f, matrix);
   fclose(f);
 }
@@ -85,7 +91,7 @@ int test_save_to_file(int argc, char **argv) {
 int test_save_to(int argc, char **argv) {
   int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
   FILE *f = fopen(__filename, "w");
-  if (f == NULL) exit(97);
+  if (f == NULL) exit(ERR_FILE_MISSING);
   save_to(f, __mat);
   fclose(f);
   __load_from(__filename, __mat_loaded);

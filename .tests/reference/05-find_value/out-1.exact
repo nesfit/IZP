@@ -1,0 +1,1 @@
+find_value(matrix, 3) == [0, 2]

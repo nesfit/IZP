@@ -31,18 +31,26 @@ int test_print_2d(int argc, char **argv) {
 }
 
 int test_contains_value(int argc, char **argv) {
-  int matrix[MAT_ROWS][MAT_COLUMNS], __value; __load_matrix(matrix);
-  scanf(" contains value %d", &__value);
-  int __status = contains_value(matrix, __value);
-  printf("contains_value returned %d\n", __status);
+  if (argc != 2) {
+    fprintf(stderr, "missing lookup value\n");
+    return 1;
+  }
+  int matrix[MAT_ROWS][MAT_COLUMNS], __value = atoi(argv[1]); __load_matrix(matrix);
+  fprintf(stderr, "lookup_value = %d;\n", __value);
+  bool __status = contains_value(matrix, __value);
+  printf("contains_value(matrix, %d) == %s\n", __value, __status ? "true" : "false");
   return 0;
 }
 
 int test_find_value(int argc, char **argv) {
-  int matrix[MAT_ROWS][MAT_COLUMNS], __value; __load_matrix(matrix);
-  scanf(" find value %d", &__value);
+  if (argc != 2) {
+    fprintf(stderr, "missing lookup value\n");
+    return 1;
+  }
+  int matrix[MAT_ROWS][MAT_COLUMNS], __value = atoi(argv[1]); __load_matrix(matrix);
+  fprintf(stderr, "lookup_value = %d;\n", __value);
   MatCoords __coords = find_value(matrix, __value);
-  printf("find_value returned [%d, %d]\n", __coords.row, __coords.column);
+  printf("find_value(matrix, %d) == [%d, %d]\n", __value, __coords.row, __coords.column);
   return 0;
 }
 

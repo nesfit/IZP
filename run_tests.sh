@@ -129,13 +129,13 @@ function check_output() {
 
     print_debug "check_output($1, $2, $3) "
 
-    OUT_FILEPATH="$OUT_DIRPATH/$OUT_TYPE"
-    REF_EXACT_FILEPATH="$REF_DIRPATH/$OUT_TYPE.exact"
-    REF_EXACT_FILEPATH__ALT="$REF_DIRPATH/$OUT_TYPE"
-    REF_MATCH_FILEPATH="$REF_DIRPATH/$OUT_TYPE.match"
-    REF_MATCH_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE.no-match"
-    REF_REGEX_FILEPATH="$REF_DIRPATH/$OUT_TYPE.regex"
-    REF_REGEX_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE.regex-inv"
+    OUT_FILEPATH="$OUT_DIRPATH/$OUT_TYPE$OUT_SUFFIX"
+    REF_EXACT_FILEPATH="$REF_DIRPATH/$OUT_TYPE$OUT_SUFFIX.exact"
+    REF_EXACT_FILEPATH__ALT="$REF_DIRPATH/$OUT_TYPE$OUT_SUFFIX"
+    REF_MATCH_FILEPATH="$REF_DIRPATH/$OUT_TYPE$OUT_SUFFIX.match"
+    REF_MATCH_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE$OUT_SUFFIX.no-match"
+    REF_REGEX_FILEPATH="$REF_DIRPATH/$OUT_TYPE$OUT_SUFFIX.regex"
+    REF_REGEX_INV_FILEPATH="$REF_DIRPATH/$OUT_TYPE$OUT_SUFFIX.regex-inv"
 
     [ ! -f "$REF_EXACT_FILEPATH" ] && [ -f "$REF_EXACT_FILEPATH__ALT" ] && REF_EXACT_FILEPATH="$REF_EXACT_FILEPATH__ALT"
     if [[ "$GENERATE_REFERENCE" == "all" ]] && [[ -f "$OUT_FILEPATH" ]]; then
@@ -247,7 +247,7 @@ function check_output() {
 function print_output() {
     OUT_TYPE="$1"       # output type: out, err
     OUT_DIRPATH="$2"    # real outptu directory for a test
-    OUT_FILEPATH="$OUT_DIRPATH/$OUT_TYPE"
+    OUT_FILEPATH="$OUT_DIRPATH/$OUT_TYPE$OUT_SUFFIX"
     OUT_CONTENT="$(cat "$OUT_FILEPATH")"
     if [ -z "$ECHO_QUIET" ] && [ -n "$OUT_CONTENT" ]; then
         printf "\n\tstd$OUT_TYPE ${GRAY}of the program: ${NORMAL}\n$OUT_CONTENT\n"
@@ -274,17 +274,18 @@ function run_test_with_args() {
     OUT_DIRPATH="$1"
     REF_DIRPATH="$2"
     ARGS="$3"
+    [ -n "$ARGSET_ID" ] && OUT_SUFFIX="-$ARGSET_ID" || OUT_SUFFIX=""
 
     # output files
-    RUN_OUT_FILEPATH="$OUT_DIRPATH/out"
-    RUN_OUT_ERR_FILEPATH="$OUT_DIRPATH/err"
-    RUN_RETURN_CODE_FILEPATH="$OUT_DIRPATH/rc"
+    RUN_OUT_FILEPATH="$OUT_DIRPATH/out$OUT_SUFFIX"
+    RUN_OUT_ERR_FILEPATH="$OUT_DIRPATH/err$OUT_SUFFIX"
+    RUN_RETURN_CODE_FILEPATH="$OUT_DIRPATH/rc$OUT_SUFFIX"
 
     # input files
     ENV_FILEPATH="$REF_DIRPATH/env.sh"
     ARGS_FILEPATH="$REF_DIRPATH/args"
     INPUT_FILEPATH="$REF_DIRPATH/in"
-    RETURN_CODE_FILEPATH="$REF_DIRPATH/rc"
+    RETURN_CODE_FILEPATH="$REF_DIRPATH/rc$OUT_SUFFIX"
 
     EXPECTED_RETURN_CODE=0
     [ -f "$RETURN_CODE_FILEPATH" ] && EXPECTED_RETURN_CODE="$(cat "$RETURN_CODE_FILEPATH")"
@@ -402,7 +403,9 @@ function run_test_with_args() {
         if [ -z "$ECHO_QUIET" ]; then
             printf "\n\treturn code ${GRAY}differs: expected ${NORMAL}%s${GRAY} ${NORMAL}but got ${RED}%s${NORMAL}" "$EXPECTED_RETURN_CODE" "$TEST_RC"
 
-            if [ "$TEST_RC" -eq "139" ]; then
+            if [ "$TEST_RC" -eq "143" ]; then
+                printf "\n\t\t${GRAY}signal meaning:${RED} Killed (timed out)${NORMAL}\n"
+            elif [ "$TEST_RC" -eq "139" ]; then
                 printf "\n\t\t${GRAY}signal meaning:${RED} Segmentation Fault${NORMAL}\n"
             elif [ "$TEST_RC" -eq "134" ]; then
                 printf "\n\t\t${GRAY}signal meaning:${RED} Aborted${NORMAL}\n"
@@ -528,10 +531,15 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ -f "$ARGS_FILEPATH" ]; then
         # args are defined
         invocations=0
-        while IFS= read ARGSET || [ "$ARGSET" ]; do
-            run_test_with_args "$OUT_DIRPATH" "$REF_DIRPATH" "$ARGSET"
+        while IFS= read ARGSET && [ "$ARGSET" ]; do
+            print_debug "  using argset $invocations"
+            ARGSET_ID=$invocations run_test_with_args "$OUT_DIRPATH" "$REF_DIRPATH" "$ARGSET"
+            __ARGSET_RC=$?
             ((invocations++))
-            [ $? -ne 0 ] && break
+            if [ $__ARGSET_RC -ne 0 ]; then
+                print_debug "  quitting argset iterations due to previously failed test"
+                break
+            fi
         done <"$ARGS_FILEPATH"
 
         if [ "$invocations" -eq 0 ]; then

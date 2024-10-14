@@ -11,6 +11,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define BUFFER_SIZE 100
+
+char __buffer[BUFFER_SIZE];
+
+char *date_to_string(struct date_t *date) {
+  int __print_len = snprintf(__buffer, BUFFER_SIZE, "struct date_t {\n  .year = %d,\n  .month = %d,\n  .day = %d\n}", date->year, date->month, date->day);
+  char *__result = malloc(__print_len + 1); strcpy(__result, __buffer);
+  return __result;
+}
 
 int test_is_valid_date(int argc, char **argv) {
   struct date_t __date;
@@ -19,9 +28,10 @@ int test_is_valid_date(int argc, char **argv) {
   } else {
     scanf("%d-%d-%d", &__date.year, &__date.month, &__date.day);
   }
-  fprintf(stderr, "loaded: %d-%d-%d", __date.year, __date.month, __date.day);
-  int __status = is_valid_date(__date);
-  printf("is_valid_date returned %d\n", __status);
+  char *__date_str = date_to_string(&__date); fprintf(stderr, "date = %s;\n", __date_str);
+  bool __status = is_valid_date(__date);
+  printf("is_valid_date(date) == %s\n", __status ? "true" : "false");
+  free(__date_str);
   return 0;
 }
 
@@ -34,10 +44,11 @@ int test_earlier_date(int argc, char **argv) {
     scanf("%d-%d-%d", &__date1.year, &__date1.month, &__date1.day);
     scanf("%d-%d-%d", &__date2.year, &__date2.month, &__date2.day);
   }
-  fprintf(stderr, "loaded first: %d-%d-%d", __date1.year, __date1.month, __date1.day);
-  fprintf(stderr, "loaded second: %d-%d-%d", __date2.year, __date2.month, __date2.day);
+  char *__date1_str = date_to_string(&__date1), *__date2_str = date_to_string(&__date2);
+  fprintf(stderr, "date1 = %s;\n", __date1_str); fprintf(stderr, "date2 = %s;\n", __date2_str);
+  free(__date1_str); free(__date2_str);
   int __status = earlier_date(__date1, __date2);
-  printf("earlier_date returned %d\n", __status);
+  printf("earlier_date(date1, date2) == %d\n", __status);
   return 0;
 }
 

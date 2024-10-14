@@ -7,6 +7,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <stdbool.h>
+
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ A STRUKTUR NIJAK NEMĚŇTE
 
 // Structures allow us to "bundle" number of variables that are related together
@@ -31,7 +33,7 @@ struct time_t
     int sec;
 };
 
-int is_valid_date(struct date_t date);
+bool is_valid_date(struct date_t date);
 
 int earlier_date(struct date_t date1, struct date_t date2);
 

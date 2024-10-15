@@ -4,8 +4,8 @@
 
 void print_2d(int matrix[MAT_ROWS][MAT_COLUMNS]) {
   for (int row = 0; row < MAT_ROWS; row++) {
-    for (int col = 0; col < MAT_COLUMNS; col++) {
-      printf("%d ", matrix[row][col]);
+    for (int column = 0; column < MAT_COLUMNS; column++) {
+      printf("%d ", matrix[row][column]);
     }
     printf("\n");
   }
@@ -22,7 +22,7 @@ bool save_to_file(const char *filename, int matrix[MAT_ROWS][MAT_COLUMNS]) {
   // FILE * is the type used to represent files and data streams
   FILE *output;
 
-  // TODO: 1. open the source file (filepath in MAT_FILE_PATH)
+  // TODO: 1. open the destination file
   // TODO: 2. validate that the stream has opened correctly
 
   bool result = save_to(output, matrix);
@@ -41,7 +41,7 @@ bool load_from(FILE *input, int matrix[MAT_ROWS][MAT_COLUMNS]) {
 bool load_from_file(const char *filename, int matrix[MAT_ROWS][MAT_COLUMNS]) {
   FILE *input;
 
-  // TODO: 1. open the source file (filepath in MAT_FILE_PATH)
+  // TODO: 1. open the source file
   // TODO: 2. validate that the stream has opened correctly
 
   bool result = load_from(input, matrix);
@@ -56,8 +56,8 @@ int main(int argc, char *argv[]) {
     // Create and initialize a matrix
     int matrix[MAT_ROWS][MAT_COLUMNS];
     for (int row = 0; row < MAT_ROWS; row++) {
-        for (int col = 0; col < MAT_COLUMNS; col++) {
-            matrix[row][col] = (row + 1) * (col + 1);
+        for (int column = 0; column < MAT_COLUMNS; column++) {
+            matrix[row][column] = (row + 1) * (column + 1);
         }
     }
 

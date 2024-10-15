@@ -32,7 +32,7 @@ int earlier_date(struct date_t date1, struct date_t date2) {
 
 #ifndef TEST_BUILD
 
-int main() {
+int main(void) {
     struct date_t date1, date2;
 
     // Load two dates from the user

@@ -42,7 +42,7 @@ MatCoords find_value(int arr[MAT_ROWS][MAT_COLUMNS], int value) {
 
 #ifndef TEST_BUILD
 
-int main() {
+int main(void) {
     // Create 3x3 array (matrix, table, ...)
     // The array has 3 rows and in each row, 3 columns
     // MAT_ROWS and MAT_COLUMNS are defined in ./types.h

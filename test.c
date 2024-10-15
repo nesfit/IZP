@@ -19,7 +19,7 @@
 void __read_dump(const char *filepath) {
   FILE *f = fopen(filepath, "r");
   if (f == NULL) {
-    fprintf(stderr, "%s", "file does not exist!\n");
+    fprintf(stderr, "%s", "the target file does not exist!\n");
     exit(ERR_FILE_MISSING);
   }
   fprintf(stderr, "file contents:\n");
@@ -80,11 +80,17 @@ static const char *__filename = ".tests/student/__mat.txt";
 
 int test_save_to_file(int argc, char **argv) {
   int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
-  save_to_file(__filename, __mat);
+  bool __result = save_to_file(__filename, __mat);
+  fprintf(stdout, "save_to_file(filepath, matrix) == %s\n", __result ? "true" : "false");
+  if (__result == false) {
+    remove(__filename);
+    return 1;
+  }
   __load_from(__filename, __mat_loaded);
-  __print(__mat_loaded);
   __read_dump(__filename);
   remove(__filename);
+  fprintf(stdout, "loaded from file:\n");
+  __print(__mat_loaded);
   return 0;
 }
 
@@ -92,11 +98,17 @@ int test_save_to(int argc, char **argv) {
   int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
   FILE *f = fopen(__filename, "w");
   if (f == NULL) exit(ERR_FILE_MISSING);
-  save_to(f, __mat);
+  bool __result = save_to(f, __mat);
+  fprintf(stdout, "save_to(file, matrix) == %s\n", __result ? "true" : "false");
   fclose(f);
+  if (__result == false) {
+    remove(__filename);
+    return 1;
+  }
   __load_from(__filename, __mat_loaded);
   __read_dump(__filename);
   remove(__filename);
+  fprintf(stdout, "loaded from file:\n");
   __print(__mat_loaded);
   return 0;
 }
@@ -104,16 +116,28 @@ int test_save_to(int argc, char **argv) {
 int test_load_from_file(int argc, char **argv) {
   int __mat[MAT_ROWS][MAT_COLUMNS], __mat_loaded[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
   __save_to(__filename, __mat);
-  load_from_file(__filename, __mat_loaded);
-  __print(__mat_loaded);
+  bool __result = load_from_file(__filename, __mat_loaded);
+  fprintf(stdout, "load_from_file(filepath, &matrix) == %s\n", __result ? "true" : "false");
+  if (__result == false) {
+    remove(__filename);
+    return 1;
+  }
   __read_dump(__filename);
   remove(__filename);
+  fprintf(stdout, "loaded from file:\n");
+  __print(__mat_loaded);
   return 0;
 }
 
 int test_load_from(int argc, char **argv) {
-  int __mat[MAT_ROWS][MAT_COLUMNS]; __load(stdin, __mat);
-  load_from(stdin, __mat);
+  int __mat[MAT_ROWS][MAT_COLUMNS];
+  bool __result = load_from(stdin, __mat);
+  fprintf(stdout, "load_from(stdin, &matrix) == %s\n", __result ? "true" : "false");
+  if (__result == false) {
+    remove(__filename);
+    return 1;
+  }
+  fprintf(stdout, "loaded from file:\n");
   __print(__mat);
   return 0;
 }

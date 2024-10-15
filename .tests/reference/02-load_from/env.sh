@@ -1,1 +1,1 @@
-TEST_NAME="test_load_from_file"
+TEST_NAME="test_load_from"

@@ -1,3 +1,5 @@
+load_from(stdin, &matrix) == true
+loaded from file:
 444 555 666 
 888 777 666 
 777 555 666 

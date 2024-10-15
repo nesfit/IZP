@@ -11,6 +11,13 @@ void print_2d(int matrix[MAT_ROWS][MAT_COLUMNS]) {
   }
 }
 
+bool save_to(FILE *output, int matrix[MAT_ROWS][MAT_COLUMNS]) {
+    // TODO: Write the matrix items into the file
+
+    // TODO: return true when successful
+    return false;
+}
+
 bool save_to_file(const char *filename, int matrix[MAT_ROWS][MAT_COLUMNS]) {
   // FILE * is the type used to represent files and data streams
   FILE *output;
@@ -24,11 +31,11 @@ bool save_to_file(const char *filename, int matrix[MAT_ROWS][MAT_COLUMNS]) {
   return result;
 }
 
-bool save_to(FILE *output, int matrix[MAT_ROWS][MAT_COLUMNS]) {
-    // TODO: Write the matrix items into the file
+bool load_from(FILE *input, int matrix[MAT_ROWS][MAT_COLUMNS]) {
+  // TODO: Read the matrix items from the file into the matrix
 
-    // TODO: return true when successful
-    return false;
+  // TODO: return true when successful
+  return false;
 }
 
 bool load_from_file(const char *filename, int matrix[MAT_ROWS][MAT_COLUMNS]) {
@@ -41,13 +48,6 @@ bool load_from_file(const char *filename, int matrix[MAT_ROWS][MAT_COLUMNS]) {
 
   // TODO: 4. Don't forget to close the file!
   return result;
-}
-
-bool load_from(FILE *input, int matrix[MAT_ROWS][MAT_COLUMNS]) {
-  // TODO: Read the matrix items from the file into the matrix
-
-  // TODO: return true when successful
-  return false;
 }
 
 #ifndef TEST_BUILD

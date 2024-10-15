@@ -7,7 +7,7 @@
  * 
  * @param date Datová struktura reprezentující datum
  * 
- * @return 1 v případě validního data, 0 jinak
+ * @return `true` v případě validního data, `false` jinak
  */
 bool is_valid_date(struct date_t date) {
   // TODO: implementujte funkci dle zadání

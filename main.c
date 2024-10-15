@@ -69,8 +69,8 @@ int main() {
     value = matrix[1][2] = 5;
 
     // Try to find the value
-    int value = contains_value(matrix, value);
-    if (value == 1) {
+    bool contains_result = contains_value(matrix, value);
+    if (contains_result) {
         printf("Value: %d found!\n", value);
     } else {
         printf("Value: %d not found!\n", value);

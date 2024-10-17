@@ -2,7 +2,9 @@
 #include <stdio.h>
 
 /**
- * Determine whether the provided date is valid.
+ * Determine whether the provided date is valid. Respect leap years with extra
+ * days, different month lengths and assume that the only valid years are above
+ * 1500 and below 3000.
  *
  * @param date Datová struktura reprezentující datum
  *
@@ -19,7 +21,7 @@ bool is_valid_date(struct date_t date) {
  * @param date1 Datová struktura reprezentující první datum
  * @param date2 Datová struktura reprezentující druhé datum
  *
- * @return `DATE1_IS_EARLIER` v případě date1 je dřívější,
+ * @return `DATE1_IS_EARLIER` v případě že date1 je dřívější,
  *     `DATE1_IS_LATER` když date2 je dřívější,
  *     `DATES_ARE_EQUAL` jinak (data jsou stejná)
  */
@@ -47,11 +49,11 @@ int main(void) {
   }
 
   // Compare the dates and find the earlier one
-  int earlier = earlier_date(date1, date2);
-  if (earlier == 1) {
+  int earlier_result = earlier_date(date1, date2);
+  if (earlier_result == DATE1_IS_EARLIER) {
     printf("The date %d-%d-%d is earlier.\n", date1.year, date1.month,
            date1.day);
-  } else if (earlier == 2) {
+  } else if (earlier_result == DATE1_IS_LATER) {
     printf("The date %d-%d-%d is earlier.\n", date2.year, date2.month,
            date2.day);
   } else {

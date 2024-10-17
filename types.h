@@ -22,19 +22,17 @@
 #define DATES_ARE_EQUAL 0
 
 // Date structure
-struct date_t
-{
-    int year;
-    int month;
-    int day;
+struct date_t {
+  int year;
+  int month;
+  int day;
 };
 
 // Time structure
-struct time_t
-{
-    int hour;
-    int min;
-    int sec;
+struct time_t {
+  int hour;
+  int min;
+  int sec;
 };
 
 bool is_valid_date(struct date_t date);

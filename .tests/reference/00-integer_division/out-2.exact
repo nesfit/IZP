@@ -1,0 +1,4 @@
+dividend = 2000000000;
+divisor  = 1;
+divide(dividend, divisor, &quotient);
+quotient == 2000000000.000;

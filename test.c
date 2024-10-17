@@ -22,13 +22,16 @@ int test_run(int argc, char **argv) {
   int divisor = atoi(argv[2]);
 
   double quotient;
+  printf("dividend = %d;\n", dividend);
+  printf("divisor  = %d;\n", divisor);
+  printf("divide(dividend, divisor, &quotient);\n");
   if (divide(dividend, divisor, &quotient) == 0)
   {
     fprintf(stderr, "divide: error\n");
     return 1;
   }
 
-  printf("%.3f\n", quotient);
+  printf("quotient == %.3f;\n", quotient);
   return 0;
 }
 

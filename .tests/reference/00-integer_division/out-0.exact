@@ -1,0 +1,4 @@
+dividend = 10;
+divisor  = 5;
+divide(dividend, divisor, &quotient);
+quotient == 2.000;

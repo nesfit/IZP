@@ -1,0 +1,4 @@
+dividend = 2;
+divisor  = 3;
+divide(dividend, divisor, &quotient);
+quotient == 0.667;

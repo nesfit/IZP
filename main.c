@@ -1,23 +1,22 @@
 #include "types.h"
 #include <stdio.h>
 
-
 /**
  * Funkce provede výpočet `dividend / divisor`.
  * Výsledek vrací prostřednictvím ukazatele `quotient`.
- * 
+ *
  * Funkce nic netiskne!
  *
  * @param dividend  Dělenec
  * @param divisor   Dělitel
  * @param quotient  Ukazatel na podíl/kvocient (výsledek)
  *
- * @returns hodnotu 1 při úspěšném dělení, 0 jinak
+ * @returns hodnotu true při úspěšném dělení, false jinak
  */
-int divide(int dividend, int divisor, double *quotient) {
+bool divide(int dividend, int divisor, double *quotient) {
   // TODO: Implementujte správné desetinné dělení
   // TODO: Výsledek vraťte prostřednictvím parametru quotient
-  return -1;
+  return false;
 }
 
 #ifndef TEST_BUILD

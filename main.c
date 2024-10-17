@@ -21,9 +21,9 @@ bool is_valid_date(struct date_t date) {
  * @param date1 Datová struktura reprezentující první datum
  * @param date2 Datová struktura reprezentující druhé datum
  * 
- * @return -1 v případě date1 je dřívější,
- *     1 když date2 je dřívější,
- *     0 jinak (data jsou stejná)
+ * @return `DATE1_IS_EARLIER` v případě date1 je dřívější,
+ *     `DATE1_IS_LATER` když date2 je dřívější,
+ *     `DATES_ARE_EQUAL` jinak (data jsou stejná)
  */
 int earlier_date(struct date_t date1, struct date_t date2) {
   // TODO: implementujte funkci dle zadání

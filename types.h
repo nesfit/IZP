@@ -17,6 +17,10 @@
 // To access specific elements of our date structure, we use the "dot" notation:
 // date.year, date.month, date.day, etc.
 
+#define DATE1_IS_EARLIER -1
+#define DATE1_IS_LATER 1
+#define DATES_ARE_EQUAL 0
+
 // Date structure
 struct date_t
 {

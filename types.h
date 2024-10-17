@@ -7,6 +7,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <stdio.h>
+#include <stdbool.h>
+
 // maximální počet prvků v množině
 // (za použití všech dostupných prvků)
 #define MAXITEMS 10
@@ -32,10 +35,10 @@ typedef struct {
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-int rel_isFunction(Pair pairs[], int pairCount, Set set);
+bool rel_isFunction(Pair pairs[], int pairCount, Set set);
 
-int rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax);
+bool rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax);
 
-int rel_isEquivalence(Pair pairs[], int pairCount, Set set);
+bool rel_isEquivalence(Pair pairs[], int pairCount, Set set);
 
 #endif

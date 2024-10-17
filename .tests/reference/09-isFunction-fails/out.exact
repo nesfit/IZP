@@ -1,0 +1,4 @@
+set = {  };
+relations = [ ];
+
+rel_isFunction(relations, 0, set) == false

@@ -1,0 +1,3 @@
+relations = [ ];
+
+rel_minMax(relations, 0, &min, &max) == false

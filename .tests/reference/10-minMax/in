@@ -1,6 +1,7 @@
 load set with 3 items:
 1 2 3
 
-load 2 pairs:
+load 3 pairs:
 (1, 1)
 (2, 2)
+(3, 3)

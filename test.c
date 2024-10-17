@@ -15,23 +15,44 @@
 #pragma region Helper functions for set operations
 
 void __load_set(Set *set) {
-  scanf("%d", &set->cardinality);
+  scanf(" load set with %d items:", &set->cardinality);
   for (int i = 0; i < set->cardinality; i++) {
-    scanf("%d", &set->items[i]);
+    scanf(" %d", &set->items[i]);
   }
 }
 
 Pair *__load_pairs(int *size) {
-  scanf("%d", size);
+  scanf(" load %d pairs:", size);
   Pair *pairs = malloc((*size) * sizeof(Pair));
   for (int i = 0; i < *size; i++) {
-    scanf("%d %d", &pairs[i].first, &pairs[i].second);
+    scanf(" (%d, %d)", &pairs[i].first, &pairs[i].second);
   }
 
   return pairs;
 }
 
-void __dispose(Pair *pairs) { free(pairs); }
+void __dispose(Pair *pairs) {
+  free(pairs);
+}
+
+void __print_set(Set *set) {
+  fprintf(stdout, "set = {");
+  for (int i = 0; i < set->cardinality; i++) {
+    fprintf(stdout, "  %d", set->items[i]);
+  }
+  fprintf(stdout, "  };\n");
+}
+
+void __print_relations(Pair *pairs, int count) {
+  fprintf(stdout, "relations = [ ");
+  for (int i = 0; i < count; i++) {
+    fprintf(stdout, "\n  (%d, %d)", pairs[i].first, pairs[i].second);
+  }
+  if (count > 0) {
+    fprintf(stdout, "\n");
+  }
+  fprintf(stdout, "];\n");
+}
 
 #pragma endregion
 
@@ -41,7 +62,13 @@ int test_is_function(int argc, char **argv) {
   __load_set(&__set);
   Pair *__rel = __load_pairs(&__relSize);
 
-  printf("rel_isFunction=%d\n", rel_isFunction(__rel, __relSize, __set));
+  __print_set(&__set);
+  __print_relations(__rel, __relSize);
+  bool __result = rel_isFunction(__rel, __relSize, __set);
+  printf("\nrel_isFunction(relations, %d, set) == %s\n", __relSize, __result ? "true" : "false");
+  if (__result == false) {
+    return 1;
+  }
 
   __dispose(__rel);
   return 0;
@@ -53,13 +80,15 @@ int test_min_max(int argc, char **argv) {
   __load_set(&__set);
   Pair *__rel = __load_pairs(&__relSize);
 
-  int __relMin, __relMax, __minMaxResult;
-  __minMaxResult = rel_minMax(__rel, __relSize, &__relMin, &__relMax);
+  __print_relations(__rel, __relSize);
+  int __relMin, __relMax, __result = rel_minMax(__rel, __relSize, &__relMin, &__relMax);
+  printf("\nrel_minMax(relations, %d, &min, &max) == %s\n", __relSize, __result ? "true" : "false");
+  if (__result == false){
+    return 1;
+  }
 
-  printf("rel_minMax=%d\n", __minMaxResult);
-  printf("min=%d\n", __relMin);
-  printf("max=%d\n", __relMax);
-
+  printf("min == %d\n", __relMin);
+  printf("max == %d\n", __relMax);
   __dispose(__rel);
   return 0;
 }
@@ -70,7 +99,13 @@ int test_is_equivalence(int argc, char **argv) {
   __load_set(&__set);
   Pair *__rel = __load_pairs(&__relSize);
 
-  printf("rel_isEquivalence=%d\n", rel_isEquivalence(__rel, __relSize, __set));
+  __print_set(&__set);
+  __print_relations(__rel, __relSize);
+  bool __result = rel_isEquivalence(__rel, __relSize, __set);
+  printf("\nrel_isEquivalence(relations, %d, set) == %s\n", __relSize, __result ? "true" : "false");
+  if (__result == false) {
+    return 1;
+  }
 
   __dispose(__rel);
   return 0;

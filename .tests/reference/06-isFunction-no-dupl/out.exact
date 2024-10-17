@@ -1,1 +1,8 @@
-rel_isFunction=0
+set = {  1  2  };
+relations = [ 
+  (1, 1)
+  (1, 2)
+  (2, 1)
+];
+
+rel_isFunction(relations, 3, set) == false

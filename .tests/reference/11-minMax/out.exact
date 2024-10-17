@@ -1,0 +1,7 @@
+relations = [ 
+  (1, 1)
+];
+
+rel_minMax(relations, 1, &min, &max) == true
+min == 1
+max == 1

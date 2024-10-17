@@ -7,4 +7,4 @@ relations = [
   (5, 5)
 ];
 
-rel_isFunction(relations, 5, set) == true
+rel_isEquivalence(relations, 5, set) == true

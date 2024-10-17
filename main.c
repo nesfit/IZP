@@ -1,5 +1,4 @@
 #include "types.h"
-#include <stdio.h>
 
 const int UNIVERSUM[MAXITEMS] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
@@ -23,10 +22,10 @@ int main(void) {
  * @param pairs      Prvky nějaké binární relace (pole dvojic)
  * @param pairCount  Počet položek (dvojic) v relaci
  * @param set        Množina nad kterou je relace definována
- * 
- * @returns hodnotu 1 pokud relace je funkcí, 0 jinak
+ *
+ * @returns hodnotu true pokud relace je funkcí, false jinak
  */
-int rel_isFunction(Pair pairs[], int pairCount, Set set) {
+bool rel_isFunction(Pair pairs[], int pairCount, Set set) {
   // TODO: 3. definujte a implementujte funkci rel_isFunction
   return -1;
 }
@@ -37,9 +36,9 @@ int rel_isFunction(Pair pairs[], int pairCount, Set set) {
  * @param relMin     Ukazatel na proměnnou minimální hodnoty relace
  * @param relMax     Ukazatel na proměnnou maximální hodnoty relace
  *
- * @returns hodnotu 1 pokud bylo hledání úspěšné, 0 jinak
+ * @returns hodnotu true pokud bylo hledání úspěšné, false jinak
  */
-int rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax) {
+bool rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax) {
   // TODO: 4. definujte a implementujte funkci rel_minMax
   return -1;
 }
@@ -48,10 +47,10 @@ int rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax) {
  * @param pairs      Prvky nějaké binární relace (pole dvojic)
  * @param pairCount  Počet položek (dvojic) v relaci
  * @param set        Množina nad kterou je relace definována
- * 
- * @returns hodnotu 1 pokud relace je relací ekvivalence, 0 jinak
+ *
+ * @returns hodnotu true pokud relace je relací ekvivalence, false jinak
  */
-int rel_isEquivalence(Pair pairs[], int pairCount, Set set) {
+bool rel_isEquivalence(Pair pairs[], int pairCount, Set set) {
   // TODO: 5. definujte a implementujte funkci rel_isEquivalence
   return -1;
 }

@@ -4,8 +4,8 @@
  *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
  */
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #ifndef TYPES_H
 #define TYPES_H

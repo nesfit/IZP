@@ -19,9 +19,13 @@ int test_run(int argc, char **argv) {
 
   int number1 = atoi(argv[1]);
   int number2 = atoi(argv[2]);
+  printf("number1 = %d;\n", number1);
+  printf("number2 = %d;\n", number2);
+  printf("swapInts(number1, number2);\n");
   swapInts(&number1, &number2);
+  printf("number1 = %d;\n", number1);
+  printf("number2 = %d;\n", number2);
 
-  printf("%d %d\n", number1, number2);
   return 0;
 }
 

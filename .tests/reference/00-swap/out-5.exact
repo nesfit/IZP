@@ -1,0 +1,5 @@
+number1 = -2147483648;
+number2 = 2147483647;
+swapInts(number1, number2);
+number1 = 2147483647;
+number2 = -2147483648;

@@ -1,0 +1,5 @@
+number1 = -10;
+number2 = -5;
+swapInts(number1, number2);
+number1 = -5;
+number2 = -10;

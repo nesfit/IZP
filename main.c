@@ -3,6 +3,7 @@
 
 /**
  * Determine whether the provided date is valid.
+ * Consider only dates between 1.1.1500 and 1.1.3000.
  *
  * @param date Datová struktura reprezentující datum
  *

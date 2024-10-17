@@ -1,14 +1,12 @@
 #include "types.h"
 #include <stdio.h>
 
-
 /**
  * Funkce vymění hodnoty dvou celočíselných proměnných.
  */
 void swapInts(int *variableA, int *variableB) {
-    // TODO: 1. implementujte metodu dle zadání
+  // TODO: 1. implementujte metodu dle zadání
 }
-
 
 #ifndef TEST_BUILD
 

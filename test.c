@@ -64,7 +64,7 @@ int test_is_function(int argc, char **argv) {
 
   __print_set(&__set);
   __print_relations(__rel, __relSize);
-  bool __result = rel_isFunction(__rel, __relSize, __set);
+  bool __result = rel_isFunction(__rel, __relSize, &__set);
   printf("\nrel_isFunction(relations, %d, set) == %s\n", __relSize, __result ? "true" : "false");
   if (__result == false) {
     return 1;
@@ -101,7 +101,7 @@ int test_is_equivalence(int argc, char **argv) {
 
   __print_set(&__set);
   __print_relations(__rel, __relSize);
-  bool __result = rel_isEquivalence(__rel, __relSize, __set);
+  bool __result = rel_isEquivalence(__rel, __relSize, &__set);
   printf("\nrel_isEquivalence(relations, %d, set) == %s\n", __relSize, __result ? "true" : "false");
   if (__result == false) {
     return 1;

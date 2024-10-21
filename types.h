@@ -35,10 +35,10 @@ typedef struct {
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-bool rel_isFunction(Pair pairs[], int pairCount, Set set);
+bool rel_isFunction(Pair pairs[], int pairCount, Set *set);
 
 bool rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax);
 
-bool rel_isEquivalence(Pair pairs[], int pairCount, Set set);
+bool rel_isEquivalence(Pair pairs[], int pairCount, Set *set);
 
 #endif

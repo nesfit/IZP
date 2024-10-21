@@ -25,7 +25,7 @@ int main(void) {
  *
  * @returns hodnotu true pokud relace je funkcí, false jinak
  */
-bool rel_isFunction(Pair pairs[], int pairCount, Set set) {
+bool rel_isFunction(Pair pairs[], int pairCount, Set *set) {
   // TODO: 3. definujte a implementujte funkci rel_isFunction
   return -1;
 }
@@ -50,7 +50,7 @@ bool rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax) {
  *
  * @returns hodnotu true pokud relace je relací ekvivalence, false jinak
  */
-bool rel_isEquivalence(Pair pairs[], int pairCount, Set set) {
+bool rel_isEquivalence(Pair pairs[], int pairCount, Set *set) {
   // TODO: 5. definujte a implementujte funkci rel_isEquivalence
   return -1;
 }

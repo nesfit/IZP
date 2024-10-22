@@ -562,7 +562,7 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
 
     DESC=""
     [ -f "$DESC_FILEPATH" ] && DESC="$(cat "$DESC_FILEPATH")"
-    printf "%s,%s,%d,%d,%d\n" "$TEST_ID" "$DESC" "$TEST_RC_DIFF" "$TEST_OUT_DIFF" "$TEST_OUT_ERR_DIFF" >>"$RESULTS_FILEPATH"
+    printf "\"%s\",\"%s\",%d,%d,%d\n" "$TEST_ID" "$DESC" "$TEST_RC_DIFF" "$TEST_OUT_DIFF" "$TEST_OUT_ERR_DIFF" >>"$RESULTS_FILEPATH"
     echo ""
 
 done

@@ -1,1 +1,1 @@
-is_name("Zimbabwe") == 1
+is_name("Zimbabwe") == true

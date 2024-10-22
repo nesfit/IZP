@@ -1,1 +1,1 @@
-is_alpha('_') == 0
+is_alpha('_') == false

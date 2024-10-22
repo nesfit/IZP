@@ -1,1 +1,1 @@
-is_alpha('d') == 1
+is_alpha('d') == true

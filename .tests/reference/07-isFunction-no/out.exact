@@ -2,7 +2,6 @@ set = {  1  2  };
 relations = [ 
   (1, 1)
   (1, 2)
-  (0, 0)
 ];
 
-rel_isFunction(relations, 3, set) == false
+rel_isFunction(relations, 2, set) == false

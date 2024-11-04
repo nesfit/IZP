@@ -1,6 +1,7 @@
--x -y
--y -x
--y -n 15 -x
+-x -y -s Hello!
+-y -x -s Hello!
+-y -n 15 -x -s Hello!
 -y -s Hello! -x
 -y -s Hello! -n 15 -x
+-x -s Hello! -y
 -x -s Hello! -n 15 -y

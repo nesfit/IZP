@@ -37,9 +37,9 @@ int main(int argc, char *argv[]) {
  * @param argumentCount  velikost pole argumentů
  * @param config         ukazatel na výstupní konfiguraci
  * 
- * @returns hodnotu 1 při úspěšném zpracování, 0 jinak
+ * @returns hodnotu true při úspěšném zpracování, false jinak
  */
-int parse_args(char **arguments, int argumentCount, Config *config) {
+bool parse_args(char **arguments, int argumentCount, Config *config) {
   // TODO: 1. implementujte funkci dle specifikace zadání
   //   a chování jednotlivých přepínačů
 

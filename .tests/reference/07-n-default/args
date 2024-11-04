@@ -1,4 +1,4 @@
-
--x
+-s Hello!
+-x -s Hello!
 -s Hello! -y
 -x -s Hello!

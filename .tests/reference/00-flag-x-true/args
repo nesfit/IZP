@@ -1,5 +1,4 @@
--x
--n 0 -x
+-x -s "A"
+-n 0 -x -s "A"
 -s Hello! -n 0 -x
 -s Hello! -x -n 0
--x -s Hello! -n 0

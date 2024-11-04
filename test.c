@@ -20,15 +20,16 @@ int test_parse_args(int argc, char **argv) {
     .nValue = 10,
   };
 
-  int __status = parse_args(argv, argc, &__config);
-  if (__status != 1) {
+  bool __status = parse_args(argv, argc, &__config);
+  printf("parse_args(argv, %d, &config) == %s\n", argc, __config.xFlag ? "true" : "false");
+  if (__status != true) {
     return 1;
   }
 
-  printf("xFlag  = %s\n", __config.xFlag ? "true" : "false");
-  printf("yFlag  = %s\n", __config.yFlag ? "true" : "false");
-  printf("sValue = %s\n", __config.sValue);
-  printf("nValue = %d\n", __config.nValue);
+  printf("config.xFlag  == %s\n", __config.xFlag ? "true" : "false");
+  printf("config.yFlag  == %s\n", __config.yFlag ? "true" : "false");
+  printf("config.sValue == %s\n", __config.sValue);
+  printf("config.nValue == %d\n", __config.nValue);
   return 0;
 }
 

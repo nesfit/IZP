@@ -27,6 +27,6 @@ typedef struct {
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-int parse_args(char **arguments, int argumentCount, Config *config);
+bool parse_args(char **arguments, int argumentCount, Config *config);
 
 #endif

@@ -1,6 +1,4 @@
 #include "types.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 
 #ifndef TEST_BUILD
@@ -30,9 +28,9 @@ void vector_print(Vector *v)
  * @param v     ukazatel na strukturu vektoru
  * @param size  počet prvků vektoru (rozměr)
  * 
- * @returns hodnotu 1 v případě úspěšné alokace, 0 jinak
+ * @returns hodnotu true v případě úspěšné alokace, false jinak
  */
-int vector_ctor(Vector *v, unsigned int size)
+bool vector_ctor(Vector *v, unsigned int size)
 {
   // TODO: implementujte funkci dle zadání
   return -1;
@@ -89,9 +87,9 @@ void vector_scalar_multiply(Vector *v, int scalar)
  * @param v1  ukazatel na první vektor
  * @param v2  ukazatel na druhý vektor
  * 
- * @returns hodnotu 1 při úspěšném sečtení, 0 jinak
+ * @returns hodnotu true při úspěšném sečtení, false jinak
  */
-int vector_add(Vector *v1, Vector *v2)
+bool vector_add(Vector *v1, Vector *v2)
 {
   // TODO: implementujte funkci dle zadání
   return -1;
@@ -108,9 +106,9 @@ int vector_add(Vector *v1, Vector *v2)
  * @param v1  ukazatel na první vektor
  * @param v2  ukazatel na druhý vektor
  * 
- * @returns hodnotu 1 při úspěšném odečtení, 0 jinak
+ * @returns hodnotu true při úspěšném odečtení, false jinak
  */
-int vector_sub(Vector *v1, Vector *v2)
+bool vector_sub(Vector *v1, Vector *v2)
 {
   // TODO: implementujte funkci dle zadání
   return -1;

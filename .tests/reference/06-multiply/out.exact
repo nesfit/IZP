@@ -1,1 +1,10 @@
-Vector(5) = [5, 10, 15, 20, 25]
+vector == Vector {
+  .size = 5,
+  .items = [1, 2, 3, 4, 5]
+}
+
+vector_scalar_multiply(&vector, 5);
+vector == Vector {
+  .size = 5,
+  .items = [5, 10, 15, 20, 25]
+}

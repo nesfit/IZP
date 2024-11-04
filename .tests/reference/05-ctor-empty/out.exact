@@ -1,2 +1,5 @@
-vector_ctor returned: 1
-Vector(0) = (null)
+vector_ctor(&vector, 0) == true
+vector == Vector {
+  .size = 0,
+  .items = (null)
+}

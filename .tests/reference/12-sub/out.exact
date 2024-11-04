@@ -1,2 +1,14 @@
-vector_sub returned: 1
-Vector(5) = [0, 0, 0, 0, 0]
+vector1 == Vector {
+  .size = 5,
+  .items = [1, 2, 3, 4, 5]
+}
+vector2 == Vector {
+  .size = 5,
+  .items = [1, 2, 3, 4, 5]
+}
+
+vector_sub(&vector1, &vector2) == true
+vector1 == Vector {
+  .size = 5,
+  .items = [0, 0, 0, 0, 0]
+}

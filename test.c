@@ -15,9 +15,9 @@
 #pragma region Helper methods for testing
 
 void __vector_fprint(FILE *file, char *prefix, Vector *v) {
-    fprintf(file, "%sVector(%d) = ", prefix, v->size);
+    fprintf(file, "%sVector {\n  .size = %d,\n  .items = ", prefix, v->size);
     if (v->items == NULL) {
-        fprintf(file, "(null)\n");
+        fprintf(file, "(null)\n}\n");
         return;
     }
 
@@ -29,12 +29,12 @@ void __vector_fprint(FILE *file, char *prefix, Vector *v) {
     if (v->size > 0) {
         fprintf(file, "%d", v->items[v->size - 1]);
     }
-    fprintf(file, "]\n");
+    fprintf(file, "]\n}\n");
 }
 
 Vector __load_vector(void) {
     Vector v;
-    scanf("%d", &v.size);
+    scanf(" load vector of size %d", &v.size);
     v.items = v.size ? malloc(v.size * sizeof(*v.items)) : NULL;
     for (int i = 0; i < v.size; i++) {
         scanf("%d", &v.items[i]);
@@ -73,11 +73,11 @@ int test_vector_print(int argc, char **argv) {
 int test_vector_ctor(int argc, char **argv) {
   Vector v1;
   int size;
-  scanf("%d", &size);
+  scanf(" load vector of size %d", &size);
 
-  int status = vector_ctor(&v1, size);
-  printf("vector_ctor returned: %d\n", status);
-  __vector_fprint(stdout, "", &v1);
+  bool status = vector_ctor(&v1, size);
+  printf("vector_ctor(&vector, %d) == %s\n", size, status ? "true" : "false");
+  __vector_fprint(stdout, "vector == ", &v1);
 
   __dispose_vector(&v1);
   return 0;
@@ -85,9 +85,12 @@ int test_vector_ctor(int argc, char **argv) {
 
 int test_vector_init(int argc, char **argv) {
   Vector v1 = __load_vector();
+  __vector_fprint(stdout, "vector == ", &v1);
+  printf("\n");
 
+  printf("vector_init(&vector);\n");
   vector_init(&v1);
-  __vector_fprint(stdout, "", &v1);
+  __vector_fprint(stdout, "vector == ", &v1);
 
   __dispose_vector(&v1);
   return 0;
@@ -95,9 +98,12 @@ int test_vector_init(int argc, char **argv) {
 
 int test_vector_dtor(int argc, char **argv) {
   Vector v1 = __load_vector();
+  __vector_fprint(stdout, "vector == ", &v1);
+  printf("\n");
 
+  printf("vector_dtor(&vector);\n");
   vector_dtor(&v1);
-  __vector_fprint(stdout, "", &v1);
+  __vector_fprint(stdout, "vector == ", &v1);
 
   __dispose_vector(&v1);
   return 0;
@@ -106,10 +112,13 @@ int test_vector_dtor(int argc, char **argv) {
 int test_vector_scalar_multiply(int argc, char **argv) {
   Vector v1 = __load_vector();
   int multiplier;
-  scanf("%d", &multiplier);
-  
+  scanf(" multiply by %d", &multiplier);
+  __vector_fprint(stdout, "vector == ", &v1);
+  printf("\n");
+
+  printf("vector_scalar_multiply(&vector, %d);\n", multiplier);
   vector_scalar_multiply(&v1, multiplier);
-  __vector_fprint(stdout, "", &v1);
+  __vector_fprint(stdout, "vector == ", &v1);
 
   __dispose_vector(&v1);
   return 0;
@@ -118,10 +127,13 @@ int test_vector_scalar_multiply(int argc, char **argv) {
 int test_vector_add(int argc, char **argv) {
   Vector v1 = __load_vector();
   Vector v2 = __load_vector();
+  __vector_fprint(stdout, "vector1 == ", &v1);
+  __vector_fprint(stdout, "vector2 == ", &v1);
+  printf("\n");
   
-  int status = vector_add(&v1, &v2);
-  printf("vector_add returned: %d\n", status);
-  __vector_fprint(stdout, "", &v1);
+  bool status = vector_add(&v1, &v2);
+  printf("vector_add(&vector1, &vector2) == %s\n", status ? "true" : "false");
+  __vector_fprint(stdout, "vector1 == ", &v1);
 
   __dispose_vector(&v1);
   __dispose_vector(&v2);
@@ -131,10 +143,13 @@ int test_vector_add(int argc, char **argv) {
 int test_vector_sub(int argc, char **argv) {
   Vector v1 = __load_vector();
   Vector v2 = __load_vector();
+  __vector_fprint(stdout, "vector1 == ", &v1);
+  __vector_fprint(stdout, "vector2 == ", &v1);
+  printf("\n");
   
-  int status = vector_sub(&v1, &v2);
-  printf("vector_sub returned: %d\n", status);
-  __vector_fprint(stdout, "", &v1);
+  bool status = vector_sub(&v1, &v2);
+  printf("vector_sub(&vector1, &vector2) == %s\n", status ? "true" : "false");
+  __vector_fprint(stdout, "vector1 == ", &v1);
 
   __dispose_vector(&v1);
   __dispose_vector(&v2);

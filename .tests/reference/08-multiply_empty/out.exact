@@ -1,1 +1,10 @@
-Vector(0) = (null)
+vector == Vector {
+  .size = 0,
+  .items = (null)
+}
+
+vector_scalar_multiply(&vector, 5);
+vector == Vector {
+  .size = 0,
+  .items = (null)
+}

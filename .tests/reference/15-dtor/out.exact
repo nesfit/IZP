@@ -1,1 +1,10 @@
-Vector(0) = (null)
+vector == Vector {
+  .size = 4,
+  .items = [1, 2, 3, 4]
+}
+
+vector_dtor(&vector);
+vector == Vector {
+  .size = 0,
+  .items = (null)
+}

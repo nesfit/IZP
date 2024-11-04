@@ -19,7 +19,7 @@ typedef struct {
 
 void vector_print(Vector *v);
 
-int vector_ctor(Vector *v, unsigned int size);
+bool vector_ctor(Vector *v, unsigned int size);
 
 void vector_init(Vector *v);
 
@@ -27,8 +27,8 @@ void vector_dtor(Vector *v);
 
 void vector_scalar_multiply(Vector *v, int scalar);
 
-int vector_add(Vector *v1, Vector *v2);
+bool vector_add(Vector *v1, Vector *v2);
 
-int vector_sub(Vector *v1, Vector *v2);
+bool vector_sub(Vector *v1, Vector *v2);
 
 #endif

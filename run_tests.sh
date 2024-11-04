@@ -289,6 +289,7 @@ function run_test_with_args() {
 
     EXPECTED_RETURN_CODE=0
     [ -f "$RETURN_CODE_FILEPATH" ] && EXPECTED_RETURN_CODE="$(cat "$RETURN_CODE_FILEPATH")"
+    print_debug "EXPECTED_RETURN_CODE=$EXPECTED_RETURN_CODE (from $RETURN_CODE_FILEPATH)"
 
     # load default config
     [ -f "$TESTS_DIRPATH/env.sh" ] && . "$TESTS_DIRPATH/env.sh"
@@ -531,7 +532,7 @@ for TEST_DIRPATH in $TESTS_DIRPATH/[0-9]*; do
     if [ -f "$ARGS_FILEPATH" ]; then
         # args are defined
         invocations=0
-        while IFS= read ARGSET && [ "$ARGSET" ]; do
+        while IFS= read ARGSET; do
             print_debug "  using argset $invocations"
             ARGSET_ID=$invocations run_test_with_args "$OUT_DIRPATH" "$REF_DIRPATH" "$ARGSET"
             __ARGSET_RC=$?

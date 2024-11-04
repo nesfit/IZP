@@ -25,7 +25,7 @@ void __array_fprint(FILE *file, int arr[], int size) {
 }
 
 int *__load(int *size) {
-  scanf("%d", size);
+  scanf("load %d items:", size);
   int *array = malloc((*size) * sizeof(int));
   for (int i = 0; i < *size; i++) {
     scanf("%d", &array[i]);
@@ -56,7 +56,7 @@ int test_array_multiply(int argc, char **argv) {
   __array_print_loaded(__array, __size);
 
   int __multiplier;
-  scanf("%d", &__multiplier);
+  scanf(" multiply by %d", &__multiplier);
 
   array_multiply(__array, __size, __multiplier);
 
@@ -70,11 +70,11 @@ int test_array_insert(int argc, char **argv) {
   __array_print_loaded(__array, __size);
 
   int __insertPairCount;
-  scanf("%d", &__insertPairCount);
+  scanf(" insert %d items", &__insertPairCount);
 
   for (int i = 0; i < __insertPairCount; i++) {
     int __value, __position;
-    scanf("%d %d", &__value, &__position);
+    scanf("%d to index %d", &__value, &__position);
     fprintf(stderr, "inserting %d at position %d\n", __value, __position);
     int __insertResult = array_insert(__array, __size, __value, __position);
     if (__insertResult != 1) {

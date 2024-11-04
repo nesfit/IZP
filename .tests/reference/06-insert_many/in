@@ -1,22 +1,20 @@
-10
+load 10 items:
 0 1 2 3 4 5 6 7 8 9
 
-# X: insert X item(s)
-16
-# X Y: insert X at position Y
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
-0 0
+insert 16 items
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0
+0 to index 0

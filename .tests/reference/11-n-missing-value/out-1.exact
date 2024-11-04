@@ -1,0 +1,1 @@
+parse_args(argv, 3, &config) == false

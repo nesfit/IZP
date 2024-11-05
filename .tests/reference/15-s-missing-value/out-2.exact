@@ -1,1 +1,1 @@
-parse_args(argv, 5, &config) == true
+parse_args(argv, 5, &config) == false

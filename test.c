@@ -21,7 +21,7 @@ int test_parse_args(int argc, char **argv) {
   };
 
   bool __status = parse_args(argv, argc, &__config);
-  printf("parse_args(argv, %d, &config) == %s\n", argc, __config.xFlag ? "true" : "false");
+  printf("parse_args(argv, %d, &config) == %s\n", argc, __status ? "true" : "false");
   if (__status != true) {
     return 1;
   }

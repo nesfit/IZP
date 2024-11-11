@@ -11,38 +11,39 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #pragma region Helper methods for testing
 
 void __vector_print(char *prefix, Vector *v) {
-  if(v == NULL)
-  {
-    printf("%sVector = (null)\n", prefix);
+  FILE *file = stdout;
+  if (v == NULL) {
+    fprintf(file, "%s(null)\n", prefix);
     return;
   }
-  printf("%sVector(%d) = ", prefix, v->size);
+
+  fprintf(file, "%sVector {\n  .size = %d,\n  .items = ", prefix, v->size);
   if (v->items == NULL) {
-      printf("(null)\n");
-      return;
+    fprintf(file, "(null)\n}\n");
+    return;
   }
-  printf("[");
+
+  fprintf(file, "[");
   for (int i = 0; i < v->size - 1; i++) {
-      printf("%d, ", v->items[i]);
+    fprintf(file, "%d, ", v->items[i]);
   }
+
   if (v->size > 0) {
-      printf("%d", v->items[v->size - 1]);
+    fprintf(file, "%d", v->items[v->size - 1]);
   }
-  printf("]\n");
+  fprintf(file, "]\n}\n");
 }
 
-Vector* __load_vector(void) {
+Vector *__load_vector(void) {
   Vector *v = malloc(sizeof(Vector));
   scanf("load Vector(%d):", &(v->size));
   v->items = v->size ? malloc(v->size * sizeof(int)) : NULL;
   for (int i = 0; i < v->size; i++) {
-      scanf("%d", &v->items[i]);
+    scanf("%d", &v->items[i]);
   }
-  __vector_print("loaded: ", v);
   return v;
 }
 
@@ -54,10 +55,10 @@ void __clone_vector(Vector *dest, Vector *src) {
 }
 
 void __dispose_vector(Vector *v) {
-  if(v == NULL)
+  if (v == NULL)
     return;
   if (v->size > 0 && v->items != NULL) {
-      free(v->items);
+    free(v->items);
   }
   v->items = NULL;
   v->size = 0;
@@ -69,7 +70,7 @@ void __dispose_vector(Vector *v) {
 int test_ctor(int argc, char **argv) {
   Vector *v1 = vector_ctor();
 
-  __vector_print("result: ", v1);
+  __vector_print("vector_ctor() == ", v1);
   __dispose_vector(v1);
   return 0;
 }
@@ -77,9 +78,10 @@ int test_ctor(int argc, char **argv) {
 int test_dtor(int argc, char **argv) {
   Vector *v1 = __load_vector();
 
+  __vector_print("vector == ", v1);
   vector_dtor(&v1);
-  __vector_print("result: ", v1);
-  __dispose_vector(v1);
+  printf("\nvector_dtor(&vector);\n");
+  __vector_print("vector == ", v1);
   return 0;
 }
 
@@ -88,26 +90,33 @@ int test_resize(int argc, char **argv) {
 
   int __new_size;
   scanf(" resize to %d", &__new_size);
-  vector_resize(v1, __new_size);
+  __vector_print("vector = ", v1);
+  bool __status = vector_resize(v1, __new_size);
+  printf("\nvector_resize(&vector, %d) == %s\n", __new_size,
+         __status ? "true" : "false");
 
-  __vector_print("result: ", v1);
+  __vector_print("vector == ", v1);
   __dispose_vector(v1);
   return 0;
 }
 
 int test_expand(int argc, char **argv) {
   Vector *v1 = __load_vector();
+  __vector_print("vector = ", v1);
+  printf("\n");
 
   int __count;
-  scanf(" add %d:", &__count);
-  for (int i = 0; i < __count; i++)
-  {
+  scanf(" add %d items:", &__count);
+  for (int i = 0; i < __count; i++) {
     int numberToAdd;
     scanf("%d", &numberToAdd);
-    printf("vector_expand: %d\n", vector_expand(v1, numberToAdd));
+    bool __status = vector_expand(v1, numberToAdd);
+    printf("vector_expand(vector, %d) == %s\n", numberToAdd,
+           __status ? "true" : "false");
+    __vector_print("vector == ", v1);
+    printf("\n");
   }
 
-  __vector_print("result: ", v1);
   __dispose_vector(v1);
   return 0;
 }
@@ -129,31 +138,28 @@ int (*tests[])(int, char **) = {
 #define TEST_COUNT (sizeof(tests) / sizeof(*tests))
 
 int run_test_by_name(const char *test_name, int argc, char **argv) {
-    if (test_name != NULL) {
-        for (size_t testId = 0; testId < TEST_COUNT; testId++)
-        {
-            if (strcmp(test_names[testId], test_name) == 0) {
-                return tests[testId](argc, argv);
-            }
-        }
+  if (test_name != NULL) {
+    for (size_t testId = 0; testId < TEST_COUNT; testId++) {
+      if (strcmp(test_names[testId], test_name) == 0) {
+        return tests[testId](argc, argv);
+      }
     }
-    
-    fprintf(stderr, "could not find test '%s'\n", test_name);
-    fprintf(stderr, "supported tets:\n");
-    for (size_t testId = 0; testId < TEST_COUNT; testId++)
-    {
-        fprintf(stderr, "    - %s\n", test_names[testId]);
-    }
+  }
 
-    return TEST_ERR_NOT_FOUND;
+  fprintf(stderr, "could not find test '%s'\n", test_name);
+  fprintf(stderr, "supported tets:\n");
+  for (size_t testId = 0; testId < TEST_COUNT; testId++) {
+    fprintf(stderr, "    - %s\n", test_names[testId]);
+  }
+
+  return TEST_ERR_NOT_FOUND;
 }
 
 #pragma region Base support methods for testing purposes
 
 void __print_array(FILE *target, int *array, int length) {
   fprintf(target, "[");
-  for (int i = 0; i < length - 1; i++)
-  {
+  for (int i = 0; i < length - 1; i++) {
     fprintf(target, "%2d, ", array[i]);
   }
   if (length > 0) {
@@ -165,8 +171,9 @@ void __print_array(FILE *target, int *array, int length) {
 int __load_array(int **array) {
   int __length;
   scanf(" load %d items: ", &__length);
-  *array = (int *) malloc(__length * sizeof(int));
-  if (*array == NULL) exit(TEST_ERR_SYSTEM_FAILURE);
+  *array = (int *)malloc(__length * sizeof(int));
+  if (*array == NULL)
+    exit(TEST_ERR_SYSTEM_FAILURE);
   for (int i = 0; i < __length; i++) {
     if (scanf("%d", (*array) + i) != 1) {
       free(*array);
@@ -174,7 +181,9 @@ int __load_array(int **array) {
       exit(TEST_ERR_WRONG_INVOCATION);
     }
   }
-  fprintf(stderr, "loaded: "); __print_array(stderr, *array, __length); fprintf(stderr, "\n");
+  fprintf(stderr, "loaded: ");
+  __print_array(stderr, *array, __length);
+  fprintf(stderr, "\n");
   return __length;
 }
 

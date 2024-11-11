@@ -1,0 +1,35 @@
+vector = Vector {
+  .size = 0,
+  .items = (null)
+}
+
+vector_expand(vector, 1) == true
+vector == Vector {
+  .size = 1,
+  .items = [1]
+}
+
+vector_expand(vector, 2) == true
+vector == Vector {
+  .size = 2,
+  .items = [1, 2]
+}
+
+vector_expand(vector, 3) == true
+vector == Vector {
+  .size = 3,
+  .items = [1, 2, 3]
+}
+
+vector_expand(vector, 4) == true
+vector == Vector {
+  .size = 4,
+  .items = [1, 2, 3, 4]
+}
+
+vector_expand(vector, 5) == true
+vector == Vector {
+  .size = 5,
+  .items = [1, 2, 3, 4, 5]
+}
+

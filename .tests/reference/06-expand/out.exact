@@ -1,0 +1,29 @@
+vector = Vector {
+  .size = 5,
+  .items = [1, 2, 3, 4, 5]
+}
+
+vector_expand(vector, 4) == true
+vector == Vector {
+  .size = 6,
+  .items = [1, 2, 3, 4, 5, 4]
+}
+
+vector_expand(vector, 3) == true
+vector == Vector {
+  .size = 7,
+  .items = [1, 2, 3, 4, 5, 4, 3]
+}
+
+vector_expand(vector, 2) == true
+vector == Vector {
+  .size = 8,
+  .items = [1, 2, 3, 4, 5, 4, 3, 2]
+}
+
+vector_expand(vector, 1) == true
+vector == Vector {
+  .size = 9,
+  .items = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+}
+

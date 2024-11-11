@@ -17,14 +17,12 @@ typedef struct {
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
 
-void vector_print(Vector *v);
-
 Vector *vector_ctor(void);
 
 void vector_dtor(Vector **vector);
 
-int vector_resize(Vector *v, int new_size);
+bool vector_resize(Vector *v, int new_size);
 
-int vector_expand(Vector *vec, int value);
+bool vector_expand(Vector *vec, int value);
 
 #endif

@@ -1,0 +1,4 @@
+vector_ctor() == Vector {
+  .size = 0,
+  .items = (null)
+}

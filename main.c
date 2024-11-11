@@ -68,9 +68,9 @@ void vector_print(Vector *v)
  * @param v         ukazatel na existující vektor
  * @param new_size  nový rozměr vektoru (počet složek/komponent)
  * 
- * @returns hodnotu 1 v případě úspěšné změny, 0 jinak
+ * @returns hodnotu true v případě úspěšné změny, false jinak
  */
-int vector_resize(Vector *v, int new_size)
+bool vector_resize(Vector *v, int new_size)
 {
   // TODO: implementujte funkci dle zadání
   return -1;
@@ -86,9 +86,9 @@ int vector_resize(Vector *v, int new_size)
  * @param v       ukazatel na existující vektor
  * @param value   složka, která má být přidána do vektoru
  * 
- * @returns hodnotu 1 v případě úspěšného přidání složky do vektoru, 0 jinak
+ * @returns hodnotu true v případě úspěšného přidání složky do vektoru, false jinak
  */
-int vector_expand(Vector *v, int value)
+bool vector_expand(Vector *v, int value)
 {
   // TODO: implementujte funkci dle zadání
   return -1;

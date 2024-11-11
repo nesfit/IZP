@@ -1,0 +1,10 @@
+vector = Vector {
+  .size = 5,
+  .items = [1, 2, 3, 4, 5]
+}
+
+vector_resize(&vector, 10) == true
+vector == Vector {
+  .size = 10,
+  .items = [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
+}

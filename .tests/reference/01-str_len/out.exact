@@ -1,1 +1,1 @@
-7
+str_len("Bonjour") == 7

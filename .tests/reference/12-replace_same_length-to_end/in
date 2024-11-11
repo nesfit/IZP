@@ -1,6 +1,8 @@
-11
+load string of length 11
 HelloWorld!
-6
+
+load string of length 6
 World!
-6
+
+load string of length 6
 Worlds

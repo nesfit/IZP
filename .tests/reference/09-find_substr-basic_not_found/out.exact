@@ -1,1 +1,2 @@
--1
+result = find_substr("HelloWorldLeftxnRead", "LeftO")
+result == -1

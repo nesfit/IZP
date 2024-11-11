@@ -1,3 +1,2 @@
-Heabld!
-lloWor
-ab
+result = replace("HelloWorld!", "lloWor", "ab");
+result == Heabld!

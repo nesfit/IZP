@@ -1,1 +1,2 @@
--1
+result = find_substr("HelloWorldLeftOnRead", "SkyrimIsOverated")
+result == -1

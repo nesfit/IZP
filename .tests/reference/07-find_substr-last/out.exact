@@ -1,1 +1,2 @@
-20
+result = find_substr("HelloWorldLeftOnReadx", "x")
+result == 20

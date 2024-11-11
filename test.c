@@ -16,7 +16,7 @@
 
 char* __load_string(void) {
   size_t size;
-  scanf("%lu", &size);
+  scanf(" load string of length %lu", &size);
   if (size == 0)
   {
     char *new_string = malloc(1 * sizeof(char));
@@ -40,7 +40,8 @@ void __dispose_string(char *str) {
 int test_str_len(int argc, char **argv)
 {
   char *testString = __load_string();
-  printf("%lu\n",str_len(testString));
+  size_t __len = str_len(testString);
+  printf("str_len(\"%s\") == %lu\n", testString, __len);
   __dispose_string(testString);
   return 0;
 }
@@ -50,10 +51,13 @@ int test_mem_cpy(int argc, char **argv)
   char *a = __load_string();
   char *b = __load_string();
 
+  printf("a = \"%s\";\n", a);
+  printf("b = \"%s\";\n", b);
   mem_cpy(b,a,strlen(a));
 
-  printf("%s\n",a);
-  printf("%s\n",b);
+  printf("\nmem_cpy(b, a, %lu);\n", str_len(a));
+  printf("a = \"%s\";\n", a);
+  printf("b = \"%s\";\n", b);
 
   __dispose_string(a);
   __dispose_string(b);
@@ -64,7 +68,11 @@ int test_find_substr(int argc, char **argv)
 {
   char *a = __load_string();
   char *b = __load_string();
-  printf("%d\n",find_substr(a,b));
+
+  printf("result = find_substr(\"%s\", \"%s\")\n", a, b);
+  int __result = find_substr(a, b);
+  printf("result == %d\n", __result);
+
   __dispose_string(a);
   __dispose_string(b);
   return 0;
@@ -75,10 +83,11 @@ int test_replace_same_length(int argc, char **argv)
   char *a = __load_string();
   char *b = __load_string();
   char *c = __load_string();
+
+  printf("replace_same_length(\"%s\", \"%s\", \"%s\");\n", a, b, c);
   replace_same_length(a,b,c);
-  printf("%s\n",a);
-  printf("%s\n",b);
-  printf("%s\n",c);
+  printf("result == %s\n", a)
+;
   __dispose_string(a);
   __dispose_string(b);
   __dispose_string(c);
@@ -90,10 +99,11 @@ int test_replace(int argc, char **argv)
   char *a = __load_string();
   char *b = __load_string();
   char *c = __load_string();
+
+  printf("result = replace(\"%s\", \"%s\", \"%s\");\n", a, b, c);
   a = replace(a,b,c);
-  printf("%s\n",a);
-  printf("%s\n",b);
-  printf("%s\n",c);
+  printf("result == %s\n", a);
+
   __dispose_string(a);
   __dispose_string(b);
   __dispose_string(c);

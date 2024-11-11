@@ -1,2 +1,6 @@
-Bonjour
-BonjoureGehtEsDirHeute
+a = "Bonjour";
+b = "HalloWieGehtEsDirHeute";
+
+mem_cpy(b, a, 7);
+a = "Bonjour";
+b = "BonjoureGehtEsDirHeute";

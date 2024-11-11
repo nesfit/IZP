@@ -1,6 +1,8 @@
-11
+load string of length 11
 HelloWorld!
-7
+
+load string of length 7
 Bonjour
-5
+
+load string of length 5
 Silly

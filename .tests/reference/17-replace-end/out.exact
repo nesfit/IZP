@@ -1,3 +1,2 @@
-HelloWorlSilly
-d!
-Silly
+result = replace("HelloWorld!", "d!", "Silly");
+result == HelloWorlSilly

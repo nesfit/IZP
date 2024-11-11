@@ -1,3 +1,2 @@
-SillylloWorld!
-He
-Silly
+result = replace("HelloWorld!", "He", "Silly");
+result == SillylloWorld!

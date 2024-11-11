@@ -1,6 +1,8 @@
-11
+load string of length 11
 HelloWorld!
-5
+
+load string of length 5
 Hello
-6
+
+load string of length 6
 Dreamy

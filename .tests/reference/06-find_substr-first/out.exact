@@ -1,1 +1,2 @@
-0
+result = find_substr("HelloWorldLeftOnRead", "Hell")
+result == 0

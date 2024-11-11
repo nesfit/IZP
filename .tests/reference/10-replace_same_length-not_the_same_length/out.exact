@@ -1,3 +1,2 @@
-HelloWorld!
-Hello
-Dreamy
+replace_same_length("HelloWorld!", "Hello", "Dreamy");
+result == HelloWorld!

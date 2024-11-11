@@ -1,3 +1,2 @@
-HellSillySillySillySillySillyorld!
-oW
-SillySillySillySillySilly
+result = replace("HelloWorld!", "oW", "SillySillySillySillySilly");
+result == HellSillySillySillySillySillyorld!

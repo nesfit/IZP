@@ -41,7 +41,8 @@ void __print_person(const char *prefix, Person *p) {
 
 void __print_person_array(const char *prefix, PersonArray *array) {
   printf("%s", prefix);
-  printf("PersonArray(%u):\n", array->length);
+  printf("PersonArray(%u):", array->length);
+  if (array->length) printf("\n");
   array_print(array);
 }
 

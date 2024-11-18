@@ -117,7 +117,7 @@ int test_array_dtor(int argc, char **argv) {
 }
 
 int test_find_min(int argc, char **argv) {
-  int __startIndex = 0;
+  int __startIndex = 0; if (argc == 2) __startIndex = atoi(argv[1]);
   PersonArray array = __load_person_array();
   __print_person_array("array = ", &array);
   printf("\narray_find_min(&array, %d)", __startIndex);

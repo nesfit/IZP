@@ -24,15 +24,15 @@ ull __load_index(void) {
 
 int test_fib(int argc, char **argv) {
   ull result = fib(__load_index());
-  printf("calls: %llu\n", fib_calls);
-  printf("result: %llu\n", result);
+  printf("calls  == %llu\n", fib_calls);
+  printf("result == %llu\n", result);
   return 0;
 }
 
 int test_fib_fast(int argc, char **argv) {
   ull result = fib_fast(__load_index());
-  printf("calls: %llu\n", fib_fast_calls);
-  printf("result: %llu\n", result);
+  printf("calls  == %llu\n", fib_fast_calls);
+  printf("result == %llu\n", result);
   return 0;
 }
 

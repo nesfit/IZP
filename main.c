@@ -100,7 +100,11 @@ int person_cmp(Person *a, Person *b)
  * @param p  Ukazatel na existující instanci osoby
  */
 void person_print(Person *p) {
-    printf("[%d, %s]", p->birthYear, p->name);
+  if (p == NULL) {
+    printf("(null)");
+    return;
+  }
+  printf("Person { .birthYear=%d, .name=%s }", p->birthYear, p->name);
 }
 
 /**
@@ -186,7 +190,7 @@ void array_remove(PersonArray *array, unsigned int index)
 }
 
 /**
- * Najde v poli osoby, která má nejmenší rok narození (případně jejíž jméno je dříve v abecedě).
+ * Najde v poli osobu, která má nejmenší rok narození (případně jejíž jméno je dříve v abecedě).
  * Minimum hledá pouze od zvoleného indexu (pro hledání v celém poli startIndex=0).
  * 
  * @param array       Ukazatel na existující instanci pole osob
@@ -224,10 +228,9 @@ void array_print(PersonArray *array)
 {
   for (unsigned i = 0; i < array->length; i++)
   {
-    if (i) {
-      printf(", ");
-    }
+    printf("- ");
     person_print(&array->items[i]);
+    putchar('\n');
   }
   putchar('\n');
 }

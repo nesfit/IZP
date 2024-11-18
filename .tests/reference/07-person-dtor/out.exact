@@ -1,0 +1,4 @@
+person = Person { .birthYear=1889, .name=Adolf }
+person_dtor(&person);
+
+person == Person { .birthYear=0, .name=(null) }

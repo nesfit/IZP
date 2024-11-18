@@ -1,0 +1,3 @@
+array = PersonArray(0):
+
+array_find_min(&array, 0) == -1

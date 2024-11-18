@@ -1,0 +1,9 @@
+array = PersonArray(5):
+- Person { .birthYear=1889, .name=Adolf }
+- Person { .birthYear=1878, .name=Joseph }
+- Person { .birthYear=1882, .name=Franklin }
+- Person { .birthYear=1895, .name=George }
+- Person { .birthYear=1878, .name=Amadeus }
+
+array_find_min(&array, 0) == 4
+array.items[4] = Person { .birthYear=1878, .name=Amadeus }

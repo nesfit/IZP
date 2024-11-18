@@ -1,2 +1,10 @@
-source: [1929, Martin Luther King]
-result: [1929, Anne Frank]
+person1 = Person { .birthYear=1929, .name=Martin Luther King }
+person2 = Person { .birthYear=0, .name=(null) }
+
+person_copy(&person1, &person2);
+person1 == Person { .birthYear=1929, .name=Martin Luther King }
+person2 == Person { .birthYear=1929, .name=Martin Luther King }
+
+renaming person2 to 'Anne Frank'
+person1 == Person { .birthYear=1929, .name=Martin Luther King }
+person2 == Person { .birthYear=1929, .name=Anne Frank }

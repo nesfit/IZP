@@ -1,0 +1,9 @@
+array = PersonArray(5):
+- Person { .birthYear=1889, .name=Adolf }
+- Person { .birthYear=1878, .name=Joseph }
+- Person { .birthYear=1882, .name=Franklin }
+- Person { .birthYear=1895, .name=George }
+- Person { .birthYear=1881, .name=Wladyslaw }
+array_sort(&array);
+
+array == PersonArray(0):

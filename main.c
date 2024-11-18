@@ -20,7 +20,9 @@ ull fib_fast_calls = 0;
  */
 ull fib(ull n)
 {
-  fib_calls++;
+  fib_calls++; // TENTO ŘÁDEK NECHTE NA PRVNÍM MÍSTĚ TÉTO FUNKCE
+
+  // TODO: Implementujte dle zadání
   return -1;
 }
 
@@ -34,7 +36,9 @@ ull fib(ull n)
  */
 ull fib_fast(ull n)
 {
-  fib_fast_calls++;
+  fib_fast_calls++; // TENTO ŘÁDEK NECHTE NA PRVNÍM MÍSTĚ TÉTO FUNKCE
+
+  // TODO: Implementujte dle zadání
   return -1;
 }
 

@@ -228,9 +228,11 @@ void array_print(PersonArray *array)
 {
   for (unsigned i = 0; i < array->length; i++)
   {
+    if (i) {
+      putchar('\n');
+    }
     printf("- ");
     person_print(&array->items[i]);
-    putchar('\n');
   }
   putchar('\n');
 }

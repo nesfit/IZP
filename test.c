@@ -120,7 +120,7 @@ int test_find_min(int argc, char **argv) {
   int __startIndex = 0;
   PersonArray array = __load_person_array();
   __print_person_array("array = ", &array);
-  printf("array_find_min(&array, %d)", __startIndex);
+  printf("\narray_find_min(&array, %d)", __startIndex);
   int __result = array_find_min(&array, __startIndex);
   printf(" == %d\n", __result);
   if (__result >= 0) {

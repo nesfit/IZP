@@ -338,7 +338,7 @@ function run_test_with_args() {
 
     VALGRIND_CALL=""
     if [[ -n "$VALGRIND" && "$VALGRIND" -eq 1 ]]; then
-        [[ -z "$VALGRIND_FLAGS" ]] && VALGRIND_FLAGS="--leak-check=summary --show-reachable=yes"
+        [[ -z "$VALGRIND_FLAGS" ]] && VALGRIND_FLAGS="--leak-check=full --show-reachable=yes"
 		VALGRIND_CALL="valgrind $VALGRIND_FLAGS"
 
     fi

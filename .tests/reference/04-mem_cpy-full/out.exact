@@ -2,5 +2,5 @@ a = "Bonjour";
 b = "ahojkys";
 
 mem_cpy(b, a, 7);
-a = "Bonjour";
-b = "Bonjour";
+a == "Bonjour", length == 7
+b == "Bonjour", length == 7

@@ -53,11 +53,13 @@ int test_mem_cpy(int argc, char **argv)
 
   printf("a = \"%s\";\n", a);
   printf("b = \"%s\";\n", b);
-  mem_cpy(b,a,strlen(a));
 
-  printf("\nmem_cpy(b, a, %lu);\n", str_len(a));
-  printf("a = \"%s\";\n", a);
-  printf("b = \"%s\";\n", b);
+  unsigned long __len = strlen(a);
+  printf("\nmem_cpy(b, a, %lu);\n", __len);
+  mem_cpy(b,a, __len);
+
+  printf("a == \"%s\", length == %lu\n", a, strlen(a));
+  printf("b == \"%s\", length == %lu\n", b, strlen(b));
 
   __dispose_string(a);
   __dispose_string(b);

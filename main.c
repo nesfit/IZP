@@ -127,9 +127,7 @@ void array_ctor(PersonArray *array)
  */
 void array_dtor(PersonArray *array)
 {
-  if (array->length) {
-    free(array->items);
-  }
+  // TODO: implementujte funkci dle zadání
 }
 
 /**

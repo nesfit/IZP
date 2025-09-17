@@ -4,21 +4,21 @@
 #define ARRAY_LENGTH 5
 #define MERGED_ARRAY_LENGTH 2 * ARRAY_LENGTH
 
-void read_print_array_reverse() {
+void read_print_array_reverse(void) {
   //TODO 1. Read an array of numbers of length ARRAY_LENGTH from stdin.
 
   //TODO 2. Print read array in reversed order to stdout.
   return;
 }
 
-void read_print_array_max() {
+void read_print_array_max(void) {
   //TODO 1. Read an array of numbers of length ARRAY_LENGTH from stdin.
 
   //TODO 2. Find maximum value and print it to stdout.
   return;
 }
 
-void read_print_array_avg() {
+void read_print_array_avg(void) {
   //TODO 1. Read an array of numbers of length ARRAY_LENGTH from stdin.
 
   //TODO 2. Calculate average value and print it to stdout.
@@ -26,7 +26,7 @@ void read_print_array_avg() {
 }
 
 
-void read_print_array_merge() {
+void read_print_array_merge(void) {
   //TODO 1. Read 2 arrays of numbers, each of length ARRAY_LENGTH from stdin.
 
   //TODO 2. To 3rd array of length MERGED_ARRAY_LENGTH copy first and 

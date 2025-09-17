@@ -8,9 +8,9 @@
 #define TYPES_H
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
-  void read_print_array_reverse();
-  void read_print_array_max();
-  void read_print_array_avg();
-  void read_print_array_merge();
+  void read_print_array_reverse(void);
+  void read_print_array_max(void);
+  void read_print_array_avg(void);
+  void read_print_array_merge(void);
 
 #endif

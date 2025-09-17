@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-void print_helloworld() {
+void print_helloworld(void) {
   //TODO 1. Print 'Hello World' to stdout.
   return;
 }
@@ -10,31 +10,31 @@ void print_helloworld() {
 #define A -4
 #define B 2
 #define C 3
-void print_discriminant() {
+void print_discriminant(void) {
   //TODO 1. Calculate and print discriminant with values defined above to stdout.
   return;
 }
 
-void read_print_is_even() {
+void read_print_is_even(void) {
   //TODO 1. Read a number from stdin and output to stdout whether the read number is even or not.
   return;
 }
 
-void read_print_is_in_interval() {
+void read_print_is_in_interval(void) {
   //TODO 1. Read 2 numbers from stdin. These two numbers represent a interval.
 
   //TODO 2. Read third number from stdin. Output to stdout whether the third number is contained in the previously read interval.
   return;
 }
 
-void read_print_is_leap_year() {
+void read_print_is_leap_year(void) {
   //TODO 1. Read a number representing a year from stdin.
 
   //TODO 2. Determine whether the year is a leap year or not.
   return; 
 }
 
-void read_print_maximum() {
+void read_print_maximum(void) {
   //TODO 1. Read 3 numbers from stdin.
 
   //TODO 2. Output the largest of read numbers to stdout.

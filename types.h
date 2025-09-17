@@ -8,11 +8,11 @@
 #define TYPES_H
 
 // DEKLAROVANÉ HLAVIČKY FUNKCÍ NIJAK NEMĚŇTE
-void print_helloworld();
-void print_discriminant();
-void read_print_is_even();
-void read_print_is_in_interval();
-void read_print_is_leap_year();
-void read_print_maximum();
+void print_helloworld(void);
+void print_discriminant(void);
+void read_print_is_even(void);
+void read_print_is_in_interval(void);
+void read_print_is_leap_year(void);
+void read_print_maximum(void);
 
 #endif

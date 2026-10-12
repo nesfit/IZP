@@ -4,10 +4,10 @@
 /**
  * Print the contents of the provided 2D matrix.
  *
- * @param arr 2D matrix
+ * @param arr 2D matrix.
  */
 void print_2d(int arr[MAT_ROWS][MAT_COLUMNS]) {
-  // TODO: 1. print contents of the matrix:
+  // TODO: 1. Print the contents of the matrix:
   //    1  2  3
   //    4  5  6
   //    7  8  9
@@ -16,31 +16,38 @@ void print_2d(int arr[MAT_ROWS][MAT_COLUMNS]) {
 /**
  * Search for a value in the provided 2D matrix.
  *
- * @param arr 2D matrix
- * @returns true when found, false otherwise
+ * @param arr 2D matrix.
+ * @param value Value to find in the matrix.
+ *
+ * @return `true` when found, `false` otherwise.
  */
 bool contains_value(int arr[MAT_ROWS][MAT_COLUMNS], int value) {
-  // TODO: 2. try to locate the provided value in the provided array
+  // TODO: 2. Try to locate the provided value in the provided array
   return false;
 }
 
 /**
  * Search for a value in the provided 2D matrix.
  *
- * @param arr 2D matrix
- * @param value the value to find in the matrix
+ * @param arr 2D matrix.
+ * @param value Value to find in the matrix.
  *
- * @return coordinates of the value in the matrix when found;
- *     corrdinates {-1, -1} otherwise
+ * @return Coordinates of the value in the matrix when found;
+ *   coordinates {-1, -1} otherwise.
  */
 MatCoords find_value(int arr[MAT_ROWS][MAT_COLUMNS], int value) {
-  // TODO: 3. try to locate the provided value in the provided array
+  // TODO: 3. Try to locate the provided value in the provided array
   //    and return its coordinates when found
   return (MatCoords){-2, -2};
 }
 
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @return Program exit status.
+ */
 int main(void) {
   // Create 3x3 array (matrix, table, ...)
   // The array has 3 rows and in each row, 3 columns

@@ -1,8 +1,8 @@
 /**
- * Hlavickovy soubor soubor test.h
- *  Obsahuje deklarace pomocnych funkci pro automatické testování.
+ * @file test.h
+ * Declarations of helper functions for automated testing.
  *
- *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
+ * Do not modify this file.
  */
 
 #include <stdio.h>

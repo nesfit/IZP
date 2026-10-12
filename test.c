@@ -1,8 +1,8 @@
 /**
- * Zdrojový soubor test.c
- *  Obsahuje logiku pro automatické testování.
+ * @file test.c
+ * Automated test logic.
  *
- *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
+ * Do not modify this file.
  */
 
 #include "test.h"

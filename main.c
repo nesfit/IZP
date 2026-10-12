@@ -2,39 +2,47 @@
 #include <stdio.h>
 
 /**
- * Funkce provede výpočet `dividend / divisor`.
- * Výsledek vrací prostřednictvím ukazatele `quotient`.
+ * Calculate `dividend / divisor`.
+ * Return the result through the `quotient` pointer.
  *
- * Funkce nic netiskne!
+ * The function must not print anything!
  *
- * @param dividend  Dělenec
- * @param divisor   Dělitel
- * @param quotient  Ukazatel na podíl/kvocient (výsledek)
+ * @param dividend Dividend.
+ * @param divisor Divisor.
+ * @param quotient Pointer to the quotient (result).
  *
- * @returns hodnotu true při úspěšném dělení, false jinak
+ * @return `true` on successful division, `false` otherwise.
  */
 bool divide(int dividend, int divisor, double *quotient) {
-  // TODO: Implementujte správné desetinné dělení
-  // TODO: Výsledek vraťte prostřednictvím parametru quotient
+  // TODO: Implement correct floating-point division
+  // TODO: Return the result through the quotient parameter
   return false;
 }
 
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Command-line arguments.
+ *
+ * @return Program exit status.
+ */
 int main(int argc, char *argv[]) {
   int dividend, divisor;
   double quotient;
 
-  // načtení dělence a dělitele ze stdin
+  // Read the dividend and divisor from stdin
   scanf("%d", &dividend);
   scanf("%d", &divisor);
 
-  // TODO: Zavolejte funkci divide s odpovídajícími parametry
+  // TODO: Call divide with the appropriate parameters
 
-  // TODO: Ošetřete případné chybné zpracování,
-  //   v případě chyby, vypiště "divide: error" na stdout
+  // TODO: Handle any processing error;
+  //   on error, print "divide: error" to stdout
 
-  // výpis výsledku dělení
+  // Print the division result
   printf("%.3f\n", quotient);
 
   return 0;

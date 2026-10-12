@@ -4,14 +4,19 @@ const int UNIVERSUM[MAXITEMS] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @return Program exit status.
+ */
 int main(void) {
   Set set = {.items = {1, 2, 3, 4, 5}, .cardinality = 5};
 
   const int pairCount = 3;
-  // TODO: 2. staticky inicializujte pole struktur Pair
+  // TODO: 2. Statically initialize the array of Pair structures
   Pair pairs[pairCount];
 
-  // TODO: 3., 4., 5. zavolejte implementované funkce a vypište své výsledky
+  // TODO: 3., 4., 5. Call the implemented functions and print their results
 
   return 0;
 }
@@ -19,38 +24,44 @@ int main(void) {
 #endif
 
 /**
- * @param pairs      Prvky nějaké binární relace (pole dvojic)
- * @param pairCount  Počet položek (dvojic) v relaci
- * @param set        Množina nad kterou je relace definována
+ * Determine whether the relation is a function.
  *
- * @returns hodnotu true pokud relace je funkcí, false jinak
+ * @param pairs Elements of a binary relation (array of pairs).
+ * @param pairCount Number of items (pairs) in the relation.
+ * @param set Set over which the relation is defined.
+ *
+ * @return `true` if the relation is a function, `false` otherwise.
  */
 bool rel_isFunction(Pair pairs[], int pairCount, Set *set) {
-  // TODO: 3. definujte a implementujte funkci rel_isFunction
+  // TODO: 3. Define and implement rel_isFunction
   return -1;
 }
 
 /**
- * @param pairs      Prvky nějaké binární relace (pole dvojic)
- * @param pairCount  Počet položek (dvojic) v relaci
- * @param relMin     Ukazatel na proměnnou minimální hodnoty relace
- * @param relMax     Ukazatel na proměnnou maximální hodnoty relace
+ * Find the minimum and maximum values of the relation.
  *
- * @returns hodnotu true pokud bylo hledání úspěšné, false jinak
+ * @param pairs Elements of a binary relation (array of pairs).
+ * @param pairCount Number of items (pairs) in the relation.
+ * @param relMin Pointer to the minimum value of the relation.
+ * @param relMax Pointer to the maximum value of the relation.
+ *
+ * @return `true` if the search succeeds, `false` otherwise.
  */
 bool rel_minMax(Pair pairs[], int pairCount, int *relMin, int *relMax) {
-  // TODO: 4. definujte a implementujte funkci rel_minMax
+  // TODO: 4. Define and implement rel_minMax
   return -1;
 }
 
 /**
- * @param pairs      Prvky nějaké binární relace (pole dvojic)
- * @param pairCount  Počet položek (dvojic) v relaci
- * @param set        Množina nad kterou je relace definována
+ * Determine whether the relation is an equivalence relation.
  *
- * @returns hodnotu true pokud relace je relací ekvivalence, false jinak
+ * @param pairs Elements of a binary relation (array of pairs).
+ * @param pairCount Number of items (pairs) in the relation.
+ * @param set Set over which the relation is defined.
+ *
+ * @return `true` if the relation is an equivalence relation, `false` otherwise.
  */
 bool rel_isEquivalence(Pair pairs[], int pairCount, Set *set) {
-  // TODO: 5. definujte a implementujte funkci rel_isEquivalence
+  // TODO: 5. Define and implement rel_isEquivalence
   return -1;
 }

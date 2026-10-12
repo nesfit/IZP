@@ -4,78 +4,111 @@
 #include <stdbool.h>
 
 /**
- * struktura Object
+ * Object structure.
  */
 typedef struct {
-    int id;
-    char *name;
+  int id;
+  char *name;
 } Object;
- 
+
 /**
- * Polozka seznamu
+ * List item.
  */
 typedef struct item Item;
 struct item {
-    Object data;
-    Item *next;
+  Object data;
+  Item *next;
 };
- 
+
 /**
- * Typ seznam
+ * List type.
  */
 typedef struct {
-    Item *first;
+  Item *first;
 } List;
 
-/*
- * Inicializace dat pro jeden uzel, pro name je vyrobena 'deepcopy' na heapu.
+/**
+ * Initialize the data for one node, making a deep copy of name on the heap.
+ *
+ * @param id Object identifier.
+ * @param name Object name.
+ *
+ * @return Initialized object.
  */
-Object object_ctor(int id, char* name);
+Object object_ctor(int id, char *name);
 
 /**
- * Inicializace polozky seznamu. Z objektu vytvori polozku bez naslednika.
+ * Initialize a list item. Create an item without a successor from the object.
+ *
+ * @param data Object data for the item.
+ *
+ * @return Pointer to the created list item.
  */
 Item *item_ctor(Object data);
 
 /**
- * Inicializace seznamu. Vytvori prazdny seznam.
+ * Initialize a list. Create an empty list.
+ *
+ * @return Empty list.
  */
 List list_ctor(void);
- 
+
 /**
- * Vlozi polozku na zacatek seznamu.
+ * Insert an item at the beginning of the list.
+ *
+ * @param list Pointer to the list.
+ * @param i Item to insert.
  */
 void list_insert_first(List *list, Item *i);
- 
+
 /**
- * Vrati true, pokud je seznam prazdny.
+ * Check whether the list is empty.
+ *
+ * @param list Pointer to the list.
+ *
+ * @return `true` if the list is empty, `false` otherwise.
  */
 bool list_empty(List *list);
- 
+
 /**
- * Odstrani prvni prvek seznamu, pokud je.
+ * Remove the first list element, if there is one.
+ *
+ * @param list Pointer to the list.
  */
 void list_delete_first(List *list);
- 
+
 /**
- * Vrati pocet polozek seznamu.
+ * Count the list items.
+ *
+ * @param list Pointer to the list.
+ *
+ * @return Number of list items.
  */
 unsigned list_count(List *list);
- 
+
 /**
- * Najde polozku seznamu s nejmensim identifikatorem. Vraci NULL, pokud je
- * seznam prazdny.
+ * Find the list item with the smallest identifier.
+ *
+ * @param list Pointer to the list.
+ *
+ * @return Pointer to the item, `NULL` if the list is empty.
  */
 Item *list_find_minid(List *list);
- 
+
 /**
- * Najde polozku seznamu s odpovidajicim jmenem objektu. Vraci NULL, pokud
- * takova polozka v seznamu neni.
+ * Find the list item whose object has the specified name.
+ *
+ * @param list Pointer to the list.
+ * @param name Object name to find.
+ *
+ * @return Pointer to the item, `NULL` if no such item exists in the list.
  */
 Item *list_find_name(List *list, char *name);
- 
+
 /**
- * Uvolneni seznamu.
+ * Free the list.
+ *
+ * @param list Pointer to the list.
  */
 void list_dtor(List *list);
 

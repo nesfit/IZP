@@ -6,8 +6,12 @@
 
 #ifndef TEST_BUILD
 
-int main()
-{
+/**
+ * Program entry point.
+ *
+ * @return Program exit status.
+ */
+int main() {
   printf("list_ctor...\n");
   List list = list_ctor();
 
@@ -43,8 +47,7 @@ int main()
   list_delete_first(&list);
   printf("Pocet prvku v seznamu: %d\n", list_count(&list));
 
-
-  // opetovne vlozeni objektu o1		
+  // Insert object o1 again.
   item = item_ctor(object_ctor(42, "Honza"));
   printf("list_insert_first...\n");
   list_insert_first(&list, item);
@@ -52,18 +55,18 @@ int main()
   printf("list_find_minid...\n");
   item = list_find_minid(&list);
   if (item != NULL) {
-    printf("Polozka s nejmensim identifikatorem: {%d, \"%s\"}\n",
-      item->data.id, item->data.name);
+    printf("Polozka s nejmensim identifikatorem: {%d, \"%s\"}\n", item->data.id,
+           item->data.name);
   } else
     printf("Polozka s nejmensim identifikatorem nenalezena\n");
 
   printf("list_find_name...\n");
-  char* name = "Honza";
+  char *name = "Honza";
   item = list_find_name(&list, name);
   if (item != NULL) {
     printf("Polozka s daty %s nalezena\n", name);
   } else
-    printf("Polozka s daty %s nenalezena.\n",name);
+    printf("Polozka s daty %s nenalezena.\n", name);
 
   printf("list_dtor...\n");
   list_dtor(&list);

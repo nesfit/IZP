@@ -1,8 +1,8 @@
 /**
- * Zdrojový soubor test.c
- *  Obsahuje logiku pro automatické testování.
+ * @file test.c
+ * Automated test logic.
  *
- *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
+ * Do not modify this file.
  */
 #include "test.h"
 #include "sll.h"
@@ -36,10 +36,10 @@ int __list_length(List *list)
 
 void __print_object(Object obj)
 {
-  printf("[%d, %s]",obj.id, obj.name); 
+  printf("[%d, %s]",obj.id, obj.name);
 }
 
-void __print_item(Item *item) 
+void __print_item(Item *item)
 {
   if (item == NULL) {
     printf("NULL");
@@ -48,7 +48,7 @@ void __print_item(Item *item)
   __print_object(item->data);
 }
 
-void __print_list(List *list) 
+void __print_list(List *list)
 {
   if (list == NULL) {
     printf("(NULL)\n");
@@ -312,7 +312,7 @@ int run_test_by_name(const char *test_name, int argc, char **argv) {
             }
         }
     }
-    
+
     fprintf(stderr, "could not find test '%s'\n", test_name);
     fprintf(stderr, "supported tets:\n");
     for (size_t testId = 0; testId < TEST_COUNT; testId++)

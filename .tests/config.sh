@@ -27,4 +27,4 @@ fi
 [ -z "$PROJECT_TASK_ID" ] && PROJECT_TASK_ID="local-dev"
 [ -z "$PROJECT_AUTHOR" ] && PROJECT_AUTHOR="$USER"
 
-RESULT_API_URL_BASE="https://teaching.api.bazar.nesad.fit.vutbr.cz"
+RESULT_API_URL_BASE="https://cvt.api.bazar.nesad.fit.vutbr.cz"

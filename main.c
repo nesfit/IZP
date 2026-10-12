@@ -2,94 +2,93 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Command-line arguments.
+ *
+ * @return Program exit status.
+ */
 int main(int argc, char *argv[]) {
-  // TODO: 1. V nekonečném cyklu čtete nenulové celočíselné hodnoty a jednotlivě je přidávejte do vektoru.
-  //   Nulová hodnota ukončuje čtecí cyklus. 
-  
-  // TODO: 2. Vypište uživateli obsah vektoru a jeho celkovou velikost voláním `vector_print`.
+  // TODO: 1. Read nonzero integer values in an infinite loop and add each to
+  // the vector.
+  //   A zero value ends the input loop.
 
-  // TODO: 3. Uvolněte alokovanou paměť.
+  // TODO: 2. Print the vector contents and its total size by calling
+  // `vector_print`.
+
+  // TODO: 3. Free the allocated memory.
 
   return 0;
 }
 
 #endif
 
-
 /**
- * Na haldě dynamicky alokuje a inicializuje nový vektor o nulovém rozměru.
- * 
- * hint: malloc, sizeof
- * 
- * @returns ukazatel na alokovanou paměť v případě úspěšné alokace, NULL jinak
+ * Dynamically allocate and initialize a new zero-size vector on the heap.
+ *
+ * Hint: malloc, sizeof
+ *
+ * @return Pointer to the allocated memory on success, `NULL` otherwise.
  */
-Vector *vector_ctor(void)
-{
-  // TODO: implementujte funkci dle zadání
+Vector *vector_ctor(void) {
+  // TODO: Implement this function.
   return NULL;
 }
 
-
 /**
- * Provede zrušení (uvolnění alokované paměti) daného vektoru.
- * A to včetně pole jeho komponent.
- * Po uvolnění ukazatel na původní vektor vynulujte.
- * 
- * hint: free
- * 
- * @param v  ukazatel na ukazatel na existující vektor
+ * Destroy the given vector by freeing its allocated memory, including
+ * its array of components.
+ * Set the pointer to the original vector to `NULL` after freeing it.
+ *
+ * Hint: free
+ *
+ * @param v Pointer to a pointer to an existing vector.
  */
-void vector_dtor(Vector **v)
-{
-  // TODO: implementujte funkci dle zadání
+void vector_dtor(Vector **v) {
+  // TODO: Implement this function.
 }
 
-
 /**
- * Vytiskne vektor (rozměr a všechny jeho prvky) na standardní výstup.
- * 
- * @param v  ukazatel na vektor
+ * Print the vector (its size and all elements) to standard output.
+ *
+ * @param v Pointer to the vector.
  */
-void vector_print(Vector *v)
-{
-  // TODO: implementujte funkci dle zadání
+void vector_print(Vector *v) {
+  // TODO: Implement this function.
 }
 
-
 /**
- * Změní rozměr vektoru na nove definovaný rozměr.
- * Odpovídajícím způsobem aktualizuje pole komponent a rozměr vektoru.
- * 
- * hint: realloc, sizeof
- * 
- * @param v         ukazatel na existující vektor
- * @param new_size  nový rozměr vektoru (počet složek/komponent)
- * 
- * @returns hodnotu true v případě úspěšné změny, false jinak
+ * Change the vector size to the newly specified size.
+ * Update the array of components and the vector size accordingly.
+ *
+ * Hint: realloc, sizeof
+ *
+ * @param v Pointer to an existing vector.
+ * @param new_size New vector size (number of components).
+ *
+ * @return `true` if resizing succeeds, `false` otherwise.
  */
-bool vector_resize(Vector *v, int new_size)
-{
-  // TODO: implementujte funkci dle zadání
+bool vector_resize(Vector *v, int new_size) {
+  // TODO: Implement this function.
   return -1;
 }
 
-
 /**
- * Rozšíří rozměr vektoru o jedna a přidá do něj jednu novou složku (komponenetu).
- * Odpovídajícím způsobem aktualizuje pole komponent a rozměr vektoru.
- * 
- * hint: vector_resize
- * 
- * @param v       ukazatel na existující vektor
- * @param value   složka, která má být přidána do vektoru
- * 
- * @returns hodnotu true v případě úspěšného přidání složky do vektoru, false jinak
+ * Increase the vector size by one and add one new component.
+ * Update the array of components and the vector size accordingly.
+ *
+ * Hint: vector_resize
+ *
+ * @param v Pointer to an existing vector.
+ * @param value Component to add to the vector.
+ *
+ * @return `true` if the component is added successfully, `false` otherwise.
  */
-bool vector_expand(Vector *v, int value)
-{
-  // TODO: implementujte funkci dle zadání
+bool vector_expand(Vector *v, int value) {
+  // TODO: Implement this function.
   return -1;
 }

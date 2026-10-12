@@ -6,32 +6,37 @@
  * days, different month lengths and assume that the only valid years are above
  * 1500 and below 3000.
  *
- * @param date Datová struktura reprezentující datum
+ * @param date Data structure representing a date.
  *
- * @return `true` v případě validního data, `false` jinak
+ * @return `true` for a valid date, `false` otherwise.
  */
 bool is_valid_date(struct date_t date) {
-  // TODO: implementujte funkci dle zadání
+  // TODO: Implement this function.
   return false;
 }
 
 /**
  * Find the earlier date by comparing years, months and days.
  *
- * @param date1 Datová struktura reprezentující první datum
- * @param date2 Datová struktura reprezentující druhé datum
+ * @param date1 Data structure representing the first date.
+ * @param date2 Data structure representing the second date.
  *
- * @return `DATE1_IS_EARLIER` v případě že date1 je dřívější,
- *     `DATE1_IS_LATER` když date2 je dřívější,
- *     `DATES_ARE_EQUAL` jinak (data jsou stejná)
+ * @return `DATE1_IS_EARLIER` if date1 is earlier,
+ *   `DATE1_IS_LATER` if date2 is earlier,
+ *   `DATES_ARE_EQUAL` otherwise (the dates are equal).
  */
 int earlier_date(struct date_t date1, struct date_t date2) {
-  // TODO: implementujte funkci dle zadání
+  // TODO: Implement this function.
   return -2;
 }
 
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @return Program exit status.
+ */
 int main(void) {
   struct date_t date1, date2;
 

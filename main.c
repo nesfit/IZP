@@ -3,22 +3,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Command-line arguments.
+ *
+ * @return Program exit status.
+ */
 int main(int argc, char *argv[]) {
-  // konfigurace programu
-  Config config = { 
-    .xFlag = false,
-    .yFlag = false,
-    .sValue = NULL,
-    .nValue = 10
-  };
+  // Program configuration
+  Config config = {
+      .xFlag = false, .yFlag = false, .sValue = NULL, .nValue = 10};
 
-  // TODO: 2. odpovídajícím způsobem zavolejte funkci parse_args
-  // TODO: 3. v případě chyby zpracování vypište obsah
-  //   globální proměnné usage na chybový výstup
-  //   a ukončente program s chybovým kódem 1
+  // TODO: 2. Call parse_args appropriately
+  // TODO: 3. On a processing error, print the contents
+  //   of the global variable usage to standard error
+  //   and exit the program with error code 1
 
   return 0;
 }
@@ -26,22 +29,22 @@ int main(int argc, char *argv[]) {
 #endif
 
 /**
- * Zpracuje argumenty příkazové řádky programu.
- *   Výsledky ukládá do struktury Config z parametrů metody.
- * 
- * Duplicity žádných přepínačů nejsou dovoleny.
- * 
- * Hlavičky žádných funkcí NEMĚŇTE!
- * 
- * @param arguments      pole argumentů z CLI
- * @param argumentCount  velikost pole argumentů
- * @param config         ukazatel na výstupní konfiguraci
- * 
- * @returns hodnotu true při úspěšném zpracování, false jinak
+ * Process the program's command-line arguments.
+ * Store the results in the Config structure passed as a parameter.
+ *
+ * Duplicate occurrences of any option are not allowed.
+ *
+ * Do not change any function signatures!
+ *
+ * @param arguments Array of command-line arguments.
+ * @param argumentCount Size of the argument array.
+ * @param config Pointer to the output configuration.
+ *
+ * @return `true` on successful processing, `false` otherwise.
  */
 bool parse_args(char **arguments, int argumentCount, Config *config) {
-  // TODO: 1. implementujte funkci dle specifikace zadání
-  //   a chování jednotlivých přepínačů
+  // TODO: 1. Implement this function according to the task specification
+  //   and the behavior of the individual options
 
   return -1;
 }

@@ -2,18 +2,29 @@
 #include <stdio.h>
 
 /**
- * Funkce vymění hodnoty dvou celočíselných proměnných.
+ * Swap the values of two integer variables.
+ *
+ * @param variableA Pointer to the first variable.
+ * @param variableB Pointer to the second variable.
  */
 void swapInts(int *variableA, int *variableB) {
-  // TODO: 1. implementujte metodu dle zadání
+  // TODO: 1. Implement this function.
 }
 
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Command-line arguments.
+ *
+ * @return Program exit status.
+ */
 int main(int argc, char *argv[]) {
   int number1, number2;
 
-  // načtení čísel ze stdin
+  // Read numbers from stdin
   scanf("%d", &number1);
   scanf("%d", &number2);
 

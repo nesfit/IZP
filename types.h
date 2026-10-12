@@ -1,14 +1,21 @@
 /**
- * Hlavičkový soubor types.h
+ * @file types.h
+ * Header file.
  *
- *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
+ * Do not modify this file.
  */
 
 #ifndef TYPES_H
 #define TYPES_H
 
-// DEKLAROVANÉ HLAVIČKY FUNKCÍ A STRUKTUR NIJAK NEMĚŇTE
+// Do not change the declared function signatures or structures.
 
+/**
+ * Swap the values of two integer variables.
+ *
+ * @param variableA Pointer to the first variable.
+ * @param variableB Pointer to the second variable.
+ */
 void swapInts(int *variableA, int *variableB);
 
 #endif

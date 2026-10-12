@@ -1,115 +1,115 @@
 #include "types.h"
 
-
 #ifndef TEST_BUILD
 
+/**
+ * Program entry point.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Command-line arguments.
+ *
+ * @return Program exit status.
+ */
 int main(int argc, char *argv[]) {
-  // TODO: volejte vámi implementované funkce
+  // TODO: Call the implemented functions.
   return 0;
 }
 
 #endif
 
 /**
- * Vytiskne vektor (velikost a jeho prvky) na standardní výstup.
- * 
- * @param v  ukazatel na vektor
+ * Print the vector (its size and elements) to standard output.
+ *
+ * @param v Pointer to the vector.
  */
-void vector_print(Vector *v)
-{
-  // TODO: implementujte funkci dle zadání
+void vector_print(Vector *v) {
+  // TODO: Implement this function.
 }
 
 /**
- * Vytvoří (dynamicky alokuje) vektor o specifikovaném rozměru.
- *   Nově alokovaná paměť a korespondující počet prvků
- *   je do struktury uložen prostřednictvím ukazatele v.
- * 
- * @param v     ukazatel na strukturu vektoru
- * @param size  počet prvků vektoru (rozměr)
- * 
- * @returns hodnotu true v případě úspěšné alokace, false jinak
+ * Create (dynamically allocate) a vector of the specified dimension.
+ * Store the newly allocated memory and corresponding number of elements
+ * in the structure through the pointer v.
+ *
+ * @param v Pointer to the vector structure.
+ * @param size Number of vector elements (dimension).
+ *
+ * @return `true` on successful allocation, `false` otherwise.
  */
-bool vector_ctor(Vector *v, unsigned int size)
-{
-  // TODO: implementujte funkci dle zadání
+bool vector_ctor(Vector *v, unsigned int size) {
+  // TODO: Implement this function.
   return -1;
 }
 
 /**
- * Inicializuje prvky vektoru na číselnou posloupnost
- *   od 0 do velikosti vektoru - 1.
- * 
- * Příklad:
+ * Initialize the vector elements to a numeric sequence
+ * from 0 to the vector size - 1.
+ *
+ * Example:
  *   Vector3 [0, 1, 2]
  *   Vector5 [0, 1, 2, 3, 4]
- * 
- * @param v  ukazatel na existující vektor
+ *
+ * @param v Pointer to an existing vector.
  */
-void vector_init(Vector *v)
-{
-  // TODO: implementujte funkci dle zadání
+void vector_init(Vector *v) {
+  // TODO: Implement this function.
 }
 
 /**
- * Provede zrušení (uvolnění alokované paměti) daného vektoru.
- *   Ukazatel na prvky zrušeného vektoru je NULL.
- *   Rozměr zrušeného vektoru je 0.
- * 
- * @param v  ukazatel na existující vektor
+ * Destroy the given vector (free its allocated memory).
+ * The destroyed vector's element pointer is `NULL`.
+ * The destroyed vector's dimension is 0.
+ *
+ * @param v Pointer to an existing vector.
  */
-void vector_dtor(Vector *v)
-{
-  // TODO: implementujte funkci dle zadání
+void vector_dtor(Vector *v) {
+  // TODO: Implement this function.
 }
 
 /**
- * Provede výpočet skalárního součinu vektoru s daným číslem.
- *   Výpočet se provádí nad hodnotami poskytnutého vektoru v,
- *   změny probíhají tzv. in-place, bez alokace nového vektoru.
- * 
- * @param v       ukazatel na existující vektor
- * @param scalar  skalární hodnota
+ * Multiply the vector by the given scalar.
+ * Perform the calculation on the values of the provided vector v,
+ * in place, without allocating a new vector.
+ *
+ * @param v Pointer to an existing vector.
+ * @param scalar Scalar value.
  */
-void vector_scalar_multiply(Vector *v, int scalar)
-{
-  // TODO: implementujte funkci dle zadání
+void vector_scalar_multiply(Vector *v, int scalar) {
+  // TODO: Implement this function.
 }
 
 /**
- * Provede součet dvou vektorů v1 + v2.
- *   Výpočet se provádí nad hodnotami poskytnutého vektoru v1,
- *   změny probíhají tzv. in-place, bez alokace nového vektoru.
- * 
- * Vzájemně kontrolujte rozměry obou vektorů!
- *   Operaci nelze provádět nad vektory různých rozměrů.
- * 
- * @param v1  ukazatel na první vektor
- * @param v2  ukazatel na druhý vektor
- * 
- * @returns hodnotu true při úspěšném sečtení, false jinak
+ * Add two vectors: v1 + v2.
+ * Perform the calculation on the values of the provided vector v1,
+ * in place, without allocating a new vector.
+ *
+ * Check the dimensions of both vectors!
+ * The operation cannot be performed on vectors of different dimensions.
+ *
+ * @param v1 Pointer to the first vector.
+ * @param v2 Pointer to the second vector.
+ *
+ * @return `true` on successful addition, `false` otherwise.
  */
-bool vector_add(Vector *v1, Vector *v2)
-{
-  // TODO: implementujte funkci dle zadání
+bool vector_add(Vector *v1, Vector *v2) {
+  // TODO: Implement this function.
   return -1;
 }
 
 /**
- * Provede odečtení dvou vektorů v1 + v2.
- *   Výpočet se provádí nad hodnotami poskytnutého vektoru v1,
- *   změny probíhají tzv. in-place, bez alokace nového vektoru.
- * 
- * Vzájemně kontrolujte rozměry obou vektorů!
- *   Operaci nelze provádět nad vektory různých rozměrů.
- * 
- * @param v1  ukazatel na první vektor
- * @param v2  ukazatel na druhý vektor
- * 
- * @returns hodnotu true při úspěšném odečtení, false jinak
+ * Subtract two vectors: v1 - v2.
+ * Perform the calculation on the values of the provided vector v1,
+ * in place, without allocating a new vector.
+ *
+ * Check the dimensions of both vectors!
+ * The operation cannot be performed on vectors of different dimensions.
+ *
+ * @param v1 Pointer to the first vector.
+ * @param v2 Pointer to the second vector.
+ *
+ * @return `true` on successful subtraction, `false` otherwise.
  */
-bool vector_sub(Vector *v1, Vector *v2)
-{
-  // TODO: implementujte funkci dle zadání
+bool vector_sub(Vector *v1, Vector *v2) {
+  // TODO: Implement this function.
   return -1;
 }

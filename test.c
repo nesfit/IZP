@@ -1,8 +1,8 @@
 /**
- * Zdrojový soubor test.c
- *  Obsahuje logiku pro automatické testování.
+ * @file test.c
+ * Automated test logic.
  *
- *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
+ * Do not modify this file.
  */
 
 #include "test.h"
@@ -130,7 +130,7 @@ int test_vector_add(int argc, char **argv) {
   __vector_fprint(stdout, "vector1 == ", &v1);
   __vector_fprint(stdout, "vector2 == ", &v1);
   printf("\n");
-  
+
   bool status = vector_add(&v1, &v2);
   printf("vector_add(&vector1, &vector2) == %s\n", status ? "true" : "false");
   __vector_fprint(stdout, "vector1 == ", &v1);
@@ -146,7 +146,7 @@ int test_vector_sub(int argc, char **argv) {
   __vector_fprint(stdout, "vector1 == ", &v1);
   __vector_fprint(stdout, "vector2 == ", &v1);
   printf("\n");
-  
+
   bool status = vector_sub(&v1, &v2);
   printf("vector_sub(&vector1, &vector2) == %s\n", status ? "true" : "false");
   __vector_fprint(stdout, "vector1 == ", &v1);
@@ -187,7 +187,7 @@ int run_test_by_name(const char *test_name, int argc, char **argv) {
             }
         }
     }
-    
+
     fprintf(stderr, "could not find test '%s'\n", test_name);
     fprintf(stderr, "supported tets:\n");
     for (size_t testId = 0; testId < TEST_COUNT; testId++)

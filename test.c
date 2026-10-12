@@ -1,8 +1,8 @@
 /**
- * Zdrojový soubor test.c
- *  Obsahuje logiku pro automatické testování.
+ * @file test.c
+ * Automated test logic.
  *
- *     OBSAH V TOMTO SOUBROU NEUPRAVUJTE!
+ * Do not modify this file.
  */
 
 #include "test.h"
@@ -57,7 +57,7 @@ int run_test_by_name(const char *test_name, int argc, char **argv) {
             }
         }
     }
-    
+
     fprintf(stderr, "could not find test '%s'\n", test_name);
     fprintf(stderr, "supported tets:\n");
     for (size_t testId = 0; testId < TEST_COUNT; testId++)
